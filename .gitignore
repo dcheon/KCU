@@ -1,21 +1,19 @@
-# 🔹 가상환경(venv) 관련 파일 무시
-venv/
-**/venv/
-.env/
-__pycache__/
+﻿# virtual env & caches
+MLProgram/venv/
+**/__pycache__/
 *.pyc
-*.pyo
-*.pyd
 
-# 🔹 데이터 관련
+# datasets & artifacts
 MLProgram/data/
 MLProgram/data_images/
 MLProgram/model/
 *.npy
 *.csv
 *.zip
+*.h5
+*.keras
 
-# 🔹 시스템/IDE 관련
+# OS & IDE
 .DS_Store
 Thumbs.db
 .vscode/
