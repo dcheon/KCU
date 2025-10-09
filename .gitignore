@@ -1,0 +1,22 @@
+# 🔹 가상환경(venv) 관련 파일 무시
+venv/
+**/venv/
+.env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 🔹 데이터 관련
+MLProgram/data/
+MLProgram/data_images/
+MLProgram/model/
+*.npy
+*.csv
+*.zip
+
+# 🔹 시스템/IDE 관련
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
