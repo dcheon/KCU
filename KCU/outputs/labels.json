@@ -1,0 +1,6 @@
+{
+  "cube": 0,
+  "others": 1,
+  "sphere": 2,
+  "tetrahedron": 3
+}
