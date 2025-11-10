@@ -214,6 +214,21 @@ body {
   background: #ddd;
 }
 
+/* 실제 이미지 들어갈 구간 */
+.img-space {
+  width: 90%;
+  aspect-ratio: 16 / 9;
+  background: #fff;
+  border-radius: 12px;
+  /* 일단 보기 편하게 표시 해놈 */
+  border: 3px solid #d9d9d9; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  text-align: center;
+}
+
 /* 반응형: 화면 좁아지면 한 줄로 */
 @media (max-width: 900px) {
   .content-grid {

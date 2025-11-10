@@ -35,9 +35,9 @@
   <div class="page">
     <!-- 왼쪽 사이드바 -->
     <aside class="sidebar" id="sidebar">
-      <button class="sidebar-section">기본모드</button>
-      <button class="sidebar-section">깔쌈버전</button>
-      <button class="sidebar-section">설정</button>
+      <button class="sidebar-section" id="defaultMode">기본모드</button>
+      <button class="sidebar-section" id="ggalSsamMode">깔쌈버전</button>
+      <button class="sidebar-section" id="option">설정</button>
     </aside>
 
     <!-- 메인 영역 -->
@@ -49,7 +49,10 @@
     <!-- 가운데 실제 콘텐츠 -->
     <div class="content-center">
       <div class="center-box">
-        유저 이미지 들어갈 곳 + ML 예상치를 그림으로 표현(이건 힘들지 않을까요)
+        <div class="img-space" id="imgSpace">
+          <button id="insertImg">사진 넣기</button>
+          <a>유저 이미지 들어갈 곳 + ML 예상치를 그림으로 표현(이건 힘들지 않을까요)</a>
+        </div>
       </div>
 
       <div class="output-area">
@@ -59,9 +62,9 @@
 
     <!-- 오른쪽 여백/추가 공간 -->
     <div class="content-right">
-      <button class="shape-selection-section">삼각형</button>
-      <button class="shape-selection-section">사각형</button>
-      <button class="shape-selection-section">원</button>
+      <button class="shape-selection-section" id="tetrahedron">삼각형</button>
+      <button class="shape-selection-section" id="cube">사각형</button>
+      <button class="shape-selection-section" id="sphere">원</button>
     </div>
   </div>
 </main>
