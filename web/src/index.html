@@ -4,41 +4,70 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>도형을 맞춰봐요!</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" type="image/png" href="../img/sample.jpg" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link rel="icon" type="image/png" href="../assets/img/icon.jpg" />
 </head>
 <body>
-  <!-- 사이드바 토글 버튼 -->
-  <button class="toggle-btn" id="toggleBtn">≡</button>
+
+  <!-- 상단 헤더 -->
+  <header class="main-header">
+    <div class="left-section">
+      <!-- 사이드바 토글 버튼 -->
+      <button class="toggle-btn" id="toggleBtn">≡</button>
+      <!-- 왼쪽 로고 -->
+      <img src="../assets/img/icon.jpg" alt="로고" class="logo-img" href="./index.html"/>
+    </div>
+
+    <!-- 중앙 문구 -->
+    <div class="center-section">
+      <h1 class="logo-text">우리가 친해질 수 있을까요?</h1>
+    </div>
+
+    <!-- 오른쪽 섹션 (비워둠) -->
+    <div class="right-section">
+      <nav>
+        <!-- 나중에 추가할 메뉴 자리 -->
+        <a href="#"></a>
+      </nav>
+    </div>
+  </header>
 
   <div class="page">
     <!-- 왼쪽 사이드바 -->
-<aside class="sidebar" id="sidebar">
-  <button class="sidebar-section">컬럼 1</button>
-  <button class="sidebar-section">컬럼 2</button>
-  <button class="sidebar-section">컬럼 3</button>
-</aside>
-
+    <aside class="sidebar" id="sidebar">
+      <button class="sidebar-section">기본모드</button>
+      <button class="sidebar-section">깔쌈버전</button>
+      <button class="sidebar-section">설정</button>
+    </aside>
 
     <!-- 메인 영역 -->
     <main class="main">
-      <!-- 로고 영역 -->
-      <div class="logo-slot">
-        우리 친해질 사이인가요?
-      </div>
+  <div class="content-grid">
+    <!-- 왼쪽 여백 -->
+    <div class="content-left"></div>
 
-      <!-- 중앙 큰 네모(이미지 영역) -->
+    <!-- 가운데 실제 콘텐츠 -->
+    <div class="content-center">
       <div class="center-box">
-        유저 이미지 들어갈 곳 + ml 예상치를 그림으로? 표현(이건 힘들지 않을까요)
+        유저 이미지 들어갈 곳 + ML 예상치를 그림으로 표현(이건 힘들지 않을까요)
       </div>
 
-      <!-- 아래 텍스트 박스 -->
-      <div class="input-area">
-        <input type="text" placeholder="여기에 텍스트가 들어갑니다" />
+      <div class="output-area">
+        <a>여기에 텍스트가 들어갑니다</a>
       </div>
-    </main>
+    </div>
+
+    <!-- 오른쪽 여백/추가 공간 -->
+    <div class="content-right">
+      <button class="shape-selection-section">삼각형</button>
+      <button class="shape-selection-section">사각형</button>
+      <button class="shape-selection-section">원</button>
+    </div>
+  </div>
+</main>
+
   </div>
 
-  <script src="script.js"></script>
+  <script src="../assets/js/script.js"></script>
 </body>
 </html>
