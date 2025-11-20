@@ -1,3 +1,4 @@
+// Compete Mode
 import { useRef, useState } from "react";
 import "../App.css"; // 스타일 필요하면 경로 맞춰서
 

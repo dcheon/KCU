@@ -4,7 +4,9 @@ import Layout from "./Layout";
 
 import DefaultMode from "./pages/DefaultMode";
 import CompeteMode from "./pages/CompeteMode";
-import OptionPage from "./pages/OptionPage";
+import Option from "./pages/Option";
+import LogIn from "./pages/LogIn";
+import AccessDenied from "./pages/AccessDenied";
 import Home from "./pages/Home"; // ★ 새로 만들 파일
 
 function App() {
@@ -23,8 +25,14 @@ function App() {
           <Route path="compete" element={<CompeteMode />} />
 
           {/* /app/option → 옵션 */}
-          <Route path="option" element={<OptionPage />} />
+          <Route path="option" element={<Option />} />
         </Route>
+
+        {/* 3) 로그인 페이지 */}
+        <Route path="/login" element={<LogIn />} />
+
+        {/* 4) 공사중 페이지 */}
+        <Route path="/access_denied" element={<AccessDenied />} />
       </Routes>
     </BrowserRouter>
   );

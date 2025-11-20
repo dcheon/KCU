@@ -1,8 +1,8 @@
-// Default Mode
+// Daily Mode
 import { useRef, useState } from "react";
 import "../App.css"; // 스타일 필요하면 경로 맞춰서
 
-export default function DefaultMode() {
+export default function DailyMode() {
   const [selectedShape, setSelectedShape] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   const fileInputRef = useRef(null);
@@ -100,7 +100,7 @@ export default function DefaultMode() {
                   사진 넣기
                 </button>
                 <a className="center-box-description">
-                  사진을 넣어 결과값을 확인해 보세요
+                  주어진 도형에 맞게 사진을 넣어 결과값을 확인해 보세요
                 </a>
               </>
             )}

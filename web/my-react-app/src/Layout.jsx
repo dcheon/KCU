@@ -36,13 +36,30 @@ function Layout() {
   };
 
   const handleCompeteMode = () => {
-    setMode("compete");
-    navigate("/app/compete");       // /app/compete → CompeteMode
+    handleDeveloping();
+    // setMode("compete");
+    // navigate("/app/compete");       // /app/compete → CompeteMode
+  };
+
+  const handleDailyMode = () => {
+    handleDeveloping();
+    // setMode("daily");
+    // navigate("/app/daily");       // /app/compete → CompeteMode
   };
 
   const handleOption = () => {
-    setMode("option");
-    navigate("/app/option");        // /app/option → OptionPage
+    handleDeveloping();
+    // setMode("option");
+    // navigate("/app/option");        // /app/option → OptionPage
+  };
+
+  const handleLogin = () => {
+    handleDeveloping();     // 개발중
+    // navigate("/login");
+  };
+
+  const handleDeveloping = () => {
+    navigate("/access_denied");        // 개발중
   };
 
   return (
@@ -67,6 +84,7 @@ function Layout() {
         </div>
 
         <div className="right-section">
+          <button className="toggle-btn" onClick={handleLogin}>Sign in</button> 
           <nav>
             <a href="#"></a>
           </nav>
@@ -80,7 +98,10 @@ function Layout() {
             기본모드
           </button>
           <button className="sidebar-section" onClick={handleCompeteMode}>
-            깔쌈버전
+            대결모드
+          </button>
+          <button className="sidebar-section" onClick={handleDailyMode}>
+            데일리샷
           </button>
           <button className="sidebar-section" onClick={handleOption}>
             설정

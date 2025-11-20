@@ -4,16 +4,20 @@
   padding: 0;
 }
 
+.bg-white {
+  background-color: #FFFFFF; /* 흰 배경 */
+}
+
 .bg-default {
-  background-color: #E9E6E1; /* 예: 기본 배경 */
+  background-color: #E9E6E1; /* 기본모드 배경 */
 }
 
 .bg-compete {
-  background-color: #f9e4d6; /* 예: 경쟁모드 배경 */
+  background-color: #f9e4d6; /* 경쟁모드 배경 */
 }
 
 .bg-option {
-  background-color: #DDECF8; /* 예: 설정모드 배경 */
+  background-color: #DDECF8; /* 설정모드 배경 */
 }
 
 body {
@@ -331,6 +335,20 @@ body {
   border-style: dashed;
   border-color: #888;
   background-color: #f5f5f5;
+}
+
+
+/* 공사중 페이지 */
+.access-denied {
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  /* 일단 보기 편하게 표시 해놈 */
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  text-align: center;
 }
 
 

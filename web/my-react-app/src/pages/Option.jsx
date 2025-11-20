@@ -1,4 +1,4 @@
-export default function OptionPage() {
+export default function Option() {
   return (
     <div className={"content-grid"}>
         <div className="content-left"></div>
