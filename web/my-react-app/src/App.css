@@ -4,6 +4,18 @@
   padding: 0;
 }
 
+.bg-default {
+  background-color: #E9E6E1; /* 예: 기본 배경 */
+}
+
+.bg-compete {
+  background-color: #f9e4d6; /* 예: 경쟁모드 배경 */
+}
+
+.bg-option {
+  background-color: #DDECF8; /* 예: 설정모드 배경 */
+}
+
 body {
   font-family: sans-serif;
   background: #E9E6E1;
@@ -181,6 +193,12 @@ body {
   text-align: center;
 }
 
+.center-box-description {
+  display: flex;
+  align-items: center;
+  
+}
+
 .output-area {
   width: 100%;
   background: rgba(255, 255, 255, 0.85);
@@ -191,10 +209,69 @@ body {
   border: 1px solid rgba(0,0,0,0.3);
 }
 
-/* 왼쪽/오른쪽은 일단 빈 공간 */
+/* 왼쪽은 compete mode에서 ranking display 용 */
 .content-left {
-
+  display: flex;
+  align-items: center;
+  margin-right: 5%;
 }
+
+/* 랭킹 박스 전체 */
+.ranking {
+  background: rgba(255, 255, 255, 0.85);
+  width: 80%;
+  margin: 0 0 0 18%;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* "랭킹" 타이틀 */
+.ranking-title {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+/* 랭킹 리스트 전체 영역 */
+.ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* 아이템 사이 간격 */
+  flex: 1;
+}
+
+/* 랭킹 칸(데이터 없는 빈 칸) */
+.ranking-item {
+  height: 21px;     
+  background: rgba(0,0,0,0.03);
+  padding: 0 5px 0;
+  border-radius: 6px;
+  position: relative;
+  align-items: center;
+  display: flex;
+}
+
+/* 칸과 칸 사이 얇은 회색 선 */
+.ranking-item::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;           /* gap 만큼 내려오기 */
+  left: 5%;               /* 좌우 5% 비우기 */
+  right: 5%;              
+  height: 1px;
+  background: rgba(0,0,0,0.2);
+}
+
+/* 마지막 칸은 아래 구분선 제거 */
+.ranking-item:last-child::after {
+  display: none;
+}
+
+
+/* 오른쪽은 디폴트로 도형선택 컬럼 */
 .content-right {
   display: flex;
   flex-direction: column;   /* 세로로 쌓기 */
@@ -226,6 +303,7 @@ body {
   background: #fff;
   border-radius: 12px;
   /* 일단 보기 편하게 표시 해놈 */
+  flex-direction: column;
   border: 3px solid #d9d9d9; 
   display: flex;
   align-items: center;

@@ -5,6 +5,7 @@ import './App.css';
 
 function Layout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [mode, setMode] = useState("default");
   const navigate = useNavigate();
 
   const handleToggleSidebar = () => {
@@ -13,14 +14,17 @@ function Layout() {
 
   // ✅ /app 영역 안에서만 이동하도록 경로 수정
   const handleDefaultMode = () => {
+    setMode("default");
     navigate("/app");               // /app/default → DefaultMode
   };
 
   const handleCompeteMode = () => {
+    setMode("compete");
     navigate("/app/compete");       // /app/compete → CompeteMode
   };
 
   const handleOption = () => {
+    setMode("option");
     navigate("/app/option");        // /app/option → OptionPage
   };
 
@@ -52,7 +56,7 @@ function Layout() {
         </div>
       </header>
 
-      <div className="page">
+      <div className={`page bg-${mode}`}>
         {/* 왼쪽 사이드바 */}
         <aside className={`sidebar ${isSidebarOpen ? "active" : ""}`} id="sidebar">
           <button className="sidebar-section" onClick={handleDefaultMode}>
@@ -68,7 +72,7 @@ function Layout() {
 
         {/* 메인 영역 */}
         <main className="main">
-          <Outlet />
+          <Outlet context={{ mode }}/>
         </main>
       </div>
     </>

@@ -5,7 +5,6 @@ import "../App.css"; // 스타일 필요하면 경로 맞춰서
 export default function DefaultMode() {
   const [selectedShape, setSelectedShape] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
-  const [mode, setMode] = useState("default"); // 일단 내부에서만 사용
   const fileInputRef = useRef(null);
 
   const handleInsertImg = () => {
@@ -37,7 +36,7 @@ export default function DefaultMode() {
   };
 
   return (
-    <div className="content-grid">
+    <div className={"content-grid"}>
       {/* 왼쪽 여백 */}
       <div className="content-left"></div>
 
@@ -67,9 +66,8 @@ export default function DefaultMode() {
                 <button id="insertImg" onClick={handleInsertImg}>
                   사진 넣기
                 </button>
-                <a>
-                  유저 이미지 들어갈 곳 + ML 예상치를 그림으로 표현(이건
-                  힘들지 않을까요)
+                <a className="center-box-description">
+                  사진을 넣어 결과값을 확인해 보세요
                 </a>
               </>
             )}
@@ -77,16 +75,12 @@ export default function DefaultMode() {
         </div>
 
         <div className="output-area">
-          {mode === "default" && (
+          {imageUrl ? (
+            <a>개발중입니다. ㅈㅅ</a>
+          ) : (
             <a>사진을 올려야 평가를 하든 머든 하죠 이건 뭐 저랑 싸우자는 건가요?</a>
           )}
-          {mode === "ggalssam" && (
-            <a>깔쌈짬뽕한거를 올려야 예쁜게 나와요</a>
-          )}
-          {mode === "option" && (
-            <a>일단 옵션페이지는 안 만들었는데 그래도 이 버튼이 작동한다는걸 알려주기위해 나타남</a>
-          )}
-          {selectedShape && (
+          {selectedShape && imageUrl && (
             <div style={{ marginTop: "10px", fontWeight: 500 }}>
               선택된 도형: {selectedShape}
             </div>
