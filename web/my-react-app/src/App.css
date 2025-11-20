@@ -327,6 +327,13 @@ body {
   background: #fff;
 }
 
+.img-space-dragging {
+  border-style: dashed;
+  border-color: #888;
+  background-color: #f5f5f5;
+}
+
+
 /* 반응형: 화면 좁아지면 한 줄로 */
 @media (max-width: 900px) {
   .content-grid {

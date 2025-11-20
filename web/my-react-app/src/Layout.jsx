@@ -1,5 +1,5 @@
 // src/Layout.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Outlet, useNavigate, Link } from 'react-router-dom';
 import './App.css';
 
@@ -8,11 +8,28 @@ function Layout() {
   const [mode, setMode] = useState("default");
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const handleWindowDragOver = (e) => {
+      e.preventDefault();
+    };
+
+    const handleWindowDrop = (e) => {
+      e.preventDefault();
+    };
+
+    window.addEventListener("dragover", handleWindowDragOver);
+    window.addEventListener("drop", handleWindowDrop);
+
+    return () => {
+      window.removeEventListener("dragover", handleWindowDragOver);
+      window.removeEventListener("drop", handleWindowDrop);
+    };
+  }, []);
+
   const handleToggleSidebar = () => {
     setIsSidebarOpen(prev => !prev);
   };
 
-  // ✅ /app 영역 안에서만 이동하도록 경로 수정
   const handleDefaultMode = () => {
     setMode("default");
     navigate("/app");               // /app/default → DefaultMode
@@ -38,7 +55,7 @@ function Layout() {
           </button>
           <Link to="/">
             <img
-              src="/assets/img/icon.jpg"
+              src="/assets/img/icon.png"
               alt="로고"
               className="logo-img"
             />

@@ -1,4 +1,3 @@
-// src/pages/DefaultMode.jsx
 import { useRef, useState } from "react";
 import "../App.css"; // 스타일 필요하면 경로 맞춰서
 
@@ -6,6 +5,20 @@ export default function DefaultMode() {
   const [selectedShape, setSelectedShape] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   const fileInputRef = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const processFile = (file) => {
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      alert("이미지 파일만 업로드할 수 있어요.");
+      return;
+    }
+
+    setImageUrl((prev) => {
+      if (prev) URL.revokeObjectURL(prev);
+      return URL.createObjectURL(file);
+    });
+  };
 
   const handleInsertImg = () => {
     if (fileInputRef.current) {
@@ -14,10 +27,25 @@ export default function DefaultMode() {
   };
 
   const handleFileChange = (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const url = URL.createObjectURL(file);
-    setImageUrl(url);
+    const file = e.target.files && e.target.files[0];
+    processFile(file);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();      // 기본 동작(파일 열기) 막기
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setIsDragging(false);
+    const file = e.dataTransfer.files?.[0];
+    processFile(file);
   };
 
   const handleSelectShape = (shape) => {
@@ -43,7 +71,11 @@ export default function DefaultMode() {
       {/* 가운데 실제 콘텐츠 */}
       <div className="content-center">
         <div className="center-box">
-          <div className="img-space" id="imgSpace">
+          <div className={`img-space ${isDragging ? "img-space-dragging" : ""}`}
+            id="imgSpace"
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}>
             {/* 숨겨진 파일 입력 */}
             <input
               type="file"
