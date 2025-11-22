@@ -4,6 +4,7 @@ import Layout from "./Layout";
 
 import DefaultMode from "./pages/DefaultMode";
 import CompeteMode from "./pages/CompeteMode";
+import DailyMode from "./pages/DailyMode";
 import Option from "./pages/Option";
 import LogIn from "./pages/LogIn";
 import AccessDenied from "./pages/AccessDenied";
@@ -23,6 +24,9 @@ function App() {
 
           {/* /app/compete → 경쟁 모드 */}
           <Route path="compete" element={<CompeteMode />} />
+
+          {/* /app/daily → 데일리 샷 모드 */}
+          <Route path="daily" element={<DailyMode />} />
 
           {/* /app/option → 옵션 */}
           <Route path="option" element={<Option />} />

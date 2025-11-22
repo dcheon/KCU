@@ -65,7 +65,7 @@ export default function DefaultMode() {
   };
 
   return (
-    <div className={"content-grid"}>
+    <div className={"content-grid bg-default"}>
       {/* 왼쪽 여백 */}
       <div className="content-left"></div>
 

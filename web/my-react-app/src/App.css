@@ -22,7 +22,6 @@
 
 body {
   font-family: sans-serif;
-  background: #E9E6E1;
   min-height: 100vh;
   overflow-x: hidden;
   width: 100%;
@@ -351,6 +350,19 @@ body {
   text-align: center;
 }
 
+.access-denied-img {
+  width: 80%;
+  margin: 10% 20%;
+  display: flex;
+}
+
+.login-page {
+  min-height: 100vh;    /* 화면 전체 높이 채우기 */
+  background-color: #ffffff; /* 흰 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 /* 반응형: 화면 좁아지면 한 줄로 */
 @media (max-width: 900px) {

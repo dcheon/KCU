@@ -5,7 +5,7 @@ import "../App.css"; // 필요하면
 export default function LogIn() {
 
   return (
-    <div className="home-container bg-white">
+    <div className="home-container">
         <p>아 뭐요</p>
     </div>
   );

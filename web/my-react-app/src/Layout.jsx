@@ -36,26 +36,26 @@ function Layout() {
   };
 
   const handleCompeteMode = () => {
-    handleDeveloping();
-    // setMode("compete");
-    // navigate("/app/compete");       // /app/compete → CompeteMode
+    // handleDeveloping();
+    setMode("compete");
+    navigate("/app/compete");       // /app/compete → CompeteMode
   };
 
   const handleDailyMode = () => {
-    handleDeveloping();
-    // setMode("daily");
-    // navigate("/app/daily");       // /app/compete → CompeteMode
+    // handleDeveloping();
+    setMode("daily");
+    navigate("/app/daily");       // /app/compete → CompeteMode
   };
 
   const handleOption = () => {
-    handleDeveloping();
-    // setMode("option");
-    // navigate("/app/option");        // /app/option → OptionPage
+    // handleDeveloping();
+    setMode("option");
+    navigate("/app/option");        // /app/option → OptionPage
   };
 
   const handleLogin = () => {
-    handleDeveloping();     // 개발중
-    // navigate("/login");
+    // handleDeveloping();     // 개발중
+    navigate("/login");
   };
 
   const handleDeveloping = () => {
