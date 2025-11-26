@@ -26,15 +26,6 @@
     opacity: 0.9;
 }
 
-.home-bg-overlay {
-    min-height: 100vh;
-    background: linear-gradient(to right,rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.3));
-    padding: 2rem 3rem;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-}
-
 /*top 35%*/
 .home-header {
     /*flex: 0 0 35%;*/
