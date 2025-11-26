@@ -7,6 +7,9 @@ import CompeteMode from "./pages/CompeteMode";
 import DailyMode from "./pages/DailyMode";
 import Option from "./pages/Option";
 import LogIn from "./pages/LogIn";
+import Register from "./pages/Register";
+import Profile from "./pages/Profile";
+import PageNotFound from "./pages/PageNotFound";
 import AccessDenied from "./pages/AccessDenied";
 import Home from "./pages/Home"; // ★ 새로 만들 파일
 
@@ -34,9 +37,15 @@ function App() {
 
         {/* 3) 로그인 페이지 */}
         <Route path="/login" element={<LogIn />} />
+        {/* 회원가입 페이지 */}
+        <Route path="/register" element={<Register />} />
+        {/* 프로필 페이지 */}
+        <Route path="/profile" element={<Profile />} />
 
         {/* 4) 공사중 페이지 */}
         <Route path="/access_denied" element={<AccessDenied />} />
+        {/* 404: catch-all */}
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );

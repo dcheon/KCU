@@ -1,6 +1,6 @@
 // src/pages/Home.jsx
 import { useNavigate } from "react-router-dom";
-import "../App.css"; // 필요하면
+import "../styles/app.css"; // 필요하면
 
 export default function Home() {
   const navigate = useNavigate();

@@ -1,0 +1,54 @@
+/* Styles specific to Compete mode (ranking column) */
+.content-left {
+  display: flex;
+  align-items: center;
+  margin-right: 2%;
+}
+
+.ranking {
+  background: rgba(255, 255, 255, 0.85);
+  width: 64%;
+  margin: 0 0 0 12%;
+  padding: 6px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ranking-title {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex: 1;
+}
+
+.ranking-item {
+  height: 17px;
+  background: rgba(0,0,0,0.03);
+  padding: 0 5px 0;
+  border-radius: 6px;
+  position: relative;
+  align-items: center;
+  display: flex;
+}
+
+.ranking-item::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  background: rgba(0,0,0,0.2);
+}
+
+.ranking-item:last-child::after {
+  display: none;
+}

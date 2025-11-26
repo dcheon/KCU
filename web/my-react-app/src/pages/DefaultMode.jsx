@@ -1,6 +1,6 @@
 // Default Mode
 import { useRef, useState } from "react";
-import "../App.css"; // 스타일 필요하면 경로 맞춰서
+import "../styles/pages/default.css"; // 페이지 전용 스타일
 
 export default function DefaultMode() {
   const [selectedShape, setSelectedShape] = useState(null);
@@ -52,6 +52,23 @@ export default function DefaultMode() {
   const handleSelectShape = (shape) => {
     setSelectedShape(shape);
     console.log(`${shape} 선택됨, 여기에 모델 돌리기`);
+  };
+
+  const [showPicker, setShowPicker] = useState(false);
+
+  const openPicker = () => setShowPicker(true);
+  const closePicker = () => setShowPicker(false);
+
+  const [pickerError, setPickerError] = useState("");
+
+  const openPickerChecked = () => {
+    setPickerError("");
+    if (!imageUrl) {
+      setPickerError("사진을 먼저 넣어주세요");
+      setShowPicker(true);
+      return;
+    }
+    setShowPicker(true);
   };
 
   const handleReset = () => {
@@ -123,31 +140,35 @@ export default function DefaultMode() {
 
       {/* 오른쪽 여백/추가 공간 */}
       <div className="content-right">
-        <button
-          className="shape-selection-section"
-          onClick={() => handleSelectShape("tetrahedron")}
-        >
-          삼각형
+        <button className="shape-selection-section" onClick={openPickerChecked}>
+          실행
         </button>
-        <button
-          className="shape-selection-section"
-          onClick={() => handleSelectShape("cube")}
-        >
-          사각형
-        </button>
-        <button
-          className="shape-selection-section"
-          onClick={() => handleSelectShape("sphere")}
-        >
-          원
-        </button>
-        <button
-          className="shape-selection-section"
-          onClick={handleReset}
-        >
+        <button className="shape-selection-section" onClick={handleReset}>
           리셋
         </button>
       </div>
+
+      {showPicker && (
+        <div className="shape-picker-overlay" onClick={closePicker}>
+          <div className="shape-picker" onClick={(e) => e.stopPropagation()}>
+            <h3>도형을 선택하세요</h3>
+            {pickerError ? (
+              <div className="picker-error">{pickerError}</div>
+            ) : (
+              <>
+                <div className="shape-picker-buttons">
+                  <button onClick={() => { handleSelectShape('삼각형'); closePicker(); }} className="shape-selection-section">삼각형</button>
+                  <button onClick={() => { handleSelectShape('사각형'); closePicker(); }} className="shape-selection-section">사각형</button>
+                  <button onClick={() => { handleSelectShape('원'); closePicker(); }} className="shape-selection-section">원</button>
+                </div>
+                <div style={{marginTop:12}}>
+                  <button onClick={closePicker} className="shape-selection-section">취소</button>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

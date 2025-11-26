@@ -1,14 +1,23 @@
 // src/Layout.jsx
 import { useState, useEffect } from 'react';
 import { Outlet, useNavigate, Link } from 'react-router-dom';
-import './App.css';
+import './styles/app.css';
 
 function Layout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [mode, setMode] = useState("default");
+  const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
+    // load current user from localStorage (mock session)
+    try {
+      const raw = localStorage.getItem("kcu_current_user");
+      if (raw) setCurrentUser(JSON.parse(raw));
+    } catch (err) {
+      // ignore
+    }
+
     const handleWindowDragOver = (e) => {
       e.preventDefault();
     };
@@ -84,7 +93,11 @@ function Layout() {
         </div>
 
         <div className="right-section">
-          <button className="toggle-btn" onClick={handleLogin}>Sign in</button> 
+          {currentUser ? (
+            <button className="toggle-btn header-btn" onClick={() => navigate('/profile')}>프로필</button>
+          ) : (
+            <button className="toggle-btn header-btn" onClick={handleLogin}>Sign in</button>
+          )}
           <nav>
             <a href="#"></a>
           </nav>

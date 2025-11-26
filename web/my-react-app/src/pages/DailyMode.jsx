@@ -1,6 +1,6 @@
 // Daily Mode
 import { useRef, useState } from "react";
-import "../App.css"; // 스타일 필요하면 경로 맞춰서
+import "../styles/pages/daily.css"; // 페이지 전용 스타일
 
 export default function DailyMode() {
   const [selectedShape, setSelectedShape] = useState(null);
