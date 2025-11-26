@@ -93,9 +93,11 @@ body {
 .page {
   display: flex;
   width: 100%;
-  min-height: 100vh;
+  min-height: 100vh; /* ensure page fills viewport */
   /* 헤더 높이만큼 아래로 밀기 */
   padding-top: 58px;
+  overflow: hidden; /* prevent page-level vertical scroll */
+  box-sizing: border-box;
 }
 
 /* ===== 토글 버튼 ===== */
@@ -162,30 +164,48 @@ body {
   display: flex;
   justify-content: center;
   width: 100%;
+  height: calc(100vh - 58px); /* fill remaining height under header robustly */
+  overflow: auto; /* allow internal scrolling if content overflows */
 }
 
 /* 본문을 3등분 */
 .content-grid {
   display: grid;
-  grid-template-columns: 200px 1000px 200px;  /* 👈 왼쪽 200px / 가운데 / 오른쪽 200px */
-  gap: 20px;
+  /* make grid responsive: side columns flexible and center column larger */
+  /* reduce side whitespace: fixed narrow side columns, center takes remaining space */
+  /* slightly reduce center width */
+  grid-template-columns: 200px minmax(580px, 1fr) 200px;
+  gap: clamp(16px, 2vw, 48px);
   width: 100%;
   margin: 0 auto; /* 중앙 정렬 */
-  max-width: 1600px;      /* ✅ 너무 넓어지지 않게 */
-  padding: 0 32px;        /* ✅ 화면 가장자리랑 살짝 띄우기 */
+  max-width: 98vw;      /* allow larger center area */
+  padding: 0 2vw;        /* small side padding relative to viewport */
+}
+
+/* Make grid fill available height so center content can size within viewport */
+.content-grid {
+  height: 100%;
+  align-items: center; /* vertically center columns */
+}
+
+/* Make grid fill available height so center content can size within viewport */
+.content-grid {
+  height: 100%;
 }
 
 /* 가운데 영역만 기존 스타일 적용 */
 .content-center {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 22px; /* increased ~20% for more spacing */
+  height: 100%;
+  min-height: 0; /* allow children to shrink inside flex container */
+  align-items: stretch;
 }
 
 /* 기존 박스들은 그대로 */
 .center-box {
   width: 100%;
-  aspect-ratio: 16 / 9;
   background: #fff;
   border-radius: 12px;
   border: 3px solid #d9d9d9;
@@ -194,6 +214,13 @@ body {
   justify-content: center;
   font-weight: 600;
   text-align: center;
+  flex: 1; /* let center boxes expand/contract to fit available space */
+  min-height: 0; /* required for proper flexbox shrinking */
+  padding: 24px; /* increased ~20% */
+  /* keep box height proportional to viewport but allow shrinking (increased ~20%) */
+  min-height: 58vh; /* increased to ~20% larger vertically */
+  max-height: 96vh; /* cap to avoid exceeding viewport */
+  overflow: hidden; /* ensure inner img-space cannot escape the box */
 }
 
 .center-box-description {
@@ -206,7 +233,8 @@ body {
   width: 100%;
   background: rgba(255, 255, 255, 0.85);
   border-radius: 8px;
-  padding: 12px;
+  padding: 18px; /* slightly larger to match center-box increase */
+  font-size: 1.08rem;
   text-align: center;
   font-weight: 600;
   border: 1px solid rgba(0,0,0,0.3);
@@ -216,15 +244,15 @@ body {
 .content-left {
   display: flex;
   align-items: center;
-  margin-right: 5%;
+  margin-right: 2%;
 }
 
 /* 랭킹 박스 전체 */
 .ranking {
   background: rgba(255, 255, 255, 0.85);
-  width: 80%;
-  margin: 0 0 0 18%;
-  padding: 8px;
+  width: 64%; /* further reduced to compensate larger center-box (~20% smaller) */
+  margin: 0 0 0 12%;
+  padding: 6px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -248,7 +276,7 @@ body {
 
 /* 랭킹 칸(데이터 없는 빈 칸) */
 .ranking-item {
-  height: 21px;     
+  height: 17px;    
   background: rgba(0,0,0,0.03);
   padding: 0 5px 0;
   border-radius: 6px;
@@ -301,18 +329,20 @@ body {
 
 /* 실제 이미지 들어갈 구간 */
 .img-space {
-  width: 90%;
-  aspect-ratio: 16 / 9;
+  width: 100%;
+  height: 100%;
   background: #fff;
   border-radius: 12px;
-  /* 일단 보기 편하게 표시 해놈 */
-  flex-direction: column;
   border: 3px solid #d9d9d9; 
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
   text-align: center;
+  padding: 8px;
+  box-sizing: border-box;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .img-space button {
@@ -323,9 +353,9 @@ body {
 }
 
 .uploaded-img {
-  width: 100%;           
+  width: 100%;
   height: 100%;
-  object-fit: contain;   
+  object-fit: contain;
   border-radius: 12px;
   background: #fff;
 }

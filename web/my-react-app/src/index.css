@@ -24,12 +24,26 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
+/* Make the html/body/root fill the viewport and prevent page-level scroll */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  overflow: hidden; /* prevent overall page scrolling */
+}
+
+/* ensure root stretches and allows the app to fill viewport */
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
