@@ -1,8 +1,25 @@
 // Default Mode
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import "../styles/pages/default.css"; // 페이지 전용 스타일
 
 export default function DefaultMode() {
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("shapehunter-theme") || "light";
+  });
+
+  useEffect(() => {
+    const handleStorage = () => {
+      const newTheme = localStorage.getItem("shapehunter-theme") || "light";
+      setTheme(newTheme);
+    };
+    window.addEventListener("storage", handleStorage);
+    const interval = setInterval(handleStorage, 100);
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+      clearInterval(interval);
+    };
+  }, []);
+
   const [selectedShape, setSelectedShape] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   const fileInputRef = useRef(null);
@@ -82,7 +99,7 @@ export default function DefaultMode() {
   };
 
   return (
-    <div className={"content-grid bg-default"}>
+    <div className={`content-grid ${theme === "dark" ? "theme-dark" : "theme-light"}`}>
       {/* 왼쪽 여백 */}
       <div className="content-left"></div>
 

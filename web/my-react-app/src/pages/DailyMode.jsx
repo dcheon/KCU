@@ -1,8 +1,25 @@
 // Daily Mode
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import "../styles/pages/daily.css"; // 페이지 전용 스타일
 
 export default function DailyMode() {
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("shapehunter-theme") || "light";
+  });
+
+  useEffect(() => {
+    const handleStorage = () => {
+      const newTheme = localStorage.getItem("shapehunter-theme") || "light";
+      setTheme(newTheme);
+    };
+    window.addEventListener("storage", handleStorage);
+    const interval = setInterval(handleStorage, 100);
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+      clearInterval(interval);
+    };
+  }, []);
+
   const [selectedShape, setSelectedShape] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   const fileInputRef = useRef(null);
@@ -65,7 +82,7 @@ export default function DailyMode() {
   };
 
   return (
-    <div className={"content-grid"}>
+    <div className={`content-grid ${theme === "dark" ? "theme-dark" : "theme-light"}`}>
       {/* 왼쪽 여백 */}
       <div className="content-left"></div>
 
@@ -123,28 +140,10 @@ export default function DailyMode() {
 
       {/* 오른쪽 여백/추가 공간 */}
       <div className="content-right">
-        <button
-          className="shape-selection-section"
-          onClick={() => handleSelectShape("tetrahedron")}
-        >
-          삼각형
+        <button className="shape-selection-section" onClick={() => alert('실행 기능 개발중')}>
+          실행
         </button>
-        <button
-          className="shape-selection-section"
-          onClick={() => handleSelectShape("cube")}
-        >
-          사각형
-        </button>
-        <button
-          className="shape-selection-section"
-          onClick={() => handleSelectShape("sphere")}
-        >
-          원
-        </button>
-        <button
-          className="shape-selection-section"
-          onClick={handleReset}
-        >
+        <button className="shape-selection-section" onClick={handleReset}>
           리셋
         </button>
       </div>

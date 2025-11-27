@@ -1,18 +1,31 @@
 // src/pages/Home.jsx
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "../styles/pages/Home.css";
 
 export default function Home() {
   const navigate = useNavigate();
 
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("shapehunter-theme") || "light";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("shapehunter-theme", theme);
+  }, [theme]);
+
   return (
-    <div className="home-root">
+    <div
+      className={`home-root ${
+        theme === "dark" ? "theme-dark" : "theme-light"
+      }`}
+    >
       <div className="home-bg-overlay">
         <header className="home-header">
           <div className="home-logo-placeholder" />
           <h1 className="home-title">Shape 헌터</h1>
           <p className="home-subtitle">
-              {/* Add Subtitle here */}
+            {/* Add Subtitle here */}
           </p>
         </header>
 
@@ -23,15 +36,27 @@ export default function Home() {
               기본 모드 (Classic)
             </button>
 
-            <button className="home-menu-btn" onClick={() => navigate("/app/compete")}>
+            <button
+              className="home-menu-btn"
+              onClick={() => navigate("/app/compete")}
+            >
               경쟁 모드 (Competitive)
             </button>
 
-            <button className="home-menu-btn" onClick={() => navigate("/app/option")}>
+            <button
+              className="home-menu-btn"
+              onClick={() => navigate("/app/daily")}
+            >
+              데일리 모드 (Daily)
+            </button>
+
+            <button
+              className="home-menu-btn"
+              onClick={() => navigate("/app/option")}
+            >
               옵션 (Options)
             </button>
           </nav>
-
 
           <section className="home-panels">
             {/*Top left:Instructions*/}

@@ -1,13 +1,17 @@
 // src/Layout.jsx
 import { useState, useEffect } from 'react';
 import { Outlet, useNavigate, Link } from 'react-router-dom';
-import './styles/app.css';
+import './styles/pages/app.css';
 
 function Layout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [mode, setMode] = useState("default");
   const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
+
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("shapehunter-theme") || "light";
+  });
 
   useEffect(() => {
     // load current user from localStorage (mock session)
@@ -17,6 +21,14 @@ function Layout() {
     } catch (err) {
       // ignore
     }
+
+    // theme storage listener
+    const handleStorage = () => {
+      const newTheme = localStorage.getItem("shapehunter-theme") || "light";
+      setTheme(newTheme);
+    };
+    window.addEventListener("storage", handleStorage);
+    const interval = setInterval(handleStorage, 100);
 
     const handleWindowDragOver = (e) => {
       e.preventDefault();
@@ -30,6 +42,8 @@ function Layout() {
     window.addEventListener("drop", handleWindowDrop);
 
     return () => {
+      window.removeEventListener("storage", handleStorage);
+      clearInterval(interval);
       window.removeEventListener("dragover", handleWindowDragOver);
       window.removeEventListener("drop", handleWindowDrop);
     };
@@ -104,7 +118,7 @@ function Layout() {
         </div>
       </header>
 
-      <div className={`page bg-${mode}`}>
+      <div className={`page bg-${mode} ${theme === "dark" ? "theme-dark" : "theme-light"}`}>
         {/* 왼쪽 사이드바 */}
         <aside className={`sidebar ${isSidebarOpen ? "active" : ""}`} id="sidebar">
           <button className="sidebar-section" onClick={handleDefaultMode}>

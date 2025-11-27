@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/app.css";
+import "../styles/pages/app.css";
 import "../styles/pages/register.css"; // reuse card styles
 
 export default function Profile() {
@@ -9,13 +9,30 @@ export default function Profile() {
   const raw = localStorage.getItem("kcu_current_user");
   const user = raw ? JSON.parse(raw) : null;
 
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("shapehunter-theme") || "light";
+  });
+
+  useEffect(() => {
+    const handleStorage = () => {
+      const newTheme = localStorage.getItem("shapehunter-theme") || "light";
+      setTheme(newTheme);
+    };
+    window.addEventListener("storage", handleStorage);
+    const interval = setInterval(handleStorage, 100);
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+      clearInterval(interval);
+    };
+  }, []);
+
   const handleLogout = () => {
     localStorage.removeItem("kcu_current_user");
     navigate("/");
   };
 
   return (
-    <div className="page center-login-page">
+    <div className={`page center-login-page ${theme === "dark" ? "theme-dark" : "theme-light"}`}>
       <main className="main">
         <div className="login-card">
           <h2>프로필</h2>
