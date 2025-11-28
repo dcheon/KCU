@@ -85,6 +85,7 @@ export default function DefaultMode() {
       setShowPicker(true);
       return;
     }
+    setPickerError("");
     setShowPicker(true);
   };
 
@@ -168,11 +169,21 @@ export default function DefaultMode() {
       {showPicker && (
         <div className="shape-picker-overlay" onClick={closePicker}>
           <div className="shape-picker" onClick={(e) => e.stopPropagation()}>
-            <h3>도형을 선택하세요</h3>
             {pickerError ? (
-              <div className="picker-error">{pickerError}</div>
+              <>
+                <h3>사진을 먼저 넣어주세요</h3>
+                <div style={{marginTop: 16}}>
+                  <button 
+                    onClick={closePicker} 
+                    className="shape-selection-section"
+                  >
+                    확인
+                  </button>
+                </div>
+              </>
             ) : (
               <>
+                <h3>도형을 선택하세요</h3>
                 <div className="shape-picker-buttons">
                   <button onClick={() => { handleSelectShape('삼각형'); closePicker(); }} className="shape-selection-section">삼각형</button>
                   <button onClick={() => { handleSelectShape('사각형'); closePicker(); }} className="shape-selection-section">사각형</button>
