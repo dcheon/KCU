@@ -10,13 +10,13 @@
 }
 
 .page {
-  background: var(--bg-color, #050509) !important;
+  background: linear-gradient(180deg, #141414, #050509) !important;
   color: var(--text-color, #f5f5f5);
   transition: background 0.25s ease, color 0.25s ease;
 }
 
 .page.theme-light .content-grid {
-  --bg-color: #E9E6E1;
+  --bg-color: #f5f5f5;
   --text-color: #111111;
   --card-bg: rgba(255, 255, 255, 0.95);
   --card-border: rgba(0, 0, 0, 0.06);
@@ -25,7 +25,7 @@
 }
 
 .page.theme-light {
-  background: var(--bg-color, #E9E6E1) !important;
+  background: linear-gradient(270deg, #f5f5f5 0%, #f2f2f2 70%, #e5e5e5 100%) !important;
   color: var(--text-color, #111111);
 }
 
@@ -39,7 +39,7 @@
 }
 
 .page.theme-dark {
-  background: var(--bg-color, #050509) !important;
+  background: linear-gradient(90deg, #1e1e1e, #1e1e1e) !important;
   color: var(--text-color, #f5f5f5);
 }
 

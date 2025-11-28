@@ -14,10 +14,26 @@ export default function Home() {
   const [showModeDetail, setShowModeDetail] = useState(false);
   const [selectedMode, setSelectedMode] = useState("");
   const [showLeaderboard, setShowLeaderboard] = useState(false);
+  const [leaderboardData, setLeaderboardData] = useState([]);
 
   useEffect(() => {
     localStorage.setItem("shapehunter-theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    // Load leaderboard data from CSV
+    fetch('/assets/data/leaderboard.csv')
+      .then(response => response.text())
+      .then(text => {
+        const lines = text.trim().split('\n');
+        const data = lines.slice(1).map(line => {
+          const [rank, username, score] = line.split(',');
+          return { rank, username, score };
+        });
+        setLeaderboardData(data);
+      })
+      .catch(error => console.error('Failed to load leaderboard:', error));
+  }, []);
 
   const openModeDetail = (mode) => {
     setSelectedMode(mode);
@@ -56,28 +72,28 @@ export default function Home() {
           <nav className="home-menu">
             <h2 className="home-menu-title">Modes</h2>
             <button className="home-menu-btn" onClick={() => navigate("/app")}>
-              기본 모드 (Classic)
+              기본 모드
             </button>
 
             <button
               className="home-menu-btn"
               onClick={() => navigate("/app/compete")}
             >
-              경쟁 모드 (Competitive)
+              경쟁 모드
             </button>
 
             <button
               className="home-menu-btn"
               onClick={() => navigate("/app/daily")}
             >
-              데일리 모드 (Daily)
+              데일리 모드
             </button>
 
             <button
               className="home-menu-btn"
               onClick={() => navigate("/app/option")}
             >
-              옵션 (Options)
+              옵션
             </button>
           </nav>
 
@@ -228,56 +244,13 @@ export default function Home() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>user001</td>
-                    <td>9500</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>user002</td>
-                    <td>9200</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>user003</td>
-                    <td>8800</td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>user004</td>
-                    <td>8500</td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td>user005</td>
-                    <td>8200</td>
-                  </tr>
-                  <tr>
-                    <td>6</td>
-                    <td>user006</td>
-                    <td>7900</td>
-                  </tr>
-                  <tr>
-                    <td>7</td>
-                    <td>user007</td>
-                    <td>7600</td>
-                  </tr>
-                  <tr>
-                    <td>8</td>
-                    <td>user008</td>
-                    <td>7300</td>
-                  </tr>
-                  <tr>
-                    <td>9</td>
-                    <td>user009</td>
-                    <td>7000</td>
-                  </tr>
-                  <tr>
-                    <td>10</td>
-                    <td>user010</td>
-                    <td>6700</td>
-                  </tr>
+                  {leaderboardData.map((entry, index) => (
+                    <tr key={index}>
+                      <td>{entry.rank}</td>
+                      <td>{entry.username}</td>
+                      <td>{entry.score}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

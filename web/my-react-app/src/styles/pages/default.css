@@ -10,13 +10,13 @@
   --picker-bg: rgba(20, 20, 20, 0.95);
   --picker-overlay: rgba(0, 0, 0, 0.65);
 
-  background: var(--bg-color) !important;
+  background: linear-gradient(180deg, #141414, #050509) !important;
   color: var(--text-color);
   transition: background 0.25s ease, color 0.25s ease;
 }
 
 .page.theme-light {
-  --bg-color: #E9E6E1;
+  --bg-color: #f5f5f5;
   --text-color: #111111;
   --card-bg: rgba(255, 255, 255, 0.95);
   --card-border: rgba(0, 0, 0, 0.06);
@@ -24,6 +24,8 @@
   --btn-bg-hover: rgba(0, 0, 0, 0.08);
   --picker-bg: rgba(255, 255, 255, 0.98);
   --picker-overlay: rgba(0, 0, 0, 0.45);
+
+  background: linear-gradient(270deg, #f5f5f5 0%, #f2f2f2 70%, #e5e5e5 100%) !important;
 }
 
 .page.theme-dark {
@@ -35,6 +37,8 @@
   --btn-bg-hover: rgba(240, 224, 190, 0.25);
   --picker-bg: rgba(20, 20, 20, 0.95);
   --picker-overlay: rgba(0, 0, 0, 0.65);
+
+  background: linear-gradient(90deg, #1e1e1e, #1e1e1e) !important;
 }
 
 /* Range input styling */

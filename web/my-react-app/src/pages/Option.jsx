@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "../styles/pages/default.css"; // 기본 테마 스타일 재사용
+import "../styles/pages/register.css"; // 팝업 스타일용
 
 export default function Option() {
   const [theme, setTheme] = useState(() => {
@@ -17,6 +18,8 @@ export default function Option() {
     if (!Number.isFinite(n)) return 50;
     return Math.min(100, Math.max(0, n));
   });
+
+  const [showDonation, setShowDonation] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("shapehunter-theme", theme);
@@ -78,8 +81,28 @@ export default function Option() {
               </div>
             </div>
 
-            <button>돈 주세요</button>
+            <button
+                className="shape-selection-section" 
+                onClick={() => setShowDonation(true)}
+                style={{maxWidth: 300}}>
+              ☕커피 마시게 돈 주세요
+            </button>
         </div>
+
+        {/* Donation Popup */}
+        {showDonation && (
+          <div className="home-popup-overlay" onClick={() => setShowDonation(false)}>
+            <div className="home-popup" onClick={(e) => e.stopPropagation()} style={{maxWidth: '600px'}}>
+              <button onClick={() => setShowDonation(false)} className="home-popup-x-btn">
+                ×
+              </button>
+              <h2 style={{textAlign: 'center'}}>감사합니다</h2>
+              <div className="home-popup-content">
+                <img src="/assets/img/donation.png" alt="후원" style={{width: '100%', height: 'auto', borderRadius: '8px'}} />
+              </div>
+            </div>
+          </div>
+        )}
     </div>
   );
 }
