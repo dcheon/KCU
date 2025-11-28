@@ -61,6 +61,7 @@ export default function Profile() {
                 <p style={{margin: 0}}><strong>데일리모드 최대 연승:</strong> {gameStats.dailyBestStreak} streak</p>
               </div>
               <div style={{display:'flex', gap:12, marginTop:12}}>
+                <button className="login-btn" onClick={() => navigate('/')}>홈으로</button>
                 <button className="login-btn" onClick={() => navigate('/app')}>앱으로</button>
                 <button className="login-btn" onClick={handleLogout}>로그아웃</button>
               </div>

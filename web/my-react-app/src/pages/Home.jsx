@@ -15,10 +15,19 @@ export default function Home() {
   const [selectedMode, setSelectedMode] = useState("");
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [leaderboardData, setLeaderboardData] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
     localStorage.setItem("shapehunter-theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    // Check if user is logged in
+    const user = localStorage.getItem("kcu_current_user");
+    if (user) {
+      setCurrentUser(JSON.parse(user));
+    }
+  }, []);
 
   useEffect(() => {
     // Load leaderboard data from CSV
@@ -55,12 +64,20 @@ export default function Home() {
       <div className="home-bg-overlay">
 
         <div className="home-authbar">
-          <button className="home-auth-btn" onClick={() => navigate("/login")}>
-            Log In
-          </button>
-          <button className="home-auth-btn primary" onClick={() => navigate("/register")}>
-            Sign Up
-          </button>
+          {currentUser ? (
+            <button className="home-auth-btn" onClick={() => navigate("/profile")}>
+              Profile
+            </button>
+          ) : (
+            <>
+              <button className="home-auth-btn" onClick={() => navigate("/login")}>
+                Log In
+              </button>
+              <button className="home-auth-btn primary" onClick={() => navigate("/register")}>
+                Sign Up
+              </button>
+            </>
+          )}
         </div>
         
         <header className="home-header">
