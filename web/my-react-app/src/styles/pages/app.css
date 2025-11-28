@@ -156,24 +156,16 @@ body:has(.page.theme-dark) .main-header .logo-img {
   position: relative;
 }
 
-/* 사이드바 열렸을 때 오버레이 */
-.page::before {
-  content: "";
+/* 사이드바 오버레이 */
+.sidebar-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
   z-index: 999;
-}
-
-.page:has(.sidebar.active)::before {
-  opacity: 1;
-  pointer-events: auto;
+  cursor: pointer;
 }
 
 /* ===== 토글 버튼 ===== */

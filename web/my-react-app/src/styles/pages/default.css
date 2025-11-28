@@ -37,6 +37,61 @@
   --picker-overlay: rgba(0, 0, 0, 0.65);
 }
 
+/* Range input styling */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Light mode range track */
+.page.theme-light input[type="range"] {
+  background: #ddd;
+}
+
+/* Dark mode range track */
+.page.theme-dark input[type="range"] {
+  background: #444;
+}
+
+/* Range thumb - Chrome/Safari */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.page.theme-light input[type="range"]::-webkit-slider-thumb {
+  background: #333;
+}
+
+.page.theme-dark input[type="range"]::-webkit-slider-thumb {
+  background: #fff;
+}
+
+/* Range thumb - Firefox */
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+.page.theme-light input[type="range"]::-moz-range-thumb {
+  background: #333;
+}
+
+.page.theme-dark input[type="range"]::-moz-range-thumb {
+  background: #fff;
+}
+
 /* Shape picker overlay */
 .shape-picker-overlay {
 	position: fixed;

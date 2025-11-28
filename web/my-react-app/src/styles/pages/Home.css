@@ -7,7 +7,7 @@
   --menu-btn-bg: rgba(240, 224, 190, 0.12);
   --menu-btn-bg-hover: rgba(240, 224, 190, 0.25);
 
-  --card-bg: rgba(0, 0, 0, 0.35);
+  --card-bg: #1a1a1a;
   --card-border: rgba(255, 255, 255, 0.05);
 
   --placeholder-bg: rgba(255, 255, 255, 0.05);
@@ -35,7 +35,7 @@
   --menu-btn-bg: rgba(0, 0, 0, 0.04);
   --menu-btn-bg-hover: rgba(0, 0, 0, 0.08);
 
-  --card-bg: rgba(255, 255, 255, 0.95);
+  --card-bg: #ffffff;
   --card-border: rgba(0, 0, 0, 0.3);
 
   --placeholder-bg: rgba(0, 0, 0, 0.03);
@@ -56,7 +56,7 @@
   --menu-btn-bg: rgba(240, 224, 190, 0.12);
   --menu-btn-bg-hover: rgba(240, 224, 190, 0.25);
 
-  --card-bg: rgba(0, 0, 0, 0.35);
+  --card-bg: #1a1a1a;
   --card-border: rgba(255, 255, 255, 0.05);
 
   --placeholder-bg: rgba(255, 255, 255, 0.05);

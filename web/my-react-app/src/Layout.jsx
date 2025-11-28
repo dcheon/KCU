@@ -54,6 +54,10 @@ function Layout() {
     setIsSidebarOpen(prev => !prev);
   };
 
+  const handleCloseSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+
   const handleDefaultMode = () => {
     setMode("default");
     navigate("/app");               // /app/default → DefaultMode
@@ -130,6 +134,14 @@ function Layout() {
       </header>
 
       <div className={`page bg-${mode} ${theme === "dark" ? "theme-dark" : "theme-light"}`}>
+        {/* Sidebar Overlay */}
+        {isSidebarOpen && (
+          <div 
+            className="sidebar-overlay" 
+            onClick={handleCloseSidebar}
+          />
+        )}
+
         {/* 왼쪽 사이드바 */}
         <aside className={`sidebar ${isSidebarOpen ? "active" : ""}`} id="sidebar">
           <button className="sidebar-section" onClick={handleDefaultMode}>
