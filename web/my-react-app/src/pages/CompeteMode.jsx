@@ -175,7 +175,7 @@ export default function CompeteMode() {
 
         <div className="output-area">
           {imageUrl ? (
-            <a>개발중입니다. ㅈㅅ</a>
+            <a>개발자를 위해 몬스터 하나 사주세요ㅠㅠ</a>
           ) : (
             <a>사진을 올려야 평가를 하든 머든 하죠 이건 뭐 저랑 싸우자는 건가요?</a>
           )}

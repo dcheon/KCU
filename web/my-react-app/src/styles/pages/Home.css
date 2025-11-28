@@ -211,6 +211,16 @@
 .home-panel-image {
   height: 120px;
   background: var(--placeholder-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.home-panel-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .home-panel-image.placeholder {
