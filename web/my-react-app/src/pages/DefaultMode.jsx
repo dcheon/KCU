@@ -1,8 +1,25 @@
 // Default Mode
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import "../styles/pages/default.css"; // 페이지 전용 스타일
 
 export default function DefaultMode() {
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("shapehunter-theme") || "light";
+  });
+
+  useEffect(() => {
+    const handleStorage = () => {
+      const newTheme = localStorage.getItem("shapehunter-theme") || "light";
+      setTheme(newTheme);
+    };
+    window.addEventListener("storage", handleStorage);
+    const interval = setInterval(handleStorage, 100);
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+      clearInterval(interval);
+    };
+  }, []);
+
   const [selectedShape, setSelectedShape] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   const fileInputRef = useRef(null);
@@ -68,6 +85,7 @@ export default function DefaultMode() {
       setShowPicker(true);
       return;
     }
+    setPickerError("");
     setShowPicker(true);
   };
 
@@ -82,7 +100,7 @@ export default function DefaultMode() {
   };
 
   return (
-    <div className={"content-grid bg-default"}>
+    <div className={`content-grid ${theme === "dark" ? "theme-dark" : "theme-light"}`}>
       {/* 왼쪽 여백 */}
       <div className="content-left"></div>
 
@@ -128,7 +146,7 @@ export default function DefaultMode() {
           {imageUrl ? (
             <a>개발중입니다. ㅈㅅ</a>
           ) : (
-            <a>사진을 올려야 평가를 하든 머든 하죠 이건 뭐 저랑 싸우자는 건가요?</a>
+            <a>사진을 올리면 이곳에 결과가 나옵니다</a>
           )}
           {selectedShape && imageUrl && (
             <div style={{ marginTop: "10px", fontWeight: 500 }}>
@@ -151,11 +169,21 @@ export default function DefaultMode() {
       {showPicker && (
         <div className="shape-picker-overlay" onClick={closePicker}>
           <div className="shape-picker" onClick={(e) => e.stopPropagation()}>
-            <h3>도형을 선택하세요</h3>
             {pickerError ? (
-              <div className="picker-error">{pickerError}</div>
+              <>
+                <h3>사진을 먼저 넣어주세요</h3>
+                <div style={{marginTop: 16}}>
+                  <button 
+                    onClick={closePicker} 
+                    className="shape-selection-section"
+                  >
+                    확인
+                  </button>
+                </div>
+              </>
             ) : (
               <>
+                <h3>도형을 선택하세요</h3>
                 <div className="shape-picker-buttons">
                   <button onClick={() => { handleSelectShape('삼각형'); closePicker(); }} className="shape-selection-section">삼각형</button>
                   <button onClick={() => { handleSelectShape('사각형'); closePicker(); }} className="shape-selection-section">사각형</button>

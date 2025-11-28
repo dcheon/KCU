@@ -1,7 +1,7 @@
 // src/pages/LogIn.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import "../styles/app.css"; // global styles (Layout uses this too)
+import "../styles/pages/app.css"; // global styles (Layout uses this too)
 import "../styles/pages/login.css";
 
 export default function LogIn() {
@@ -9,6 +9,23 @@ export default function LogIn() {
   const [identifier, setIdentifier] = useState(""); // 아이디 또는 이메일
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("shapehunter-theme") || "light";
+  });
+
+  useEffect(() => {
+    const handleStorage = () => {
+      const newTheme = localStorage.getItem("shapehunter-theme") || "light";
+      setTheme(newTheme);
+    };
+    window.addEventListener("storage", handleStorage);
+    const interval = setInterval(handleStorage, 100);
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+      clearInterval(interval);
+    };
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,7 +55,7 @@ export default function LogIn() {
   };
 
   return (
-    <div className="login-page">
+    <div className={`login-page ${theme === "dark" ? "theme-dark" : "theme-light"}`}>
       <div className="login-card" role="form" aria-label="로그인 폼">
         <h2>로그인</h2>
         <label>

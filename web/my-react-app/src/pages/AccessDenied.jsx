@@ -1,11 +1,11 @@
 // src/pages/Home.jsx
 import { useNavigate } from "react-router-dom";
-import "../styles/app.css"; // 필요하면
+import "../styles/pages/app.css"; // 필요하면
 
 export default function AccessDenied() {
 
   return (
-    <div className="home-container bg-white">
+    <div className="home-container">
       <div className="access-denied">
         <p>ㅈㅅ</p>
         <img 

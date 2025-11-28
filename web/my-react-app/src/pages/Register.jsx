@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import "../styles/app.css";
+import "../styles/pages/app.css";
 import "../styles/pages/register.css";
 
 export default function Register() {

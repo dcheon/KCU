@@ -4,22 +4,6 @@
   padding: 0;
 }
 
-.bg-white {
-  background-color: #FFFFFF; /* 흰 배경 */
-}
-
-.bg-default {
-  background-color: #E9E6E1; /* 기본모드 배경 */
-}
-
-.bg-compete {
-  background-color: #f9e4d6; /* 경쟁모드 배경 */
-}
-
-.bg-option {
-  background-color: #DDECF8; /* 설정모드 배경 */
-}
-
 body {
   font-family: sans-serif;
   min-height: 100vh;
@@ -41,6 +25,23 @@ body {
   background: #fff;
   border-bottom: 1px solid #eee;
   z-index: 1002;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+/* 다크모드 헤더 */
+.page.theme-dark ~ .main-header,
+body:has(.page.theme-dark) .main-header {
+  background: #1a1a1a;
+  border-bottom: 1px solid #333;
+  color: #f5f5f5;
+}
+
+/* 라이트모드 헤더 (기본값) */
+.page.theme-light ~ .main-header,
+body:has(.page.theme-light) .main-header {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  color: #222;
 }
 
 /* 왼쪽 섹션: 토글 버튼 + 로고 */
@@ -73,6 +74,14 @@ body {
   font-size: 26px;
   cursor: pointer;
   padding: 4px 8px;
+  color: #222;
+  transition: color 0.25s ease;
+}
+
+/* 다크모드 토글 버튼 */
+.page.theme-dark ~ .main-header .toggle-btn,
+body:has(.page.theme-dark) .main-header .toggle-btn {
+  color: #f5f5f5;
 }
 
 /* Header-specific button: smaller text and subtle 3D look */
@@ -86,9 +95,18 @@ body {
   color: #222;
   font-weight: 600;
   box-shadow: 0 4px 0 rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.6);
-  transition: transform 0.08s ease, box-shadow 0.08s ease;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.25s ease, color 0.25s ease;
   min-width: 56px;
   text-align: center;
+}
+
+/* 다크모드 헤더 버튼 */
+.page.theme-dark ~ .main-header .header-btn,
+body:has(.page.theme-dark) .main-header .header-btn {
+  background: linear-gradient(180deg, #2a2a2a, #1f1f1f);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #f5f5f5;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
 }
 
 .header-btn:hover {
@@ -108,6 +126,13 @@ body {
   object-fit: cover;
   border-radius: 8px;
   cursor: pointer;
+  transition: filter 0.25s ease;
+}
+
+/* 다크모드 로고 반전 */
+.page.theme-dark ~ .main-header .logo-img,
+body:has(.page.theme-dark) .main-header .logo-img {
+  filter: invert(1);
 }
 
 /* 중앙 문구 */
@@ -128,6 +153,19 @@ body {
   padding-top: 58px;
   overflow: hidden; /* prevent page-level vertical scroll */
   box-sizing: border-box;
+  position: relative;
+}
+
+/* 사이드바 오버레이 */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  cursor: pointer;
 }
 
 /* ===== 토글 버튼 ===== */
@@ -169,7 +207,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, background 0.25s ease, color 0.25s ease;
   transform: translateX(-100%);
   position: fixed;
   left: 0;
@@ -177,6 +215,13 @@ body {
   bottom: 0;
   backdrop-filter: blur(4px);
   z-index: 1000;
+}
+
+/* 다크모드 사이드바 */
+.page.theme-dark ~ .sidebar,
+body:has(.page.theme-dark) .sidebar {
+  background: #1a1a1a;
+  color: #f5f5f5;
 }
 
 /* 버튼 아래에 구분선 */
@@ -188,6 +233,13 @@ body {
   width: 100%;
   height: 1px;
   background: rgba(0, 0, 0, 0.05);
+  transition: background 0.25s ease;
+}
+
+/* 다크모드 사이드바 구분선 */
+.page.theme-dark ~ .sidebar::before,
+body:has(.page.theme-dark) .sidebar::before {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .sidebar.active {
@@ -202,10 +254,24 @@ body {
   font-weight: 600;
   cursor: pointer;
   border: 1px solid rgba(0,0,0,0.3);
+  transition: background 0.15s ease, color 0.25s ease;
 }
 
 .sidebar-section:hover {
   background: #ddd;
+}
+
+/* 다크모드 사이드바 버튼 */
+.page.theme-dark ~ .sidebar .sidebar-section,
+body:has(.page.theme-dark) .sidebar .sidebar-section {
+  background: rgba(40, 40, 40, 0.85);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #f5f5f5;
+}
+
+.page.theme-dark ~ .sidebar .sidebar-section:hover,
+body:has(.page.theme-dark) .sidebar .sidebar-section:hover {
+  background: rgba(60, 60, 60, 0.95);
 }
 
 /* ===== 메인 ===== */
@@ -258,7 +324,7 @@ body {
 /* 기존 박스들은 그대로 */
 .center-box {
   width: 100%;
-  background: #fff;
+  /* background: #fff; - removed, use page-specific theme */
   border-radius: 12px;
   border: 3px solid #d9d9d9;
   display: flex;
@@ -283,7 +349,7 @@ body {
 
 .output-area {
   width: 100%;
-  background: rgba(255, 255, 255, 0.85);
+  /* background: rgba(255, 255, 255, 0.85); - removed, use page-specific theme */
   border-radius: 8px;
   padding: 18px; /* slightly larger to match center-box increase */
   font-size: 1.08rem;
@@ -305,7 +371,7 @@ body {
 
 /* 오른쪽 공간을 어떤 도형으로 생각하고 찍었는지 선택 */
 .shape-selection-section {
-  background: rgba(255, 255, 255, 0.85);
+  /* background: rgba(255, 255, 255, 0.85); - removed, use page-specific theme */
   width: 100%;
   margin: 10px 0;
   border-radius: 8px;
@@ -316,18 +382,15 @@ body {
   border: 1px solid rgba(0,0,0,0.3);
 }
 
-.shape-selection-section:hover {
-  background: #ddd;
-}
-
 /* 실제 이미지 들어갈 구간 */
 .img-space {
   width: 100%;
   height: 100%;
-  background: #fff;
+  /* background: #fff; - removed, use page-specific theme */
   border-radius: 12px;
   border: 3px solid #d9d9d9; 
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   font-weight: 600;
@@ -336,6 +399,7 @@ body {
   box-sizing: border-box;
   max-width: 100%;
   max-height: 100%;
+  gap: 12px;
 }
 
 .img-space button {
@@ -350,7 +414,9 @@ body {
   height: 100%;
   object-fit: contain;
   border-radius: 12px;
-  background: #fff;
+  /* Use themed card background instead of fixed white */
+  background: var(--card-bg) !important;
+  color: var(--text-color) !important;
 }
 
 .img-space-dragging {
