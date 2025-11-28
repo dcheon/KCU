@@ -7,7 +7,8 @@
   --card-border: rgba(255, 255, 255, 0.05);
   --input-bg: rgba(255, 255, 255, 0.08);
   --input-border: rgba(255, 255, 255, 0.2);
-  --btn-bg: #2874f0;
+  --btn-bg: rgba(240, 224, 190, 0.12);
+  --btn-bg-hover: rgba(240, 224, 190, 0.25);
   --link-color: #8f96ff;
 
   background: var(--bg-color);
@@ -22,7 +23,8 @@
   --card-border: rgba(0, 0, 0, 0.06);
   --input-bg: #ffffff;
   --input-border: #ddd;
-  --btn-bg: #2874f0;
+  --btn-bg: rgba(0, 0, 0, 0.04);
+  --btn-bg-hover: rgba(0, 0, 0, 0.08);
   --link-color: #2874f0;
 }
 
@@ -33,7 +35,8 @@
   --card-border: rgba(255, 255, 255, 0.05);
   --input-bg: rgba(255, 255, 255, 0.08);
   --input-border: rgba(255, 255, 255, 0.2);
-  --btn-bg: #2874f0;
+  --btn-bg: rgba(240, 224, 190, 0.12);
+  --btn-bg-hover: rgba(240, 224, 190, 0.25);
   --link-color: #8f96ff;
 }
 
@@ -44,7 +47,8 @@
 .login-input { width:100%; padding:10px 12px; border:1px solid var(--input-border); border-radius:6px; font-size:14px; background:var(--input-bg); color:var(--text-color); }
 .login-error { color:#b00020; margin-top:6px; }
 .login-actions { display:flex; align-items:center; gap:12px; margin-top:8px; }
-.login-btn { background:var(--btn-bg); color:#fff; padding:10px 14px; border:none; border-radius:6px; cursor:pointer; }
+.login-btn { background:var(--btn-bg); color:var(--text-color); padding:10px 14px; border:none; border-radius:6px; cursor:pointer; transition: background 0.15s ease; }
+.login-btn:hover { background:var(--btn-bg-hover); }
 .login-link { color:var(--link-color); text-decoration:none; cursor:pointer; }
 
 /* Popup styles for Profile page */

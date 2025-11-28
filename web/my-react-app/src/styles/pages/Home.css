@@ -486,42 +486,42 @@
 
 /*Light Mode*/
 .home-root.theme-light .home-auth-btn:first-child {
-  color: #0b4db8;
-  border: 1px solid rgba(11, 77, 184, 0.45);
-  background: rgba(11, 77, 184, 0.08);
+  color: var(--text-color);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.04);
 }
 .home-root.theme-light .home-auth-btn:first-child:hover {
-  background: rgba(11, 77, 184, 0.14);
-  border-color: rgba(11, 77, 184, 0.65);
+  background: rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.12);
 }
 
 .home-root.theme-light .home-auth-btn.primary {
-  color: #b42318;
-  border: 1px solid rgba(180, 35, 24, 0.45);
-  background: rgba(180, 35, 24, 0.08);
+  color: var(--text-color);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.04);
 }
 .home-root.theme-light .home-auth-btn.primary:hover {
-  background: rgba(180, 35, 24, 0.14);
-  border-color: rgba(180, 35, 24, 0.65);
+  background: rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.12);
 }
 
 /*Dark Mode*/
 .home-root.theme-dark .home-auth-btn:first-child {
-  color: #8ab4ff;
-  border: 1px solid rgba(138, 180, 255, 0.38);
-  background: rgba(18, 78, 184, 0.20);
+  color: var(--text-color);
+  border: 1px solid rgba(240, 224, 190, 0.15);
+  background: rgba(240, 224, 190, 0.08);
 }
 .home-root.theme-dark .home-auth-btn:first-child:hover {
-  background: rgba(18, 78, 184, 0.30);
-  border-color: rgba(138, 180, 255, 0.55);
+  background: rgba(240, 224, 190, 0.15);
+  border-color: rgba(240, 224, 190, 0.25);
 }
 
 .home-root.theme-dark .home-auth-btn.primary {
-  color: #ff9a93;
-  border: 1px solid rgba(255, 154, 147, 0.38);
-  background: rgba(184, 36, 28, 0.20);
+  color: var(--text-color);
+  border: 1px solid rgba(240, 224, 190, 0.15);
+  background: rgba(240, 224, 190, 0.08);
 }
 .home-root.theme-dark .home-auth-btn.primary:hover {
-  background: rgba(184, 36, 28, 0.30);
-  border-color: rgba(255, 154, 147, 0.55);
+  background: rgba(240, 224, 190, 0.15);
+  border-color: rgba(240, 224, 190, 0.25);
 }
