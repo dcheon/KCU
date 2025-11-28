@@ -358,6 +358,45 @@
   display: block;
 }
 
+/* Leaderboard Table */
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.leaderboard-table thead {
+  background: var(--menu-btn-bg);
+  border-bottom: 2px solid var(--card-border);
+}
+
+.leaderboard-table th {
+  padding: 0.75rem 1rem;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-color);
+}
+
+.leaderboard-table td {
+  padding: 0.75rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid var(--card-border);
+  font-size: 0.9rem;
+}
+
+.leaderboard-table tbody tr {
+  transition: background 0.15s ease;
+}
+
+.leaderboard-table tbody tr:hover {
+  background: var(--menu-btn-bg);
+}
+
+.leaderboard-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
 /* 반응형 */
 @media (max-width: 768px) {
   .home-main {

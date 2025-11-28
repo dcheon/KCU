@@ -91,7 +91,7 @@ export default function Home() {
             {/*Top right:Leaderboard*/}
             <article className="home-panel-card" onClick={() => setShowLeaderboard(true)} style={{cursor: 'pointer'}}>
               <div className="home-panel-image placeholder">
-                {/*Add Leaderboard Image*/}
+                <img className="home-panel-image" src="/assets/img/leaderboard.jpg"/>
               </div>
               <div className="home-panel-body">
                 <h3>Leaderboard (리더의 보드에요)</h3>
@@ -209,7 +209,67 @@ export default function Home() {
           <div className="home-popup" onClick={(e) => e.stopPropagation()}>
             <h2>리더보드</h2>
             <div className="home-popup-content">
-              <p>리더의 보드입니다</p>
+              <table className="leaderboard-table">
+                <thead>
+                  <tr>
+                    <th>순위</th>
+                    <th>아이디</th>
+                    <th>스코어</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>user001</td>
+                    <td>9500</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>user002</td>
+                    <td>9200</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>user003</td>
+                    <td>8800</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>user004</td>
+                    <td>8500</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>user005</td>
+                    <td>8200</td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                    <td>user006</td>
+                    <td>7900</td>
+                  </tr>
+                  <tr>
+                    <td>7</td>
+                    <td>user007</td>
+                    <td>7600</td>
+                  </tr>
+                  <tr>
+                    <td>8</td>
+                    <td>user008</td>
+                    <td>7300</td>
+                  </tr>
+                  <tr>
+                    <td>9</td>
+                    <td>user009</td>
+                    <td>7000</td>
+                  </tr>
+                  <tr>
+                    <td>10</td>
+                    <td>user010</td>
+                    <td>6700</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
             <button onClick={() => setShowLeaderboard(false)} className="home-popup-close">
               닫기
