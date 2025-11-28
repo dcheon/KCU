@@ -37,8 +37,8 @@
   --link-color: #8f96ff;
 }
 
-.center-login-page { display:flex; align-items:center; justify-content:center; height:100vh; }
-.login-card { max-width:420px; width:90%; background:var(--card-bg); color:var(--text-color); padding:28px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.08); border: 1px solid var(--card-border); }
+.center-login-page { display:flex; align-items:center; justify-content:center; height:100vh; margin: 0; padding: 0; }
+.login-card { max-width:420px; width:90%; background:var(--card-bg); color:var(--text-color); padding:28px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.08); border: 1px solid var(--card-border); height: fit-content; margin: auto; }
 .login-card h2 { margin:0 0 16px 0; font-size:1.4rem; color:var(--text-color); }
 .login-form { display:flex; flex-direction:column; gap:12px; }
 .login-input { width:100%; padding:10px 12px; border:1px solid var(--input-border); border-radius:6px; font-size:14px; background:var(--input-bg); color:var(--text-color); }

@@ -125,7 +125,7 @@ function Layout() {
           {currentUser ? (
             <button className="toggle-btn header-btn" onClick={() => navigate('/profile')}>프로필</button>
           ) : (
-            <button className="toggle-btn header-btn" onClick={handleLogin}>Sign in</button>
+            <button className="toggle-btn header-btn" onClick={handleLogin}>Log In</button>
           )}
           <nav>
             <a href="#"></a>

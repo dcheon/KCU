@@ -88,11 +88,11 @@ export default function Profile() {
       {/* Delete Account Popup */}
       {showDeletePopup && (
         <div className="home-popup-overlay" onClick={() => setShowDeletePopup(false)}>
-          <div className="home-popup" onClick={(e) => e.stopPropagation()} style={{maxWidth: '500px', width: 'auto', maxHeight: 'none', padding: '1.5rem'}}>
-            <button onClick={() => setShowDeletePopup(false)} className="home-popup-x-btn">
+          <div className="home-popup" onClick={(e) => e.stopPropagation()} style={{maxWidth: '500px', width: 'auto', maxHeight: 'none', padding: 0}}>
+            <button onClick={() => setShowDeletePopup(false)} className="home-popup-x-btn" style={{top: '0.5rem', right: '0.5rem'}}>
               ×
             </button>
-            <img src="/assets/img/delete_account.webp" style={{width: '100%', height: 'auto', display: 'block', borderRadius: '8px'}}/>
+            <img src="/assets/img/delete_account.webp" style={{width: '100%', height: 'auto', display: 'block', borderRadius: '12px'}}/>
           </div>
         </div>
       )}
