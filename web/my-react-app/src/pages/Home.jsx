@@ -13,6 +13,7 @@ export default function Home() {
   const [showInstructions, setShowInstructions] = useState(false);
   const [showModeDetail, setShowModeDetail] = useState(false);
   const [selectedMode, setSelectedMode] = useState("");
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("shapehunter-theme", theme);
@@ -88,12 +89,12 @@ export default function Home() {
             </article>
 
             {/*Top right:Leaderboard*/}
-            <article className="home-panel-card">
+            <article className="home-panel-card" onClick={() => setShowLeaderboard(true)} style={{cursor: 'pointer'}}>
               <div className="home-panel-image placeholder">
                 {/*Add Leaderboard Image*/}
               </div>
               <div className="home-panel-body">
-                <h3>Leaderboard</h3>
+                <h3>Leaderboard (리더의 보드에요)</h3>
                 <p>
                   {/* Add Leaderboard Description*/}
                 </p>
@@ -103,7 +104,7 @@ export default function Home() {
             {/*Bottom: Shape Library */}
             <article className="home-panel-card span-2">
               <div className="home-panel-body">
-                <h3>Shape Library</h3>
+                <h3>Shape Library (명예의 도형)</h3>
                 <p>
                   {/*Add Shape Library Description*/}
                 </p>
@@ -196,6 +197,21 @@ export default function Home() {
               )}
             </div>
             <button onClick={closeModeDetail} className="home-popup-close">
+              닫기
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Leaderboard Popup */}
+      {showLeaderboard && (
+        <div className="home-popup-overlay" onClick={() => setShowLeaderboard(false)}>
+          <div className="home-popup" onClick={(e) => e.stopPropagation()}>
+            <h2>리더보드</h2>
+            <div className="home-popup-content">
+              <p>리더의 보드입니다</p>
+            </div>
+            <button onClick={() => setShowLeaderboard(false)} className="home-popup-close">
               닫기
             </button>
           </div>
