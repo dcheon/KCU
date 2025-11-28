@@ -11,7 +11,11 @@ export default function Option() {
   });
 
   const [soundVolume, setSoundVolume] = useState(() => {
-    return parseInt(localStorage.getItem("shapehunter-volume")) || 50;
+    const raw = localStorage.getItem("shapehunter-volume");
+    const n = raw === null ? 50 : Number(raw);
+
+    if (!Number.isFinite(n)) return 50;
+    return Math.min(100, Math.max(0, n));
   });
 
   useEffect(() => {
