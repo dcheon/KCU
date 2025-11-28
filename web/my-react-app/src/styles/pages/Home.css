@@ -153,6 +153,7 @@
   color: inherit;
   cursor: pointer;
   font-size: 0.95rem;
+  font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   transition: background 0.15s ease, transform 0.05s ease;
 }
 
