@@ -46,3 +46,75 @@
 .login-actions { display:flex; align-items:center; gap:12px; margin-top:8px; }
 .login-btn { background:var(--btn-bg); color:#fff; padding:10px 14px; border:none; border-radius:6px; cursor:pointer; }
 .login-link { color:var(--link-color); text-decoration:none; cursor:pointer; }
+
+/* Popup styles for Profile page */
+.home-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.home-popup {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.home-popup h2 {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+  color: var(--text-color);
+}
+
+.home-popup-content {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.home-popup-content p {
+  margin: 0.5rem 0;
+}
+
+.home-popup-close {
+  background: var(--btn-bg);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: opacity 0.15s ease;
+}
+
+.home-popup-close:hover {
+  opacity: 0.9;
+}
