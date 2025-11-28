@@ -71,7 +71,12 @@ export default function Option() {
               </div>
             </div>
 
-            <button>돈 주세요</button>
+            <button
+                className="shape-selection-section" 
+                onClick={toggleTheme}
+                style={{maxWidth: 300}}>
+              ☕커피 마시게 돈 주세요
+            </button>
         </div>
     </div>
   );
