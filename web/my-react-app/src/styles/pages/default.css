@@ -124,3 +124,11 @@
 .page .content-right .shape-selection-section:hover {
 	background: var(--btn-bg-hover) !important;
 }
+
+.page .center-box-description {
+	color: var(--text-color) !important;
+}
+
+.page .output-area a {
+	color: var(--text-color) !important;
+}

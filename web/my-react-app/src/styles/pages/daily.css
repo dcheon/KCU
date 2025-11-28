@@ -43,6 +43,59 @@
   color: var(--text-color, #f5f5f5);
 }
 
+/* Daily shape box */
+.content-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.daily-shape-box {
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 12px;
+  padding: 20px;
+  width: 90%;
+  max-width: 200px;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.daily-shape-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.daily-shape-display {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.shape-svg {
+  width: 80%;
+  height: 80%;
+  color: var(--text-color);
+  opacity: 0.9;
+}
+
+.daily-shape-label {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-color);
+  text-align: center;
+  margin-top: 8px;
+}
+
 /* Apply theme variables to existing elements */
 .page .content-grid .center-box {
 	background: var(--card-bg) !important;
@@ -83,4 +136,12 @@
 
 .page .content-grid .content-right {
 	color: var(--text-color);
+}
+
+.page .content-grid .center-box-description {
+	color: var(--text-color) !important;
+}
+
+.page .content-grid .output-area a {
+	color: var(--text-color) !important;
 }

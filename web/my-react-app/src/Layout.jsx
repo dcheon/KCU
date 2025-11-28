@@ -1,6 +1,6 @@
 // src/Layout.jsx
 import { useState, useEffect } from 'react';
-import { Outlet, useNavigate, Link } from 'react-router-dom';
+import { Outlet, useNavigate, Link, useLocation } from 'react-router-dom';
 import './styles/pages/app.css';
 
 function Layout() {
@@ -8,6 +8,7 @@ function Layout() {
   const [mode, setMode] = useState("default");
   const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem("shapehunter-theme") || "light";
@@ -85,6 +86,16 @@ function Layout() {
     navigate("/access_denied");        // 개발중
   };
 
+  // 현재 경로에 따라 헤더 제목 결정
+  const getHeaderTitle = () => {
+    const path = location.pathname;
+    if (path.includes('/app/compete')) return '대결모드';
+    if (path.includes('/app/daily')) return '데일리샷';
+    if (path.includes('/app/option')) return '우리가 친해질 수 있을까요';
+    if (path.includes('/app')) return '기본모드';
+    return '우리가 친해질 수 있을까요';
+  };
+
   return (
     <>
       {/* 상단 헤더 */}
@@ -103,7 +114,7 @@ function Layout() {
         </div>
 
         <div className="center-section">
-          <h1 className="logo-text">우리가 친해질 수 있을까요?</h1>
+          <h1 className="logo-text">{getHeaderTitle()}</h1>
         </div>
 
         <div className="right-section">

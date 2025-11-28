@@ -152,6 +152,14 @@
 	color: var(--text-color);
 }
 
+.page .content-grid .center-box-description {
+	color: var(--text-color) !important;
+}
+
+.page .content-grid .output-area a {
+	color: var(--text-color) !important;
+}
+
 /* Shape picker overlay */
 .shape-picker-overlay {
 	position: fixed;

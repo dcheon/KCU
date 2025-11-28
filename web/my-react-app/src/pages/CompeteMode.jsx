@@ -86,8 +86,8 @@ export default function CompeteMode() {
   };
 
   const handleExecute = () => {
-    // 로그인 체크
-    const currentUser = localStorage.getItem("shapehunter-user");
+    // 로그인 체크 - Layout.jsx와 동일한 키 사용
+    const currentUser = localStorage.getItem("kcu_current_user");
     if (!currentUser) {
       setPickerType("login");
       setShowPicker(true);
@@ -238,7 +238,7 @@ export default function CompeteMode() {
             
             {pickerType === "shape" && (
               <>
-                <h3>어떤 도형을 생각하셨나요?</h3>
+                <h3>어떤 도형으로 대결하실 건가요?</h3>
                 <div className="shape-picker-buttons">
                   <button 
                     onClick={() => handleShapeSelect('삼각형')} 
