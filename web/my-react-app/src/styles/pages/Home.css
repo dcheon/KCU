@@ -271,10 +271,10 @@
   color: var(--text-color);
   border: 1px solid var(--card-border);
   border-radius: 12px;
-  padding: 2rem;
-  width: 600px;
+  padding: 2.5rem;
+  width: 700px;
   max-width: 90vw;
-  max-height: 80vh;
+  max-height: 85vh;
   overflow-y: auto;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
   animation: slideUp 0.3s ease;
