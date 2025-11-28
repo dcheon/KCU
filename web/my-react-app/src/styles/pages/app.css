@@ -248,6 +248,7 @@ body:has(.page.theme-dark) .sidebar::before {
 
 .sidebar-section {
   background: rgba(255, 255, 255, 0.85);
+  color:rgba(0,0,0);
   border-radius: 8px;
   padding: 12px;
   text-align: center;
