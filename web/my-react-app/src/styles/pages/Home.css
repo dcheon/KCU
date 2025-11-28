@@ -69,8 +69,8 @@
 }
 
 .home-root.theme-dark .home-menu {
-  background: rgba(35, 32, 28, 0.92);   /* subtle warm tone */
-  border: 1px solid rgba(240, 224, 190, 0.18); /* echoes your button color */
+  background: rgba(35, 32, 28, 0.92);  
+  border: 1px solid rgba(240, 224, 190, 0.18); 
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
 }
 
@@ -81,6 +81,7 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 /* 상단 토글 바 */
@@ -462,4 +463,65 @@
   .home-menu-btn {
     flex: 1 1 45%;
   }
+}
+
+.home-authbar {
+  position: absolute;
+  top: 2rem;
+  right: 3rem;
+  display: flex;
+  gap: 0.6rem;
+  z-index: 50;
+}
+
+.home-auth-btn {
+  padding: 0.55rem 0.9rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  background: transparent;
+  transition: transform 0.08s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.home-auth-btn:hover { transform: translateY(-1px); }
+
+/*Light Mode*/
+.home-root.theme-light .home-auth-btn:first-child {
+  color: #0b4db8;
+  border: 1px solid rgba(11, 77, 184, 0.45);
+  background: rgba(11, 77, 184, 0.08);
+}
+.home-root.theme-light .home-auth-btn:first-child:hover {
+  background: rgba(11, 77, 184, 0.14);
+  border-color: rgba(11, 77, 184, 0.65);
+}
+
+.home-root.theme-light .home-auth-btn.primary {
+  color: #b42318;
+  border: 1px solid rgba(180, 35, 24, 0.45);
+  background: rgba(180, 35, 24, 0.08);
+}
+.home-root.theme-light .home-auth-btn.primary:hover {
+  background: rgba(180, 35, 24, 0.14);
+  border-color: rgba(180, 35, 24, 0.65);
+}
+
+/*Dark Mode*/
+.home-root.theme-dark .home-auth-btn:first-child {
+  color: #8ab4ff;
+  border: 1px solid rgba(138, 180, 255, 0.38);
+  background: rgba(18, 78, 184, 0.20);
+}
+.home-root.theme-dark .home-auth-btn:first-child:hover {
+  background: rgba(18, 78, 184, 0.30);
+  border-color: rgba(138, 180, 255, 0.55);
+}
+
+.home-root.theme-dark .home-auth-btn.primary {
+  color: #ff9a93;
+  border: 1px solid rgba(255, 154, 147, 0.38);
+  background: rgba(184, 36, 28, 0.20);
+}
+.home-root.theme-dark .home-auth-btn.primary:hover {
+  background: rgba(184, 36, 28, 0.30);
+  border-color: rgba(255, 154, 147, 0.55);
 }
