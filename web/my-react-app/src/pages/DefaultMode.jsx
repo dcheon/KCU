@@ -146,7 +146,7 @@ export default function DefaultMode() {
           {imageUrl ? (
             <a>개발중입니다. ㅈㅅ</a>
           ) : (
-            <a>사진을 올려야 평가를 하든 머든 하죠 이건 뭐 저랑 싸우자는 건가요?</a>
+            <a>사진을 올리면 이곳에 결과가 나옵니다</a>
           )}
           {selectedShape && imageUrl && (
             <div style={{ marginTop: "10px", fontWeight: 500 }}>

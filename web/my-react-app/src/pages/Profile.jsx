@@ -13,6 +13,8 @@ export default function Profile() {
     return localStorage.getItem("shapehunter-theme") || "light";
   });
 
+  const [showDeletePopup, setShowDeletePopup] = useState(false);
+
   useEffect(() => {
     const handleStorage = () => {
       const newTheme = localStorage.getItem("shapehunter-theme") || "light";
@@ -31,6 +33,20 @@ export default function Profile() {
     navigate("/");
   };
 
+  const handleDeleteAccount = () => {
+    // TODO: Call backend API to delete account
+    localStorage.removeItem("kcu_current_user");
+    setShowDeletePopup(false);
+    navigate("/");
+  };
+
+  // Placeholder stats - replace with actual data from backend
+  const gameStats = {
+    totalGames: 42,
+    competeHighestRank: 3, // Set to null or undefined for NaN
+    dailyBestStreak: 7
+  };
+
   return (
     <div className={`page center-login-page ${theme === "dark" ? "theme-dark" : "theme-light"}`}>
       <main className="main">
@@ -39,9 +55,23 @@ export default function Profile() {
           {user ? (
             <>
               <p><strong>아이디/이메일:</strong> {user.identifier}</p>
+              <div style={{marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem'}}>
+                <p style={{margin: 0}}><strong>게임 횟수:</strong> {gameStats.totalGames}회</p>
+                <p style={{margin: 0}}><strong>대결모드 최고 랭킹:</strong> {gameStats.competeHighestRank ?? 'NaN'}</p>
+                <p style={{margin: 0}}><strong>데일리모드 최대 연승:</strong> {gameStats.dailyBestStreak} streak</p>
+              </div>
               <div style={{display:'flex', gap:12, marginTop:12}}>
                 <button className="login-btn" onClick={() => navigate('/app')}>앱으로</button>
                 <button className="login-btn" onClick={handleLogout}>로그아웃</button>
+              </div>
+              <div style={{marginTop: '1rem'}}>
+                <button 
+                  className="login-btn" 
+                  onClick={() => setShowDeletePopup(true)}
+                  style={{backgroundColor: '#d32f2f', borderColor: '#d32f2f'}}
+                >
+                  계정 탈퇴
+                </button>
               </div>
             </>
           ) : (
@@ -54,6 +84,17 @@ export default function Profile() {
           )}
         </div>
       </main>
+
+      {/* Delete Account Popup */}
+      {showDeletePopup && (
+        <div className="home-popup-overlay" onClick={() => setShowDeletePopup(false)}>
+          <div className="home-popup" onClick={(e) => e.stopPropagation()} style={{maxWidth: '500px'}}>
+            <div className="home-popup-content">
+              <img src="/assets/img/delete_account.webp"/>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
