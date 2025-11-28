@@ -59,28 +59,28 @@ export default function Home() {
           <nav className="home-menu">
             <h2 className="home-menu-title">Modes</h2>
             <button className="home-menu-btn" onClick={() => navigate("/app")}>
-              기본 모드 (Classic)
+              기본 모드
             </button>
 
             <button
               className="home-menu-btn"
               onClick={() => navigate("/app/compete")}
             >
-              경쟁 모드 (Competitive)
+              경쟁 모드
             </button>
 
             <button
               className="home-menu-btn"
               onClick={() => navigate("/app/daily")}
             >
-              데일리 모드 (Daily)
+              데일리 모드
             </button>
 
             <button
               className="home-menu-btn"
               onClick={() => navigate("/app/option")}
             >
-              옵션 (Options)
+              옵션
             </button>
           </nav>
 
