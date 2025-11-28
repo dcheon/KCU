@@ -2,20 +2,26 @@
 __pycache__/
 *.pyc
 .venv/
+venv/
 
-# Node
+# FastAPI Auto-generated
+static/*.png
+
+# Node / React
 node_modules/
 dist/
+build/
 .vite/
+*.log
 
 # Env
 .env
 .env.local
 
-# Images auto-generated
-static/*.png
-*.log
-
 # OS
 .DS_Store
 Thumbs.db
+
+# IDE
+.vscode/
+.idea/

@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from "react";
+// src/pages/Register.jsx
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/pages/app.css";
 import "../styles/pages/register.css";
 
 export default function Register() {
   const navigate = useNavigate();
-  const [identifier, setIdentifier] = useState(""); // 아이디 또는 이메일
+
+  const [identifier, setIdentifier] = useState(""); 
   const [password, setPassword] = useState("");
-  const [confirm, setConfirm] = useState("");
   const [error, setError] = useState("");
 
+  const API_BASE = "http://127.0.0.1:8000";
+
+  // 테마 유지
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem("shapehunter-theme") || "light";
   });
@@ -27,76 +31,93 @@ export default function Register() {
     };
   }, []);
 
-  const handleSubmit = (e) => {
+  // ---------------------------
+  // ⭐ FastAPI 회원가입 연동
+  // ---------------------------
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    if (!identifier.trim() || !password.trim() || !confirm.trim()) {
-      setError("모든 항목을 입력하세요.");
-      return;
-    }
-    if (password !== confirm) {
-      setError("비밀번호와 확인이 일치하지 않습니다.");
+
+    if (!identifier.trim() || !password.trim()) {
+      setError("아이디(또는 이메일)과 비밀번호를 모두 입력하세요.");
       return;
     }
 
-    // Mock registration: save to localStorage (for demo only)
-    const users = JSON.parse(localStorage.getItem("kcu_users") || "[]");
-    // simple uniqueness check by identifier
-    if (users.some((u) => u.identifier === identifier)) {
-      setError("이미 존재하는 아이디(또는 이메일)입니다.");
-      return;
-    }
-    users.push({ identifier, password });
-    localStorage.setItem("kcu_users", JSON.stringify(users));
+    try {
+      const response = await fetch(`${API_BASE}/auth/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: identifier,
+          password: password
+        }),
+      });
 
-    // After signup, navigate to login
-    navigate("/login");
+      const result = await response.json();
+
+      if (!response.ok) {
+        if (Array.isArray(result.detail)) {
+          setError(result.detail[0].msg || "로그인 실패");
+        } else {
+          setError(result.detail || "로그인 실패");
+        }
+        return;
+      }
+
+      // ⭐ 회원가입 성공 → 자동 로그인 금지
+      // JWT 저장하지 않음
+      // kcu_current_user 저장하지 않음
+
+      alert("회원가입이 완료되었습니다. 로그인해주세요!");
+
+      // 로그인 페이지로 이동
+      navigate("/login");
+
+    } catch (error) {
+      console.error("Signup error:", error);
+      setError("서버 연결 오류");
+    }
   };
 
   return (
-    <div className={`page center-login-page ${theme === "dark" ? "theme-dark" : "theme-light"}`}>
-      <main className="main">
-        <div className="login-card">
-          <h2>회원가입</h2>
-          <form onSubmit={handleSubmit} className="login-form">
-            <label>
-              아이디 또는 이메일
-              <input
-                className="login-input"
-                type="text"
-                value={identifier}
-                onChange={(e) => setIdentifier(e.target.value)}
-                placeholder="아이디 또는 이메일"
-              />
-            </label>
-            <label>
-              비밀번호
-              <input
-                className="login-input"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="비밀번호"
-              />
-            </label>
-            <label>
-              비밀번호 확인
-              <input
-                className="login-input"
-                type="password"
-                value={confirm}
-                onChange={(e) => setConfirm(e.target.value)}
-                placeholder="비밀번호 확인"
-              />
-            </label>
-            {error && <div className="login-error">{error}</div>}
-            <div className="login-actions">
-              <button type="submit" className="login-btn">가입하기</button>
-              <Link to="/login" className="login-link">로그인으로</Link>
-            </div>
-          </form>
+    <div className={`login-page ${theme === "dark" ? "theme-dark" : "theme-light"}`}>
+      <div className="login-card" role="form" aria-label="회원가입 폼">
+        <h2>회원가입</h2>
+
+        <label>
+          이메일(아이디)
+          <input
+            className="login-input"
+            type="text"
+            value={identifier}
+            onChange={(e) => setIdentifier(e.target.value)}
+            placeholder="이메일"
+          />
+        </label>
+
+        <label>
+          비밀번호
+          <input
+            className="login-input"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="비밀번호"
+          />
+        </label>
+
+        {error && <div className="login-error">{error}</div>}
+
+        <div className="login-actions">
+          <button className="login-btn" onClick={handleSubmit}>
+            회원가입
+          </button>
+          <div style={{ display: "flex", gap: 12 }}>
+            <Link className="login-link" to="/login">로그인</Link>
+            <a className="login-link" onClick={() => navigate("/")}>홈으로</a>
+          </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

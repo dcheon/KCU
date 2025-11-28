@@ -1,6 +1,6 @@
 // Default Mode
 import { useRef, useState, useEffect } from "react";
-import "../styles/pages/default.css"; // 페이지 전용 스타일
+import "../styles/pages/default.css";
 
 export default function DefaultMode() {
   const [theme, setTheme] = useState(() => {
@@ -25,8 +25,63 @@ export default function DefaultMode() {
   const fileInputRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
 
+  const [result, setResult] = useState(null); // ML 결과
+  const [isLoading, setIsLoading] = useState(false);
+
+  // -------------------------------
+  // 🔥 ML 결과 Top3 + 그 외 계산 함수
+  // -------------------------------
+  const processPredictionResult = (predictions) => {
+    if (!predictions) return null;
+
+    const sorted = [...predictions].sort(
+      (a, b) => b.confidence - a.confidence
+    );
+
+    const top3 = sorted.slice(0, 3);
+    const etc = sorted.slice(3).reduce((acc, p) => acc + p.confidence, 0);
+
+    return { top3, etc };
+  };
+
+  // -------------------------------
+  // 🔥 Backend로 이미지 보내기
+  // -------------------------------
+  const sendToBackend = async (file) => {
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/visualize", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+      console.log("🔥 백엔드 응답:", data);
+
+      // ML 결과 처리
+      const processed = processPredictionResult(data.predictions);
+      setResult(processed);
+
+    } catch (error) {
+      console.error("백엔드 오류:", error);
+      alert("서버 요청 중 오류가 발생했습니다.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // -------------------------------
+  // 이미지 업로드 처리
+  // -------------------------------
   const processFile = (file) => {
     if (!file) return;
+
     if (!file.type.startsWith("image/")) {
       alert("이미지 파일만 업로드할 수 있어요.");
       return;
@@ -36,21 +91,16 @@ export default function DefaultMode() {
       if (prev) URL.revokeObjectURL(prev);
       return URL.createObjectURL(file);
     });
+
+    sendToBackend(file); // 🔥 업로드 시 자동 ML 분석
   };
 
-  const handleInsertImg = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
+  const handleInsertImg = () => fileInputRef.current?.click();
 
-  const handleFileChange = (e) => {
-    const file = e.target.files && e.target.files[0];
-    processFile(file);
-  };
+  const handleFileChange = (e) => processFile(e.target.files?.[0]);
 
   const handleDragOver = (e) => {
-    e.preventDefault();      // 기본 동작(파일 열기) 막기
+    e.preventDefault();
     setIsDragging(true);
   };
 
@@ -62,20 +112,13 @@ export default function DefaultMode() {
   const handleDrop = (e) => {
     e.preventDefault();
     setIsDragging(false);
-    const file = e.dataTransfer.files?.[0];
-    processFile(file);
+    processFile(e.dataTransfer.files?.[0]);
   };
 
-  const handleSelectShape = (shape) => {
-    setSelectedShape(shape);
-    console.log(`${shape} 선택됨, 여기에 모델 돌리기`);
-  };
-
+  // -------------------------------
+  // 도형 선택
+  // -------------------------------
   const [showPicker, setShowPicker] = useState(false);
-
-  const openPicker = () => setShowPicker(true);
-  const closePicker = () => setShowPicker(false);
-
   const [pickerError, setPickerError] = useState("");
 
   const openPickerChecked = () => {
@@ -85,34 +128,37 @@ export default function DefaultMode() {
       setShowPicker(true);
       return;
     }
-    setPickerError("");
     setShowPicker(true);
   };
 
+  const handleSelectShape = (shape) => {
+    setSelectedShape(shape);
+    setShowPicker(false);
+  };
+
+  // -------------------------------
+  // 리셋
+  // -------------------------------
   const handleReset = () => {
-    if (imageUrl) {
-      URL.revokeObjectURL(imageUrl);
-    }
+    if (imageUrl) URL.revokeObjectURL(imageUrl);
     setImageUrl(null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
+    setResult(null);
+    fileInputRef.current.value = "";
   };
 
   return (
     <div className={`content-grid ${theme === "dark" ? "theme-dark" : "theme-light"}`}>
-      {/* 왼쪽 여백 */}
       <div className="content-left"></div>
 
-      {/* 가운데 실제 콘텐츠 */}
       <div className="content-center">
         <div className="center-box">
-          <div className={`img-space ${isDragging ? "img-space-dragging" : ""}`}
+          <div
+            className={`img-space ${isDragging ? "img-space-dragging" : ""}`}
             id="imgSpace"
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
-            onDrop={handleDrop}>
-            {/* 숨겨진 파일 입력 */}
+            onDrop={handleDrop}
+          >
             <input
               type="file"
               accept="image/*"
@@ -121,13 +167,12 @@ export default function DefaultMode() {
               onChange={handleFileChange}
             />
 
-            {/* 이미지가 있으면 표시, 없으면 버튼/텍스트 표시 */}
             {imageUrl ? (
               <img
                 src={imageUrl}
                 alt="업로드 이미지"
                 className="uploaded-img"
-                onLoad={() => URL.revokeObjectURL(imageUrl)} // 메모리 정리
+                onLoad={() => URL.revokeObjectURL(imageUrl)}
               />
             ) : (
               <>
@@ -143,11 +188,32 @@ export default function DefaultMode() {
         </div>
 
         <div className="output-area">
-          {imageUrl ? (
-            <a>개발중입니다. ㅈㅅ</a>
-          ) : (
+          {/* 로딩 상태 */}
+          {isLoading && (
+            <p style={{ marginTop: "15px" }}>AI가 이미지를 분석 중입니다... ⏳</p>
+          )}
+
+          {/* 결과 출력 */}
+          {result && (
+            <div style={{ marginTop: "20px", fontSize: "17px", lineHeight: "26px" }}>
+              <h3>🔍 분석 결과</h3>
+
+              {result.top3.map((item, idx) => (
+                <div key={idx}>
+                  {item.label}: {(item.confidence * 100).toFixed(2)}%
+                </div>
+              ))}
+
+              <strong style={{ marginTop: "10px", display: "block" }}>
+                그 외: {(result.etc * 100).toFixed(2)}%
+              </strong>
+            </div>
+          )}
+
+          {!imageUrl && (
             <a>사진을 올리면 이곳에 결과가 나옵니다</a>
           )}
+
           {selectedShape && imageUrl && (
             <div style={{ marginTop: "10px", fontWeight: 500 }}>
               선택된 도형: {selectedShape}
@@ -156,7 +222,6 @@ export default function DefaultMode() {
         </div>
       </div>
 
-      {/* 오른쪽 여백/추가 공간 */}
       <div className="content-right">
         <button className="shape-selection-section" onClick={openPickerChecked}>
           실행
@@ -167,31 +232,41 @@ export default function DefaultMode() {
       </div>
 
       {showPicker && (
-        <div className="shape-picker-overlay" onClick={closePicker}>
+        <div className="shape-picker-overlay" onClick={() => setShowPicker(false)}>
           <div className="shape-picker" onClick={(e) => e.stopPropagation()}>
             {pickerError ? (
               <>
-                <h3>사진을 먼저 넣어주세요</h3>
-                <div style={{marginTop: 16}}>
-                  <button 
-                    onClick={closePicker} 
-                    className="shape-selection-section"
-                  >
-                    확인
-                  </button>
-                </div>
+                <h3>{pickerError}</h3>
+                <button onClick={() => setShowPicker(false)} className="shape-selection-section">
+                  확인
+                </button>
               </>
             ) : (
               <>
                 <h3>도형을 선택하세요</h3>
                 <div className="shape-picker-buttons">
-                  <button onClick={() => { handleSelectShape('삼각형'); closePicker(); }} className="shape-selection-section">삼각형</button>
-                  <button onClick={() => { handleSelectShape('사각형'); closePicker(); }} className="shape-selection-section">사각형</button>
-                  <button onClick={() => { handleSelectShape('원'); closePicker(); }} className="shape-selection-section">원</button>
+                  <button
+                    onClick={() => handleSelectShape("삼각형")}
+                    className="shape-selection-section"
+                  >
+                    삼각형
+                  </button>
+                  <button
+                    onClick={() => handleSelectShape("사각형")}
+                    className="shape-selection-section"
+                  >
+                    사각형
+                  </button>
+                  <button
+                    onClick={() => handleSelectShape("원")}
+                    className="shape-selection-section"
+                  >
+                    원
+                  </button>
                 </div>
-                <div style={{marginTop:12}}>
-                  <button onClick={closePicker} className="shape-selection-section">취소</button>
-                </div>
+                <button onClick={() => setShowPicker(false)} className="shape-selection-section">
+                  취소
+                </button>
               </>
             )}
           </div>
