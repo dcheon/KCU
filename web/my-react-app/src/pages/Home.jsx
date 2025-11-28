@@ -10,9 +10,24 @@ export default function Home() {
     return localStorage.getItem("shapehunter-theme") || "light";
   });
 
+  const [showInstructions, setShowInstructions] = useState(false);
+  const [showModeDetail, setShowModeDetail] = useState(false);
+  const [selectedMode, setSelectedMode] = useState("");
+
   useEffect(() => {
     localStorage.setItem("shapehunter-theme", theme);
   }, [theme]);
+
+  const openModeDetail = (mode) => {
+    setSelectedMode(mode);
+    setShowInstructions(false);
+    setShowModeDetail(true);
+  };
+
+  const closeModeDetail = () => {
+    setShowModeDetail(false);
+    setSelectedMode("");
+  };
 
   return (
     <div
@@ -60,7 +75,7 @@ export default function Home() {
 
           <section className="home-panels">
             {/*Top left:Instructions*/}
-            <article className="home-panel-card">
+            <article className="home-panel-card" onClick={() => setShowInstructions(true)} style={{cursor: 'pointer'}}>
               <div className="home-panel-image placeholder">
                 {/*Add instruction image */}
               </div>
@@ -121,6 +136,63 @@ export default function Home() {
           <span>© {new Date().getFullYear()} Shape Hunter</span>
         </footer>
       </div>
+
+      {/* Instructions Popup */}
+      {showInstructions && (
+        <div className="home-popup-overlay" onClick={() => setShowInstructions(false)}>
+          <div className="home-popup" onClick={(e) => e.stopPropagation()}>
+            <h2>사용 방법</h2>
+            <p>각 모드에 대한 자세한 설명을 확인하세요.</p>
+            <div className="home-popup-buttons">
+              <button onClick={() => openModeDetail("기본모드")} className="home-popup-btn">
+                기본모드 설명
+              </button>
+              <button onClick={() => openModeDetail("대결모드")} className="home-popup-btn">
+                대결모드 설명
+              </button>
+              <button onClick={() => openModeDetail("데일리모드")} className="home-popup-btn">
+                데일리모드 설명
+              </button>
+            </div>
+            <button onClick={() => setShowInstructions(false)} className="home-popup-close">
+              닫기
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Mode Detail Popup */}
+      {showModeDetail && (
+        <div className="home-popup-overlay" onClick={closeModeDetail}>
+          <div className="home-popup" onClick={(e) => e.stopPropagation()}>
+            <h2>{selectedMode} 설명</h2>
+            <div className="home-popup-content">
+              {selectedMode === "기본모드" && (
+                <div>
+                  <img src="/assets/img/example_default_1.png"/>
+                  <p>가운데 사진 넣기 버튼을 클릭 후 사진을 넣어 주세요</p>
+                  <p>사진을 넣고 실행 버튼을 눌러주세요</p>
+                  <img src="/assets/img/example_default_2.png"/>
+                  <p>본인이 생각했던 도형을 눌러 결과값을 확인해 보세요</p>
+                </div>
+              )}
+              {selectedMode === "대결모드" && (
+                <div>
+                  <p>대결모드에 대한 설명입니다</p>
+                </div>
+              )}
+              {selectedMode === "데일리모드" && (
+                <div>
+                  <p>데일리샷 모드에 대한 설명입니다</p>
+                </div>
+              )}
+            </div>
+            <button onClick={closeModeDetail} className="home-popup-close">
+              닫기
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

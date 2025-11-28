@@ -238,6 +238,116 @@
   opacity: 0.8;
 }
 
+/* Popup Overlay */
+.home-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Popup Container */
+.home-popup {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 600px;
+  max-width: 90vw;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.home-popup h2 {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+}
+
+.home-popup p {
+  margin: 0 0 1.5rem;
+  line-height: 1.6;
+}
+
+/* Popup Buttons Container */
+.home-popup-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.home-popup-btn {
+  background: var(--menu-btn-bg);
+  color: var(--text-color);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.home-popup-btn:hover {
+  background: var(--menu-btn-bg-hover);
+}
+
+.home-popup-close {
+  background: var(--menu-btn-bg);
+  color: var(--text-color);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.15s ease;
+}
+
+.home-popup-close:hover {
+  background: var(--menu-btn-bg-hover);
+}
+
+.home-popup-content {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+  min-height: 100px;
+}
+
+.home-popup-content img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  display: block;
+}
+
 /* 반응형 */
 @media (max-width: 768px) {
   .home-main {
