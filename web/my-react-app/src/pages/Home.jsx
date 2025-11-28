@@ -37,6 +37,16 @@ export default function Home() {
       }`}
     >
       <div className="home-bg-overlay">
+
+        <div className="home-authbar">
+          <button className="home-auth-btn" onClick={() => navigate("/login")}>
+            Log In
+          </button>
+          <button className="home-auth-btn primary" onClick={() => navigate("/register")}>
+            Sign Up
+          </button>
+        </div>
+        
         <header className="home-header">
           <div className="home-logo-placeholder" />
           <h1 className="home-title">Shape 헌터</h1>
