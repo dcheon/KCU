@@ -401,7 +401,9 @@ body:has(.page.theme-dark) .sidebar .sidebar-section:hover {
   height: 100%;
   object-fit: contain;
   border-radius: 12px;
-  background: #fff;
+  /* Use themed card background instead of fixed white */
+  background: var(--card-bg) !important;
+  color: var(--text-color) !important;
 }
 
 .img-space-dragging {
