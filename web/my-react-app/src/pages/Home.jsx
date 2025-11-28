@@ -30,12 +30,9 @@ export default function Home() {
     setSelectedMode("");
   };
 
+
   return (
-    <div
-      className={`home-root ${
-        theme === "dark" ? "theme-dark" : "theme-light"
-      }`}
-    >
+    <div className={`home-root ${theme === "dark" ? "theme-dark" : "theme-light"}`}>
       <div className="home-bg-overlay">
 
         <div className="home-authbar">

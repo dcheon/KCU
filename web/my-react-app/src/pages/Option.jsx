@@ -20,11 +20,14 @@ export default function Option() {
 
   useEffect(() => {
     localStorage.setItem("shapehunter-sound", soundEnabled.toString());
+    window.dispatchEvent(new Event("shapehunter-audio-settings"));
   }, [soundEnabled]);
 
   useEffect(() => {
     localStorage.setItem("shapehunter-volume", soundVolume.toString());
+    window.dispatchEvent(new Event("shapehunter-audio-settings"));
   }, [soundVolume]);
+
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
