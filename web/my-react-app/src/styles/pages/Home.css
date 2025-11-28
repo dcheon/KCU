@@ -51,7 +51,7 @@
 .home-root.theme-dark {
   --bg-color: #050509;
   --text-color: #f5f5f5;
-  --overlay-bg: linear-gradient(90deg, #141414, #11112e);
+  --overlay-bg: linear-gradient(90deg, #1e1e1e, #1e1e1e);
 
   --menu-btn-bg: rgba(240, 224, 190, 0.12);
   --menu-btn-bg-hover: rgba(240, 224, 190, 0.25);
@@ -66,6 +66,12 @@
   --gallery-border: rgba(255, 255, 255, 0.18);
   --gallery-item-bg: rgba(255, 255, 255, 0.08);
   --gallery-item-border: rgba(255, 255, 255, 0.06);
+}
+
+.home-root.theme-dark .home-menu {
+  background: rgba(35, 32, 28, 0.92);   /* subtle warm tone */
+  border: 1px solid rgba(240, 224, 190, 0.18); /* echoes your button color */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
 }
 
 .home-bg-overlay {
