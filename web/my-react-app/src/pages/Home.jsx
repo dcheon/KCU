@@ -142,6 +142,9 @@ export default function Home() {
       {showInstructions && (
         <div className="home-popup-overlay" onClick={() => setShowInstructions(false)}>
           <div className="home-popup" onClick={(e) => e.stopPropagation()}>
+            <button onClick={() => setShowInstructions(false)} className="home-popup-x-btn">
+              ×
+            </button>
             <h2>사용 방법</h2>
             <p>각 모드에 대한 자세한 설명을 확인하세요.</p>
             <div className="home-popup-buttons">
@@ -155,9 +158,6 @@ export default function Home() {
                 데일리모드 설명
               </button>
             </div>
-            <button onClick={() => setShowInstructions(false)} className="home-popup-close">
-              닫기
-            </button>
           </div>
         </div>
       )}
@@ -166,6 +166,9 @@ export default function Home() {
       {showModeDetail && (
         <div className="home-popup-overlay" onClick={closeModeDetail}>
           <div className="home-popup" onClick={(e) => e.stopPropagation()}>
+            <button onClick={closeModeDetail} className="home-popup-x-btn">
+              ×
+            </button>
             <h2>{selectedMode} 설명</h2>
             <div className="home-popup-content">
               {selectedMode === "기본모드" && (
@@ -196,9 +199,6 @@ export default function Home() {
                 </div>
               )}
             </div>
-            <button onClick={closeModeDetail} className="home-popup-close">
-              닫기
-            </button>
           </div>
         </div>
       )}
@@ -207,6 +207,9 @@ export default function Home() {
       {showLeaderboard && (
         <div className="home-popup-overlay" onClick={() => setShowLeaderboard(false)}>
           <div className="home-popup" onClick={(e) => e.stopPropagation()}>
+            <button onClick={() => setShowLeaderboard(false)} className="home-popup-x-btn">
+              ×
+            </button>
             <h2>리더보드</h2>
             <div className="home-popup-content">
               <table className="leaderboard-table">
@@ -271,9 +274,6 @@ export default function Home() {
                 </tbody>
               </table>
             </div>
-            <button onClick={() => setShowLeaderboard(false)} className="home-popup-close">
-              닫기
-            </button>
           </div>
         </div>
       )}

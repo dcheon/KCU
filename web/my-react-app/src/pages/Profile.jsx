@@ -89,8 +89,28 @@ export default function Profile() {
       {showDeletePopup && (
         <div className="home-popup-overlay" onClick={() => setShowDeletePopup(false)}>
           <div className="home-popup" onClick={(e) => e.stopPropagation()} style={{maxWidth: '500px'}}>
+            <button onClick={() => setShowDeletePopup(false)} className="home-popup-x-btn">
+              ×
+            </button>
+            <h2>계정 탈퇴</h2>
             <div className="home-popup-content">
-              <img src="/assets/img/delete_account.webp"/>
+              <p>정말로 계정을 탈퇴하시겠습니까?</p>
+              <p style={{color: '#d32f2f', fontWeight: 'bold'}}>이 작업은 되돌릴 수 없습니다.</p>
+            </div>
+            <div style={{display: 'flex', gap: '0.75rem'}}>
+              <button 
+                onClick={handleDeleteAccount} 
+                className="home-popup-close"
+                style={{backgroundColor: '#d32f2f', borderColor: '#d32f2f'}}
+              >
+                탈퇴하기
+              </button>
+              <button 
+                onClick={() => setShowDeletePopup(false)} 
+                className="home-popup-close"
+              >
+                취소
+              </button>
             </div>
           </div>
         </div>
