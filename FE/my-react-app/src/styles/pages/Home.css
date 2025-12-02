@@ -1,0 +1,528 @@
+.home-root {
+  /* 기본값(다크 기준) – 변수 미설정 시 fallback */
+  --bg-color: #050509;
+  --text-color: #f5f5f5;
+  --overlay-bg: linear-gradient(180deg, #141414, #050509);
+
+  --menu-btn-bg: rgba(240, 224, 190, 0.12);
+  --menu-btn-bg-hover: rgba(240, 224, 190, 0.25);
+
+  --card-bg: #1a1a1a;
+  --card-border: rgba(255, 255, 255, 0.05);
+
+  --placeholder-bg: rgba(255, 255, 255, 0.05);
+  --placeholder-border: rgba(255, 255, 255, 0.2);
+
+  --gallery-bg: rgba(255, 255, 255, 0.04);
+  --gallery-border: rgba(255, 255, 255, 0.18);
+  --gallery-item-bg: rgba(255, 255, 255, 0.08);
+  --gallery-item-border: rgba(255, 255, 255, 0.06);
+
+  min-height: 100vh;
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+/* 라이트 테마 변수 세트 */
+.home-root.theme-light {
+  --bg-color: #f5f5f5;
+  --text-color: #111111;
+  --overlay-bg: linear-gradient(270deg, #f5f5f5  0%, #f2f2f2  70%, #e5e5e5 100%);
+
+  --menu-btn-bg: rgba(0, 0, 0, 0.04);
+  --menu-btn-bg-hover: rgba(0, 0, 0, 0.08);
+
+  --card-bg: #ffffff;
+  --card-border: rgba(0, 0, 0, 0.3);
+
+  --placeholder-bg: rgba(0, 0, 0, 0.03);
+  --placeholder-border: rgba(0, 0, 0, 0.08);
+
+  --gallery-bg: rgba(255, 255, 255, 0.9);
+  --gallery-border: rgba(0, 0, 0, 0.08);
+  --gallery-item-bg: rgba(0, 0, 0, 0.03);
+  --gallery-item-border: rgba(0, 0, 0, 0.04);
+}
+
+/* 다크 테마 변수 세트 */
+.home-root.theme-dark {
+  --bg-color: #050509;
+  --text-color: #f5f5f5;
+  --overlay-bg: linear-gradient(90deg, #1e1e1e, #1e1e1e);
+
+  --menu-btn-bg: rgba(240, 224, 190, 0.12);
+  --menu-btn-bg-hover: rgba(240, 224, 190, 0.25);
+
+  --card-bg: #1a1a1a;
+  --card-border: rgba(255, 255, 255, 0.05);
+
+  --placeholder-bg: rgba(255, 255, 255, 0.05);
+  --placeholder-border: rgba(255, 255, 255, 0.2);
+
+  --gallery-bg: rgba(255, 255, 255, 0.04);
+  --gallery-border: rgba(255, 255, 255, 0.18);
+  --gallery-item-bg: rgba(255, 255, 255, 0.08);
+  --gallery-item-border: rgba(255, 255, 255, 0.06);
+}
+
+.home-root.theme-dark .home-menu {
+  background: rgba(35, 32, 28, 0.92);  
+  border: 1px solid rgba(240, 224, 190, 0.18); 
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+}
+
+.home-bg-overlay {
+  min-height: 100vh;
+  background: var(--overlay-bg);
+  padding: 2rem 3rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* 상단 토글 바 */
+.home-topbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
+}
+
+/* 타이틀 & 헤더 */
+
+.home-title {
+  margin: 0;
+  font-size: 2.5rem;
+  letter-spacing: 0.05em;
+}
+
+.home-subtitle {
+  margin: 0.4rem 0 0;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+/*top 37%*/
+.home-header {
+  height: 38vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 5vh;
+}
+
+/*bottom 63%*/
+.home-main {
+  height: 62vh;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 2rem;
+
+  padding-bottom: 2rem;
+  box-sizing: border-box;
+}
+
+/* left panel */
+.home-menu {
+  display: flex;
+  flex-direction: column;
+
+  align-self: start;         
+  padding: 1rem;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.04);  
+  border: 1px solid rgba(0,0,0,0.08);
+  min-height: 50.4vh;
+}
+
+.home-menu-title {
+  font-size: 1.rem;
+  margin-bottom: 1rem;
+}
+
+.home-menu-btn {
+  text-align: center;
+  padding: 0.75rem 0.95rem;
+  margin-bottom: 0.9rem;
+  border: none;
+  border-radius: 4px;
+  background: var(--menu-btn-bg);
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  transition: background 0.15s ease, transform 0.05s ease;
+}
+
+.home-menu-btn:hover {
+  background: var(--menu-btn-bg-hover);
+  transform: translateX(2px);
+}
+
+/*right panel*/
+.home-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1.2rem;
+  align-content: start;
+}
+
+.home-panel-card.span-2 {
+  grid-column: 1 / -1;
+}
+
+.home-gallery {
+  margin-top: 0.75rem;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--gallery-bg);
+  border: 1px dashed var(--gallery-border);
+  padding: 0.6rem;
+}
+
+.home-gallery-track {
+  display: flex;
+  gap: 0.75rem;
+  width: max-content;
+  animation: gallery-scroll 18s linear infinite;
+}
+
+/*Placeholder images*/
+.home-gallery-images {
+  width: 140px;
+  height: 80px;
+  flex: 0 0 auto;
+  border-radius: 6px;
+  background: var(--gallery-item-bg);
+  border: 1px solid var(--gallery-item-border);
+  min-height: 110px;
+}
+
+@keyframes gallery-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-720px);
+  }
+}
+
+.home-gallery:hover .home-gallery-track {
+  animation-play-state: paused;
+}
+
+/*Card*/
+.home-panel-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--card-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+}
+
+/*Reserved image Space*/
+.home-panel-image {
+  height: 120px;
+  background: var(--placeholder-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.home-panel-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-panel-image.placeholder {
+  border-bottom: 1px dashed var(--placeholder-border);
+}
+
+.home-panel-body {
+  padding: 0.8rem 1rem 1rem;
+}
+
+.home-panel-body h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1rem;
+}
+
+.home-panel-body p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.home-footer {
+  margin-top: 1.5rem;
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+/* Popup Overlay */
+.home-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Popup Container */
+.home-popup {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 2.5rem;
+  width: 700px;
+  max-width: 90vw;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.home-popup h2 {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+}
+
+.home-popup p {
+  margin: 0 0 1.5rem;
+  line-height: 1.6;
+}
+
+/* Popup Buttons Container */
+.home-popup-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.home-popup-btn {
+  background: var(--menu-btn-bg);
+  color: var(--text-color);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.home-popup-btn:hover {
+  background: var(--menu-btn-bg-hover);
+}
+
+.home-popup-close {
+  background: var(--menu-btn-bg);
+  color: var(--text-color);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.15s ease;
+}
+
+.home-popup-close:hover {
+  background: var(--menu-btn-bg-hover);
+}
+
+/* X Close Button */
+.home-popup-x-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-color);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  width: 2.5rem;
+  height: 2.5rem;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 4px;
+  transition: background 0.15s ease;
+}
+
+.home-popup-x-btn:hover {
+  background: var(--menu-btn-bg-hover);
+}
+
+.home-popup {
+  position: relative;
+}
+
+.home-popup-content {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+  min-height: 100px;
+}
+
+.home-popup-content img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+/* Leaderboard Table */
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.leaderboard-table thead {
+  background: var(--menu-btn-bg);
+  border-bottom: 2px solid var(--card-border);
+}
+
+.leaderboard-table th {
+  padding: 0.75rem 1rem;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-color);
+}
+
+.leaderboard-table td {
+  padding: 0.75rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid var(--card-border);
+  font-size: 0.9rem;
+}
+
+.leaderboard-table tbody tr {
+  transition: background 0.15s ease;
+}
+
+.leaderboard-table tbody tr:hover {
+  background: var(--menu-btn-bg);
+}
+
+.leaderboard-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .home-main {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .home-menu {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .home-menu-btn {
+    flex: 1 1 45%;
+  }
+}
+
+.home-authbar {
+  position: absolute;
+  top: 2rem;
+  right: 3rem;
+  display: flex;
+  gap: 0.6rem;
+  z-index: 50;
+}
+
+.home-auth-btn {
+  padding: 0.55rem 0.9rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  background: transparent;
+  transition: transform 0.08s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.home-auth-btn:hover { transform: translateY(-1px); }
+
+/*Light Mode*/
+.home-root.theme-light .home-auth-btn:first-child {
+  color: #0b4db8;
+  border: 1px solid rgba(11, 77, 184, 0.45);
+  background: rgba(11, 77, 184, 0.08);
+}
+.home-root.theme-light .home-auth-btn:first-child:hover {
+  background: rgba(11, 77, 184, 0.14);
+  border-color: rgba(11, 77, 184, 0.65);
+}
+
+.home-root.theme-light .home-auth-btn.primary {
+  color: #b42318;
+  border: 1px solid rgba(180, 35, 24, 0.45);
+  background: rgba(180, 35, 24, 0.08);
+}
+.home-root.theme-light .home-auth-btn.primary:hover {
+  background: rgba(180, 35, 24, 0.14);
+  border-color: rgba(180, 35, 24, 0.65);
+}
+
+/*Dark Mode*/
+.home-root.theme-dark .home-auth-btn:first-child {
+  color: #8ab4ff;
+  border: 1px solid rgba(138, 180, 255, 0.38);
+  background: rgba(18, 78, 184, 0.20);
+}
+.home-root.theme-dark .home-auth-btn:first-child:hover {
+  background: rgba(18, 78, 184, 0.30);
+  border-color: rgba(138, 180, 255, 0.55);
+}
+
+.home-root.theme-dark .home-auth-btn.primary {
+  color: #ff9a93;
+  border: 1px solid rgba(255, 154, 147, 0.38);
+  background: rgba(184, 36, 28, 0.20);
+}
+.home-root.theme-dark .home-auth-btn.primary:hover {
+  background: rgba(184, 36, 28, 0.30);
+  border-color: rgba(255, 154, 147, 0.55);
+}

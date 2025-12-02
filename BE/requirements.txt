@@ -1,0 +1,26 @@
+fastapi
+uvicorn
+python-jose
+python-multipart
+pydantic
+passlib
+sqlalchemy
+
+Pillow
+numpy
+
+# CORS
+starlette
+
+# Transformers / CLIP
+transformers
+torch
+torchvision
+torchaudio
+
+# For visualization
+matplotlib
+seaborn
+
+# Optional but recommended
+python-dotenv

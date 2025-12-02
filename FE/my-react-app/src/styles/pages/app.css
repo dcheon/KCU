@@ -1,0 +1,481 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* ===== 상단 헤더 ===== */
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 30px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  z-index: 1002;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+/* 다크모드 헤더 */
+.page.theme-dark ~ .main-header,
+body:has(.page.theme-dark) .main-header {
+  background: #1a1a1a;
+  border-bottom: 1px solid #333;
+  color: #f5f5f5;
+}
+
+/* 라이트모드 헤더 (기본값) */
+.page.theme-light ~ .main-header,
+body:has(.page.theme-light) .main-header {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  color: #222;
+}
+
+/* 왼쪽 섹션: 토글 버튼 + 로고 */
+.left-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 중앙 섹션: 텍스트 */
+.center-section {
+  flex: 1;
+  text-align: center;
+}
+
+/* 오른쪽 비워둔 영역 */
+.right-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* 오른쪽으로 정렬 */
+  gap: 12px; /* 버튼들 사이 여백 */
+}
+
+/* 토글 버튼 */
+.toggle-btn {
+  background: none;
+  border: none;
+  font-size: 26px;
+  cursor: pointer;
+  padding: 4px 8px;
+  color: #222;
+  transition: color 0.25s ease;
+}
+
+/* 다크모드 토글 버튼 */
+.page.theme-dark ~ .main-header .toggle-btn,
+body:has(.page.theme-dark) .main-header .toggle-btn {
+  color: #f5f5f5;
+}
+
+/* Header-specific button: smaller text and subtle 3D look */
+.header-btn {
+  font-size: 18px; /* 더 작게 */
+  padding: 4px 8px; /* 작게 줄임 */
+  border-radius: 8px;
+  background: linear-gradient(180deg, #ffffff, #f5f5f5);
+  /* match sidebar button border shade */
+  border: 1px solid rgba(0,0,0,0.3);
+  color: #222;
+  font-weight: 600;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.6);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.25s ease, color 0.25s ease;
+  min-width: 56px;
+  text-align: center;
+}
+
+/* 다크모드 헤더 버튼 */
+.page.theme-dark ~ .main-header .header-btn,
+body:has(.page.theme-dark) .main-header .header-btn {
+  background: linear-gradient(180deg, #2a2a2a, #1f1f1f);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #f5f5f5;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+.header-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 8px rgba(0,0,0,0.06);
+}
+
+.header-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 0 rgba(0,0,0,0.04);
+}
+
+/* 로고 이미지 */
+.logo-img {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: filter 0.25s ease;
+}
+
+/* 다크모드 로고 반전 */
+.page.theme-dark ~ .main-header .logo-img,
+body:has(.page.theme-dark) .main-header .logo-img {
+  filter: invert(1);
+}
+
+/* 중앙 문구 */
+.logo-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: clamp(14px, 2.5vw, 22px);
+}
+
+
+/* 페이지 전체 */
+.page {
+  display: flex;
+  width: 100%;
+  min-height: 100vh; /* ensure page fills viewport */
+  /* 헤더 높이만큼 아래로 밀기 */
+  padding-top: 58px;
+  overflow: hidden; /* prevent page-level vertical scroll */
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* 사이드바 오버레이 */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  cursor: pointer;
+}
+
+/* ===== 토글 버튼 ===== */
+.toggle-btn {
+  background: none;
+  border: none;
+  font-size: 26px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+/* stronger selector for header-specific toggle buttons (when both classes present) */
+.toggle-btn.header-btn {
+  /* keep the smaller size but use the simple toggle look */
+  font-size: 18px;
+  padding: 4px 8px;
+  background: none; /* match .toggle-btn */
+  border: none;     /* match .toggle-btn */
+  box-shadow: none;
+  color: inherit;
+  font-weight: 600;
+  border-radius: 6px;
+  min-width: 56px;
+}
+
+.toggle-btn.header-btn:hover {
+  opacity: 0.9;
+}
+
+.toggle-btn.header-btn:active {
+  opacity: 0.85;
+}
+
+/* ===== 사이드바 ===== */
+.sidebar {
+  width: 200px;
+  background: #fff;
+  padding: 70px 16px 16px; /* 헤더+여백만큼 */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.3s ease, background 0.25s ease, color 0.25s ease;
+  transform: translateX(-100%);
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+}
+
+/* 다크모드 사이드바 */
+.page.theme-dark ~ .sidebar,
+body:has(.page.theme-dark) .sidebar {
+  background: #1a1a1a;
+  color: #f5f5f5;
+}
+
+/* 버튼 아래에 구분선 */
+.sidebar::before {
+  content: "";
+  position: absolute;
+  top: 58px; /* 헤더 높이 맞춰서 */
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.05);
+  transition: background 0.25s ease;
+}
+
+/* 다크모드 사이드바 구분선 */
+.page.theme-dark ~ .sidebar::before,
+body:has(.page.theme-dark) .sidebar::before {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar.active {
+  transform: translateX(0);
+}
+
+.sidebar-section {
+  background: rgba(255, 255, 255, 0.85);
+  color:rgba(0,0,0);
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid rgba(0,0,0,0.3);
+  transition: background 0.15s ease, color 0.25s ease;
+}
+
+.sidebar-section:hover {
+  background: #ddd;
+}
+
+/* 다크모드 사이드바 버튼 */
+.page.theme-dark ~ .sidebar .sidebar-section,
+body:has(.page.theme-dark) .sidebar .sidebar-section {
+  background: rgba(40, 40, 40, 0.85);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #f5f5f5;
+}
+
+.page.theme-dark ~ .sidebar .sidebar-section:hover,
+body:has(.page.theme-dark) .sidebar .sidebar-section:hover {
+  background: rgba(60, 60, 60, 0.95);
+}
+
+/* ===== 메인 ===== */
+/* 메인 전체는 위아래 여백만 */
+.main {
+  flex: 1;
+  padding: 20px 10px 40px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: calc(100vh - 58px); /* fill remaining height under header robustly */
+  overflow: auto; /* allow internal scrolling if content overflows */
+}
+
+/* 본문을 3등분 */
+.content-grid {
+  display: grid;
+  /* make grid responsive: side columns flexible and center column larger */
+  /* reduce side whitespace: fixed narrow side columns, center takes remaining space */
+  /* slightly reduce center width */
+  grid-template-columns: 200px minmax(580px, 1fr) 200px;
+  gap: clamp(16px, 2vw, 48px);
+  width: 100%;
+  margin: 0 auto; /* 중앙 정렬 */
+  max-width: 98vw;      /* allow larger center area */
+  padding: 0 2vw;        /* small side padding relative to viewport */
+}
+
+/* Make grid fill available height so center content can size within viewport */
+.content-grid {
+  height: 100%;
+  align-items: center; /* vertically center columns */
+}
+
+/* Make grid fill available height so center content can size within viewport */
+.content-grid {
+  height: 100%;
+}
+
+/* 가운데 영역만 기존 스타일 적용 */
+.content-center {
+  display: flex;
+  flex-direction: column;
+  gap: 22px; /* increased ~20% for more spacing */
+  height: 100%;
+  min-height: 0; /* allow children to shrink inside flex container */
+  align-items: stretch;
+}
+
+/* 기존 박스들은 그대로 */
+.center-box {
+  width: 100%;
+  /* background: #fff; - removed, use page-specific theme */
+  border-radius: 12px;
+  border: 3px solid #d9d9d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  text-align: center;
+  flex: 1; /* let center boxes expand/contract to fit available space */
+  min-height: 0; /* required for proper flexbox shrinking */
+  padding: 24px; /* increased ~20% */
+  /* keep box height proportional to viewport but allow shrinking (increased ~20%) */
+  min-height: 58vh; /* increased to ~20% larger vertically */
+  max-height: 96vh; /* cap to avoid exceeding viewport */
+  overflow: hidden; /* ensure inner img-space cannot escape the box */
+}
+
+.center-box-description {
+  display: flex;
+  align-items: center;
+  
+}
+
+.output-area {
+  width: 100%;
+  /* background: rgba(255, 255, 255, 0.85); - removed, use page-specific theme */
+  border-radius: 8px;
+  padding: 18px; /* slightly larger to match center-box increase */
+  font-size: 1.08rem;
+  text-align: center;
+  font-weight: 600;
+  border: 1px solid rgba(0,0,0,0.3);
+}
+
+/* compete-specific styles moved to src/styles/pages/compete.css */
+
+
+/* 오른쪽은 디폴트로 도형선택 컬럼 */
+.content-right {
+  display: flex;
+  flex-direction: column;   /* 세로로 쌓기 */
+  align-items: center;      /* ✅ 가로 방향 가운데 정렬 */
+  justify-content: center;  /* 세로 방향 정렬 (원하면) */
+}
+
+/* 오른쪽 공간을 어떤 도형으로 생각하고 찍었는지 선택 */
+.shape-selection-section {
+  /* background: rgba(255, 255, 255, 0.85); - removed, use page-specific theme */
+  width: 100%;
+  margin: 10px 0;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid rgba(0,0,0,0.3);
+}
+
+/* 실제 이미지 들어갈 구간 */
+.img-space {
+  width: 100%;
+  height: 100%;
+  /* background: #fff; - removed, use page-specific theme */
+  border-radius: 12px;
+  border: 3px solid #d9d9d9; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  text-align: center;
+  padding: 8px;
+  box-sizing: border-box;
+  max-width: 100%;
+  max-height: 100%;
+  gap: 12px;
+}
+
+.img-space button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.uploaded-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+  /* Use themed card background instead of fixed white */
+  background: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+.img-space-dragging {
+  border-style: dashed;
+  border-color: #888;
+  background-color: #f5f5f5;
+}
+
+
+/* 공사중 페이지 */
+.access-denied {
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  /* 일단 보기 편하게 표시 해놈 */
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  text-align: center;
+}
+
+.access-denied-img {
+  width: 80%;
+  margin: 10% 20%;
+  display: flex;
+}
+
+.login-page {
+  min-height: 100vh;    /* 화면 전체 높이 채우기 */
+  background-color: #ffffff; /* 흰 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 반응형: 화면 좁아지면 한 줄로 */
+@media (max-width: 900px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+  .content-left,
+  .content-right {
+    display: none;
+  }
+}
+
+
+
+
+/* 필요하면 모바일용으로 더 조절 가능 */
+@media (max-width: 768px) {
+  .right-section nav {
+    display: none;
+  }
+  .logo-slot,
+  .center-box,
+  .input-area {
+    width: 90%;
+  }
+}
