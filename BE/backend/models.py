@@ -14,17 +14,7 @@ class User(Base):
     username = Column(String, nullable=True)
     created_at = Column(TIMESTAMP, server_default=func.now())
 
-
-class Daily(Base):
-    """
-    날짜별 '오늘의 도형' 저장
-    예: date="2025-11-22", shape="sphere"
-    """
-    __tablename__ = "daily"
-
-    date = Column(String, primary_key=True, index=True)
-    shape = Column(String, nullable=False)
-
+# (중간 Daily 모델 부분 생략)
 
 class Score(Base):
     """
@@ -41,4 +31,20 @@ class Score(Base):
     date = Column(String, index=True)  # "2025-11-22" 같은 문자열
     score = Column(Float)
     image_path = Column(String, nullable=True)
+    created_at = Column(TIMESTAMP, server_default=func.now())
+
+
+class MatchResult(Base):
+    """
+    1:1 매치 결과를 저장하는 테이블
+    - match_id: 매칭 시스템에서 사용한 UUID
+    - winner_id: 이긴 유저 ID
+    - loser_id: 진 유저 ID
+    """
+    __tablename__ = "match_results"
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    match_id = Column(String, index=True)
+    winner_id = Column(String, index=True)
+    loser_id = Column(String, index=True)
     created_at = Column(TIMESTAMP, server_default=func.now())

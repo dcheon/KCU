@@ -1,4 +1,4 @@
-# backend/main.py
+# backend/main.py 
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -6,6 +6,10 @@ from fastapi.staticfiles import StaticFiles
 
 from backend.auth.router_auth import router as auth_router
 from backend.visualization.router_visualize import router as visual_router
+from backend.router_ranking import router as ranking_router   # ⭐ 랭킹 라우터 추가
+
+from backend.router_ranking import router as ranking_router
+from backend.router_matchmaking import router as matchmaking_router  # ⭐ 추가
 
 # Swagger customizing import
 from fastapi.openapi.utils import get_openapi
@@ -38,7 +42,11 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 # -----------------------
 app.include_router(auth_router, prefix="/auth", tags=["Auth"])
 app.include_router(visual_router, tags=["Visualization"])
-
+app.include_router(ranking_router, prefix="/ranking", tags=["Ranking"])  # ⭐ 랭킹 엔드포인트
+app.include_router(auth_router, prefix="/auth", tags=["Auth"])
+app.include_router(visual_router, prefix="/visualize", tags=["Visualization"])  # or no prefix?
+app.include_router(ranking_router, prefix="/ranking", tags=["Ranking"])
+app.include_router(matchmaking_router, prefix="/match", tags=["Matchmaking"])   # ⭐ 추가
 
 # =============================================================
 #            ⭐ Swagger UI에 Bearer Token 입력칸 추가 ⭐
@@ -63,11 +71,9 @@ def custom_openapi():
         }
     }
 
-    # 🔥 모든 API에 기본 security 설정 추가 (원하면 특정 API만 추가 가능)
+    # 🔥 모든 API에 기본 security 설정 추가
     for path in openapi_schema["paths"]:
         for method in openapi_schema["paths"][path]:
-            # 인증 필요한 API에만 적용할 수도 있음
-            # 여기서는 전체 API에 BearerAuth 적용 (권장)
             openapi_schema["paths"][path][method]["security"] = [
                 {"BearerAuth": []}
             ]
