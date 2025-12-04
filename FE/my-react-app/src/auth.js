@@ -1,28 +1,24 @@
-// src/api/auth.js
-const API_BASE = "http://127.0.0.1:8000";  // FastAPI 주소
+// src/auth.js - 레거시 파일, config/api.js 사용 권장
+import { API_ENDPOINTS, apiFetch } from "./config/api";
 
 export async function login(username, password) {
-    const response = await fetch(`${API_BASE}/auth/login`, {
+    return await apiFetch(API_ENDPOINTS.login, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email: username, password }),
     });
-    return response.json();
 }
 
 export async function register(username, password, email) {
-    const response = await fetch(`${API_BASE}/auth/register`, {
+    return await apiFetch(API_ENDPOINTS.signup, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password, email }),
+        body: JSON.stringify({ email: email || username, password }),
     });
-    return response.json();
 }
 
 export function saveToken(token) {
-    localStorage.setItem("token", token);
+    localStorage.setItem("access_token", token);
 }
 
 export function getToken() {
-    return localStorage.getItem("token");
+    return localStorage.getItem("access_token");
 }

@@ -1,6 +1,7 @@
 // src/pages/Home.jsx
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { API_ENDPOINTS, apiFetch } from "../config/api";
 import "../styles/pages/Home.css";
 
 export default function Home() {
@@ -30,18 +31,25 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    // Load leaderboard data from CSV
-    fetch('/assets/data/leaderboard.csv')
-      .then(response => response.text())
-      .then(text => {
-        const lines = text.trim().split('\n');
-        const data = lines.slice(1).map(line => {
-          const [rank, username, score] = line.split(',');
-          return { rank, username, score };
-        });
-        setLeaderboardData(data);
-      })
-      .catch(error => console.error('Failed to load leaderboard:', error));
+    // Load leaderboard data from API
+    const loadLeaderboard = async () => {
+      try {
+        const data = await apiFetch(API_ENDPOINTS.top10);
+        // API 응답 형식: [{ rank, user_id, score, date }, ...]
+        const formattedData = data.map(item => ({
+          rank: item.rank,
+          username: item.user_id,
+          score: item.score.toFixed(2),
+        }));
+        setLeaderboardData(formattedData);
+      } catch (error) {
+        console.error('Failed to load leaderboard from API:', error);
+        // 실패 시 빈 배열 또는 기본값 사용
+        setLeaderboardData([]);
+      }
+    };
+
+    loadLeaderboard();
   }, []);
 
   const openModeDetail = (mode) => {

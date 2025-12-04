@@ -10,6 +10,7 @@ from backend.auth.router_auth import router as auth_router
 from backend.visualization.router_visualize import router as visual_router
 from backend.router_ranking import router as ranking_router
 from backend.router_matchmaking import router as matchmaking_router
+from backend.router_score import router as score_router
 
 
 app = FastAPI(
@@ -44,6 +45,7 @@ app.include_router(auth_router, prefix="/auth", tags=["Auth"])
 app.include_router(visual_router, prefix="/visualize", tags=["Visualization"])
 app.include_router(ranking_router, prefix="/ranking", tags=["Ranking"])
 app.include_router(matchmaking_router, prefix="/match", tags=["Matchmaking"])
+app.include_router(score_router, prefix="/score", tags=["Score"])
 
 
 # --------------------------------------------------

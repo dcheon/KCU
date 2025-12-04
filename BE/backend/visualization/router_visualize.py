@@ -11,6 +11,16 @@ router = APIRouter()
 
 LABELS = ["sphere", "cube", "cylinder", "cone", "pyramid", "torus"]
 
+# 영어 -> 한글 변환 매핑
+LABEL_KOR = {
+    "sphere": "원",
+    "cube": "사각형",
+    "cylinder": "원기둥",
+    "cone": "원뿔",
+    "pyramid": "삼각형",
+    "torus": "도넛"
+}
+
 # CLIP 모델은 서버 시작 시 1번만 로드
 model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
 processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
@@ -51,9 +61,9 @@ async def visualize(file: UploadFile = File(...)):
     # 5) softmax → 확률 계산
     probs = output.logits_per_image.softmax(dim=1)[0].tolist()
 
-    # 6) FE에서 기대하는 predictions 포맷
+    # 6) FE에서 기대하는 predictions 포맷 (한글로 변환)
     predictions = [
-        {"label": LABELS[i], "confidence": float(probs[i])}
+        {"label": LABEL_KOR[LABELS[i]], "confidence": float(probs[i])}
         for i in range(len(LABELS))
     ]
 

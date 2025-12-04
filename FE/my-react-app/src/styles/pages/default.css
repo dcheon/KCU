@@ -110,18 +110,31 @@ input[type="range"]::-moz-range-thumb {
 .shape-picker {
 	background: var(--picker-bg);
 	color: var(--text-color);
-	padding: 20px;
+	padding: 30px;
 	border-radius: 12px;
 	box-shadow: 0 12px 40px rgba(0,0,0,0.25);
-	min-width: 280px;
+	min-width: 600px;
 	text-align: center;
 }
 
 .shape-picker-buttons {
-	display:flex;
-	gap:10px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin: 12px auto;
+	width: 100%;
+	max-width: 450px;
+}
+
+.shape-row {
+	display: flex;
+	gap: 10px;
 	justify-content: center;
-	margin-top: 12px;
+}
+
+.shape-row button {
+	flex: 1;
+	min-height: 40px;
 }
 
 .shape-selection-section { /* ensure buttons in picker match look */

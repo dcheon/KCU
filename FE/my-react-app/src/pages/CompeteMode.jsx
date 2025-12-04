@@ -1,6 +1,7 @@
 // Compete Mode
 import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_ENDPOINTS, apiFetch } from "../config/api";
 import "../styles/pages/compete.css"; // 페이지 전용 스타일
 
 export default function CompeteMode() {
@@ -28,6 +29,11 @@ export default function CompeteMode() {
   const [isDragging, setIsDragging] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
   const [pickerType, setPickerType] = useState(""); // "login", "image", "shape"
+  
+  // 매칭 관련 상태
+  const [isMatching, setIsMatching] = useState(false);
+  const [matchInfo, setMatchInfo] = useState(null); // { match_id, opponent_id }
+  const [matchResult, setMatchResult] = useState(null); // ML 분석 결과
 
   const processFile = (file) => {
     if (!file) return;
@@ -114,6 +120,84 @@ export default function CompeteMode() {
     setSelectedShape(shape);
     console.log(`${shape} 선택됨, 여기에 모델 돌리기`);
     closePicker();
+    
+    // 매칭 시작
+    startMatching();
+  };
+
+  // 매칭 시작
+  const startMatching = async () => {
+    const currentUser = JSON.parse(localStorage.getItem("kcu_current_user") || "{}");
+    const userId = currentUser.identifier;
+
+    if (!userId) {
+      alert("로그인 정보가 없습니다.");
+      return;
+    }
+
+    setIsMatching(true);
+
+    try {
+      const result = await apiFetch(API_ENDPOINTS.matchJoin, {
+        method: "POST",
+        body: JSON.stringify({ user_id: userId }),
+      });
+
+      if (result.status === "matched") {
+        setMatchInfo({
+          match_id: result.match_id,
+          opponent_id: result.opponent_id,
+        });
+        alert(`매칭 성공! 상대: ${result.opponent_id}`);
+        
+        // 이미지 분석 시작
+        if (imageUrl && fileInputRef.current?.files?.[0]) {
+          await analyzeImage(fileInputRef.current.files[0]);
+        }
+      } else {
+        alert("상대를 기다리는 중입니다...");
+        // 실제로는 폴링이나 WebSocket으로 매칭 완료 대기
+      }
+    } catch (error) {
+      console.error("매칭 오류:", error);
+      alert("매칭 중 오류가 발생했습니다.");
+    } finally {
+      setIsMatching(false);
+    }
+  };
+
+  // 이미지 분석
+  const analyzeImage = async (file) => {
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await fetch(API_ENDPOINTS.visualize, {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+      setMatchResult(data.predictions);
+      
+      // 점수 계산 (예: 선택한 도형의 confidence)
+      const selectedShapeData = data.predictions.find(
+        p => p.label.toLowerCase() === selectedShape.toLowerCase()
+      );
+      
+      if (selectedShapeData) {
+        const score = selectedShapeData.confidence * 100;
+        alert(`분석 완료! 점수: ${score.toFixed(2)}점`);
+        
+        // TODO: 상대방 점수와 비교하여 승패 결정
+        // saveMatchResult(matchInfo.match_id, winner_id, loser_id);
+      }
+    } catch (error) {
+      console.error("이미지 분석 오류:", error);
+      alert("이미지 분석 중 오류가 발생했습니다.");
+    }
   };
 
   return (
@@ -175,9 +259,9 @@ export default function CompeteMode() {
 
         <div className="output-area">
           {imageUrl ? (
-            <a>개발자를 위해 몬스터 하나 사주세요ㅠㅠ</a>
+            <a>실행 버튼을 눌러주세요</a>
           ) : (
-            <a>사진을 올려야 평가를 하든 머든 하죠 이건 뭐 저랑 싸우자는 건가요?</a>
+            <a>사진을 먼저 올려주세요</a>
           )}
           {(selectedShape && imageUrl) && (
             <div style={{ marginTop: "10px", fontWeight: 500 }}>
@@ -240,24 +324,46 @@ export default function CompeteMode() {
               <>
                 <h3>어떤 도형으로 대결하실 건가요?</h3>
                 <div className="shape-picker-buttons">
-                  <button 
-                    onClick={() => handleShapeSelect('삼각형')} 
-                    className="shape-selection-section"
-                  >
-                    삼각형
-                  </button>
-                  <button 
-                    onClick={() => handleShapeSelect('사각형')} 
-                    className="shape-selection-section"
-                  >
-                    사각형
-                  </button>
-                  <button 
-                    onClick={() => handleShapeSelect('원')} 
-                    className="shape-selection-section"
-                  >
-                    원
-                  </button>
+                  <div className="shape-row">
+                    <button 
+                      onClick={() => handleShapeSelect('원')} 
+                      className="shape-selection-section"
+                    >
+                      원
+                    </button>
+                    <button 
+                      onClick={() => handleShapeSelect('사각형')} 
+                      className="shape-selection-section"
+                    >
+                      사각형
+                    </button>
+                    <button 
+                      onClick={() => handleShapeSelect('원기둥')} 
+                      className="shape-selection-section"
+                    >
+                      원기둥
+                    </button>
+                  </div>
+                  <div className="shape-row">
+                    <button 
+                      onClick={() => handleShapeSelect('원뿔')} 
+                      className="shape-selection-section"
+                    >
+                      원뿔
+                    </button>
+                    <button 
+                      onClick={() => handleShapeSelect('삼각형')} 
+                      className="shape-selection-section"
+                    >
+                      삼각형
+                    </button>
+                    <button 
+                      onClick={() => handleShapeSelect('도넛')} 
+                      className="shape-selection-section"
+                    >
+                      도넛
+                    </button>
+                  </div>
                 </div>
                 <div style={{marginTop: 12}}>
                   <button 

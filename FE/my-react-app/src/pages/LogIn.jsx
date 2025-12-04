@@ -1,6 +1,7 @@
 // src/pages/LogIn.jsx
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { API_ENDPOINTS, apiFetch } from "../config/api";
 import "../styles/pages/app.css";
 import "../styles/pages/login.css";
 
@@ -9,8 +10,6 @@ export default function LogIn() {
   const [identifier, setIdentifier] = useState(""); // username 또는 email
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
-  const API_BASE = "http://127.0.0.1:8000";  // FastAPI 백엔드 주소
 
   // 테마 유지
   const [theme, setTheme] = useState(() => {
@@ -43,41 +42,27 @@ export default function LogIn() {
     }
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/auth/login", {
+      const result = await apiFetch(API_ENDPOINTS.login, {
         method: "POST",
-        headers: { 
-          "Content-Type": "application/json"
-        },
         body: JSON.stringify({
           email: identifier,
           password: password
         })
       });
 
-      const result = await response.json();
-
-      if (!response.ok) {
-        if (Array.isArray(result.detail)) {
-          setError(result.detail[0].msg || "로그인 실패");
-        } else {
-          setError(result.detail || "로그인 실패");
-        }
-        return;
-      }
-
       // ⭐ FastAPI가 보내준 JWT 저장
       localStorage.setItem("access_token", result.access_token);
       localStorage.setItem("token_type", result.token_type);
 
       // 필요한 경우 사용자 정보도 저장 가능
-      localStorage.setItem("kcu_current_user", JSON.stringify({ identifier }));
+      localStorage.setItem("kcu_current_user", JSON.stringify({ identifier: result.email }));
 
       // 로그인 성공 후 이동
       navigate("/app");
 
     } catch (error) {
       console.error("Login error:", error);
-      setError("서버 연결 오류");
+      setError(error.message || "서버 연결 오류");
     }
   };
 

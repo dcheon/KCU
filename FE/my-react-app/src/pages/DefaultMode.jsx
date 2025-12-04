@@ -1,5 +1,6 @@
 // Default Mode
 import { useRef, useState, useEffect } from "react";
+import { API_ENDPOINTS, apiFetch } from "../config/api";
 import "../styles/pages/default.css";
 
 export default function DefaultMode() {
@@ -56,13 +57,13 @@ export default function DefaultMode() {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/visualize", {
+      const response = await fetch(API_ENDPOINTS.visualize, {
         method: "POST",
         body: formData,
       });
 
       const data = await response.json();
-      console.log("🔥 백엔드 응답:", data);
+      console.log("백엔드 응답:", data);
 
       // ML 결과 처리
       const processed = processPredictionResult(data.predictions);
@@ -92,7 +93,7 @@ export default function DefaultMode() {
       return URL.createObjectURL(file);
     });
 
-    sendToBackend(file); // 🔥 업로드 시 자동 ML 분석
+    // 자동 분석 제거 - 실행 버튼으로 도형 선택 후 분석
   };
 
   const handleInsertImg = () => fileInputRef.current?.click();
@@ -131,9 +132,14 @@ export default function DefaultMode() {
     setShowPicker(true);
   };
 
-  const handleSelectShape = (shape) => {
+  const handleSelectShape = async (shape) => {
     setSelectedShape(shape);
     setShowPicker(false);
+    
+    // 도형 선택 후 이미지 분석 실행
+    if (imageUrl && fileInputRef.current?.files?.[0]) {
+      await sendToBackend(fileInputRef.current.files[0]);
+    }
   };
 
   // -------------------------------
@@ -143,7 +149,8 @@ export default function DefaultMode() {
     if (imageUrl) URL.revokeObjectURL(imageUrl);
     setImageUrl(null);
     setResult(null);
-    fileInputRef.current.value = "";
+    setSelectedShape(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
   return (
@@ -194,19 +201,62 @@ export default function DefaultMode() {
           )}
 
           {/* 결과 출력 */}
-          {result && (
+          {result && selectedShape && (
             <div style={{ marginTop: "20px", fontSize: "17px", lineHeight: "26px" }}>
-              <h3>🔍 분석 결과</h3>
-
-              {result.top3.map((item, idx) => (
-                <div key={idx}>
-                  {item.label}: {(item.confidence * 100).toFixed(2)}%
-                </div>
-              ))}
-
-              <strong style={{ marginTop: "10px", display: "block" }}>
-                그 외: {(result.etc * 100).toFixed(2)}%
-              </strong>
+              {(() => {
+                const topShape = result.top3[0];
+                const isCorrect = topShape.label === selectedShape;
+                
+                // 선택한 도형의 confidence 찾기
+                const selectedShapeData = result.top3.find(item => item.label === selectedShape);
+                const confidence = selectedShapeData ? selectedShapeData.confidence * 100 : 0;
+                
+                // confidence에 따른 메시지
+                let message = "";
+                let messageColor = "#FF5722";
+                
+                if (isCorrect) {
+                  if (confidence >= 70) {
+                    message = `${selectedShape}이(가) 맞는것 같아요! 🎉`;
+                    messageColor = "#4CAF50";
+                  } else if (confidence >= 40) {
+                    message = `${selectedShape}인것 같긴한데 맞을까요..? 🤔`;
+                    messageColor = "#FF9800";
+                  } else if (confidence >= 20) {
+                    message = `${selectedShape}이(가) 어느정도 맞아는 보이네요 😐`;
+                    messageColor = "#FFC107";
+                  } else {
+                    message = `${selectedShape}은(는) 아닌것 같아요ㅠㅠ 😢`;
+                    messageColor = "#FF5722";
+                  }
+                } else {
+                  message = `${selectedShape}은(는) 아닌것 같아요ㅠㅠ 😢`;
+                }
+                
+                return (
+                  <>
+                    <h3 style={{ color: messageColor }}>
+                      {message}
+                    </h3>
+                    
+                    <div style={{ marginTop: "15px" }}>
+                      <strong>🔍 분석 결과:</strong>
+                      {result.top3.map((item, idx) => (
+                        <div key={idx} style={{ 
+                          marginTop: "8px",
+                          fontWeight: item.label === selectedShape ? "bold" : "normal",
+                          color: item.label === topShape.label ? "#2196F3" : "inherit"
+                        }}>
+                          {idx + 1}. {item.label}: {(item.confidence * 100).toFixed(2)}%
+                        </div>
+                      ))}
+                      <div style={{ marginTop: "10px", fontSize: "15px", opacity: 0.7 }}>
+                        그 외: {(result.etc * 100).toFixed(2)}%
+                      </div>
+                    </div>
+                  </>
+                );
+              })()}
             </div>
           )}
 
@@ -214,10 +264,8 @@ export default function DefaultMode() {
             <a>사진을 올리면 이곳에 결과가 나옵니다</a>
           )}
 
-          {selectedShape && imageUrl && (
-            <div style={{ marginTop: "10px", fontWeight: 500 }}>
-              선택된 도형: {selectedShape}
-            </div>
+          {imageUrl && !selectedShape && (
+            <a>실행 버튼을 눌러 도형을 선택해주세요</a>
           )}
         </div>
       </div>
@@ -245,24 +293,46 @@ export default function DefaultMode() {
               <>
                 <h3>도형을 선택하세요</h3>
                 <div className="shape-picker-buttons">
-                  <button
-                    onClick={() => handleSelectShape("삼각형")}
-                    className="shape-selection-section"
-                  >
-                    삼각형
-                  </button>
-                  <button
-                    onClick={() => handleSelectShape("사각형")}
-                    className="shape-selection-section"
-                  >
-                    사각형
-                  </button>
-                  <button
-                    onClick={() => handleSelectShape("원")}
-                    className="shape-selection-section"
-                  >
-                    원
-                  </button>
+                  <div className="shape-row">
+                    <button
+                      onClick={() => handleSelectShape("원")}
+                      className="shape-selection-section"
+                    >
+                      원
+                    </button>
+                    <button
+                      onClick={() => handleSelectShape("사각형")}
+                      className="shape-selection-section"
+                    >
+                      사각형
+                    </button>
+                    <button
+                      onClick={() => handleSelectShape("원기둥")}
+                      className="shape-selection-section"
+                    >
+                      원기둥
+                    </button>
+                  </div>
+                  <div className="shape-row">
+                    <button
+                      onClick={() => handleSelectShape("원뿔")}
+                      className="shape-selection-section"
+                    >
+                      원뿔
+                    </button>
+                    <button
+                      onClick={() => handleSelectShape("삼각형")}
+                      className="shape-selection-section"
+                    >
+                      삼각형
+                    </button>
+                    <button
+                      onClick={() => handleSelectShape("도넛")}
+                      className="shape-selection-section"
+                    >
+                      도넛
+                    </button>
+                  </div>
                 </div>
                 <button onClick={() => setShowPicker(false)} className="shape-selection-section">
                   취소

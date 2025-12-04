@@ -1,6 +1,7 @@
 // src/pages/Register.jsx
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { API_ENDPOINTS, apiFetch } from "../config/api";
 import "../styles/pages/app.css";
 import "../styles/pages/register.css";
 
@@ -10,8 +11,6 @@ export default function Register() {
   const [identifier, setIdentifier] = useState(""); 
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
-  const API_BASE = "http://127.0.0.1:8000";
 
   // 테마 유지
   const [theme, setTheme] = useState(() => {
@@ -44,25 +43,13 @@ export default function Register() {
     }
 
     try {
-      const response = await fetch(`${API_BASE}/auth/signup`, {
+      const result = await apiFetch(API_ENDPOINTS.signup, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: identifier,
           password: password
         }),
       });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        if (Array.isArray(result.detail)) {
-          setError(result.detail[0].msg || "로그인 실패");
-        } else {
-          setError(result.detail || "로그인 실패");
-        }
-        return;
-      }
 
       // ⭐ 회원가입 성공 → 자동 로그인 금지
       // JWT 저장하지 않음
@@ -75,7 +62,7 @@ export default function Register() {
 
     } catch (error) {
       console.error("Signup error:", error);
-      setError("서버 연결 오류");
+      setError(error.message || "서버 연결 오류");
     }
   };
 
