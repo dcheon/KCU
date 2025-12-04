@@ -1,5 +1,3 @@
-# backend/main.py
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -10,12 +8,13 @@ from backend.auth.router_auth import router as auth_router
 from backend.visualization.router_visualize import router as visual_router
 from backend.router_ranking import router as ranking_router
 from backend.router_matchmaking import router as matchmaking_router
+from backend.router_compete import router as compete_router  # ⭐ 추가
 
 
 app = FastAPI(
     title="KCU Shape Classification API",
     version="1.0.0",
-    description="로그인 + 도형 분석 + 랭킹 + 대결 API 서버",
+    description="로그인 + 도형 분석 + 랭킹 + 대결 + 점수 저장 API 서버",
 )
 
 
@@ -24,7 +23,7 @@ app = FastAPI(
 # --------------------------------------------------
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],     # FE 개발 시 전체 허용
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -38,12 +37,13 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 # --------------------------------------------------
-# Routers 등록 (딱 1번씩!)
+# Routers (⭐ compete 추가)
 # --------------------------------------------------
 app.include_router(auth_router, prefix="/auth", tags=["Auth"])
 app.include_router(visual_router, prefix="/visualize", tags=["Visualization"])
 app.include_router(ranking_router, prefix="/ranking", tags=["Ranking"])
 app.include_router(matchmaking_router, prefix="/match", tags=["Matchmaking"])
+app.include_router(compete_router, prefix="/compete", tags=["Compete"])
 
 
 # --------------------------------------------------

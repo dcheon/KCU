@@ -1,6 +1,6 @@
 # backend/router_ranking.py
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from typing import List
 from sqlalchemy.orm import Session
@@ -8,7 +8,9 @@ from sqlalchemy.orm import Session
 from backend.database import get_db
 from backend.models import Score
 
-router = APIRouter()
+# ✅ Swagger에도 보이도록
+router = APIRouter(include_in_schema=True)
+
 
 # -----------------------
 #  응답 스키마
@@ -16,8 +18,12 @@ router = APIRouter()
 class RankItem(BaseModel):
     rank: int          # 1위, 2위, ...
     user_id: str       # 유저 아이디
-    score: float       # 점수
+    score: float       # 점수 (0~1 사이 확률)
     date: str | None = None  # 언제 찍은 점수인지 (옵션)
+
+    class Config:
+        orm_mode = True
+
 
 # -----------------------
 #  상위 10위 랭킹 API
@@ -36,10 +42,6 @@ def get_top10_ranking(db: Session = Depends(get_db)):
         .all()
     )
 
-    if not scores:
-        # 아직 점수 기록이 하나도 없을 때
-        raise HTTPException(status_code=404, detail="랭킹 데이터가 없습니다.")
-
     ranking: list[RankItem] = []
     for idx, s in enumerate(scores, start=1):
         ranking.append(
@@ -47,8 +49,10 @@ def get_top10_ranking(db: Session = Depends(get_db)):
                 rank=idx,
                 user_id=s.user_id,
                 score=s.score,
-                date=s.date,
+                # date 컬럼이 datetime 이면 문자열로 변환
+                date=str(s.date) if getattr(s, "date", None) else None,
             )
         )
 
+    # ✅ 데이터가 없어도 [] 반환 (404 X)
     return ranking
