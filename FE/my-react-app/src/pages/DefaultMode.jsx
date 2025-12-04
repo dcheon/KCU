@@ -207,36 +207,12 @@ export default function DefaultMode() {
                 const topShape = result.top3[0];
                 const isCorrect = topShape.label === selectedShape;
                 
-                // 선택한 도형의 confidence 찾기
-                const selectedShapeData = result.top3.find(item => item.label === selectedShape);
-                const confidence = selectedShapeData ? selectedShapeData.confidence * 100 : 0;
-                
-                // confidence에 따른 메시지
-                let message = "";
-                let messageColor = "#FF5722";
-                
-                if (isCorrect) {
-                  if (confidence >= 70) {
-                    message = `${selectedShape}이(가) 맞는것 같아요! 🎉`;
-                    messageColor = "#4CAF50";
-                  } else if (confidence >= 40) {
-                    message = `${selectedShape}인것 같긴한데 맞을까요..? 🤔`;
-                    messageColor = "#FF9800";
-                  } else if (confidence >= 20) {
-                    message = `${selectedShape}이(가) 어느정도 맞아는 보이네요 😐`;
-                    messageColor = "#FFC107";
-                  } else {
-                    message = `${selectedShape}은(는) 아닌것 같아요ㅠㅠ 😢`;
-                    messageColor = "#FF5722";
-                  }
-                } else {
-                  message = `${selectedShape}은(는) 아닌것 같아요ㅠㅠ 😢`;
-                }
-                
                 return (
                   <>
-                    <h3 style={{ color: messageColor }}>
-                      {message}
+                    <h3 style={{ color: isCorrect ? "#4CAF50" : "#FF5722" }}>
+                      {isCorrect 
+                        ? `${selectedShape}이(가) 맞네요! 🎉` 
+                        : `${selectedShape}은(는) 아닌것 같아요ㅠㅠ 😢`}
                     </h3>
                     
                     <div style={{ marginTop: "15px" }}>
