@@ -26,10 +26,10 @@ model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
 processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
 
 
-@router.post("")
+@router.post("/visualize")
 async def visualize(file: UploadFile = File(...)):
     """
-    FE에서 요청하는:
+    FE에서 요청하는: /visualize/visualize
     반환 형식: predictions = [{label, confidence}, ...]
     """
 

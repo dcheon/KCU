@@ -270,20 +270,20 @@ export default function DailyMode() {
                 
                 if (isCorrect) {
                   if (confidence >= 70) {
-                    message = `오늘의 도형 ${dailyShape.name}이(가) 맞는것 같아요!`;
+                    message = `오늘의 도형인 ${dailyShape.name}이(가) 맞는것 같아요!`;
                     messageColor = "#4CAF50";
                   } else if (confidence >= 40) {
-                    message = `오늘의 도형 ${dailyShape.name}인것 같긴한데 맞을까요..?`;
+                    message = `오늘의 도형인 ${dailyShape.name}인것 같긴한데 맞을까요..?`;
                     messageColor = "#FF9800";
                   } else if (confidence >= 20) {
-                    message = `오늘의 도형 ${dailyShape.name}이(가) 어느정도 맞아는 보이네요`;
+                    message = `오늘의 도형인 ${dailyShape.name}이(가) 어느정도 맞아는 보이네요`;
                     messageColor = "#FFC107";
                   } else {
-                    message = `오늘의 도형 ${dailyShape.name}은(는) 아닌것 같아요`;
+                    message = `오늘의 도형인 ${dailyShape.name}은(는) 아닌것 같아요`;
                     messageColor = "#FF5722";
                   }
                 } else {
-                  message = `오늘의 도형 ${dailyShape.name}은(는) 아닌것 같아요`;
+                  message = `오늘의 도형인 ${dailyShape.name}은(는) 아닌것 같아요`;
                 }
                 
                 return (

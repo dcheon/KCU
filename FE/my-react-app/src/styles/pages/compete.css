@@ -54,19 +54,20 @@
 
 /* 좌측 랭킹 영역 넓히기 */
 .content-left {
-  width: 25%;              /* 기존 대비 넓게 */
-  min-width: 260px;        /* 모바일에서도 넓게 보임 */
+  width: 20%;              /* 너비 축소 */
+  min-width: 200px;        /* 모바일에서도 넓게 보임 */
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding-left: 0px;
+  align-items: center;
+  justify-content: center;
+  padding-left: 10px;
+  margin-right: 20px;      /* 중앙 content와 거리 확보 */
 }
 
 /* 랭킹 박스 */
 .ranking {
   background: var(--ranking-bg);
   color: var(--text-color);
-  width: 85%;              /* content-left 전체를 사용하도록 85% */
+  width: 100%;             /* content-left 전체를 사용 */
   margin-left: 0;
   padding: 20px;
   border-radius: 14px;
@@ -92,15 +93,25 @@
 /* 개별 랭킹 항목 */
 .ranking-item {
   background: var(--ranking-item-bg);
-  padding: 10px 14px;      /* 패딩 증가 */
+  padding: 6px 10px;       /* 세로 폭 축소 */
   border-radius: 10px;
-  font-size: 15px;
+  font-size: 12px;
   display: flex;
   justify-content: space-between;  /* 아이디 / 점수 양옆 정렬 */
   white-space: nowrap;             /* 절대 줄바꿈 금지 */
   overflow: hidden;
   text-overflow: ellipsis;         /* 너무 길면 ... 처리 */
   border: 1px solid var(--ranking-divider);
+  transition: all 0.2s ease;
+}
+
+.ranking-item-clickable {
+  cursor: pointer;
+}
+
+.ranking-item-clickable:hover {
+  background: var(--ranking-divider);
+  transform: translateX(3px);
 }
 
 
@@ -134,6 +145,10 @@
 	background: var(--ranking-bg) !important;
 	color: var(--text-color) !important;
 	border-color: var(--card-border) !important;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
 }
 
 .page .content-grid .shape-selection-section {
@@ -196,14 +211,157 @@
 
 .shape-picker-buttons {
 	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin: 12px auto;
+	width: 100%;
+	max-width: 450px;
+}
+
+.shape-row {
+	display: flex;
 	gap: 10px;
 	justify-content: center;
-	margin-top: 16px;
-	flex-wrap: wrap;
+}
+
+.shape-row button {
+	flex: 1;
+	min-height: 40px;
 }
 
 .shape-picker .shape-selection-section {
 	flex: 1;
 	min-width: 80px;
 	transition: background 0.15s ease;
+}
+
+/* ========== 대결 화면 CSS ========== */
+
+.battle-result-only {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+}
+
+.vs-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+	width: 100%;
+}
+
+.my-side, .opponent-side {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+}
+
+.battle-img {
+	width: 180px;
+	height: 180px;
+	border-radius: 12px;
+	object-fit: cover;
+	border: 2px solid var(--ranking-bg);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.score-display {
+	font-size: 32px;
+	font-weight: bold;
+	color: #FFD700;
+	text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+	font-weight: 900;
+}
+
+.page.theme-light .score-display {
+	color: #000000;
+	text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+.page.theme-dark .score-display {
+	color: #FFFFFF;
+	text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.label {
+	font-size: 14px;
+	color: var(--text-color);
+	opacity: 0.7;
+	font-weight: 600;
+}
+
+.vs-text {
+	font-size: 32px;
+	font-weight: bold;
+	color: var(--text-color);
+	opacity: 0.5;
+}
+
+.battle-message {
+	font-size: 18px;
+	font-weight: 600;
+	text-align: center;
+	padding: 16px;
+	border-radius: 10px;
+	width: 100%;
+	margin-top: 8px;
+	transition: all 0.3s ease;
+}
+
+.battle-message.win {
+	background: rgba(76, 175, 80, 0.2);
+	color: #4caf50;
+	border: 1px solid rgba(76, 175, 80, 0.4);
+}
+
+.battle-message.draw {
+	background: rgba(255, 193, 7, 0.2);
+	color: #ffc107;
+	border: 1px solid rgba(255, 193, 7, 0.4);
+}
+
+.battle-message.lose {
+	background: rgba(244, 67, 54, 0.2);
+	color: #f44336;
+	border: 1px solid rgba(244, 67, 54, 0.4);
+}
+
+/* ========== 랭킹 상세 모달 CSS ========== */
+
+.ranking-detail-modal {
+	min-width: 400px;
+}
+
+.ranking-detail-content {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin: 20px 0;
+	text-align: left;
+}
+
+.ranking-detail-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 16px;
+	background: var(--ranking-item-bg);
+	border-radius: 8px;
+	border: 1px solid var(--card-border);
+}
+
+.detail-label {
+	font-weight: 600;
+	color: var(--text-color);
+	opacity: 0.7;
+}
+
+.detail-value {
+	font-weight: 700;
+	color: var(--text-color);
+	font-size: 16px;
 }
