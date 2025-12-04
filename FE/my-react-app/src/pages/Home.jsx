@@ -63,6 +63,7 @@ export default function Home() {
     >
       <div className="home-bg-overlay">
 
+        {/* Top header section for auth buttons */}
         <div className="home-authbar">
           {currentUser ? (
             <button className="home-auth-btn" onClick={() => navigate("/profile")}>
@@ -80,44 +81,53 @@ export default function Home() {
           )}
         </div>
         
-        <header className="home-header">
-          <div className="home-logo-placeholder" />
-          <h1 className="home-title">Shape 헌터</h1>
-          <p className="home-subtitle">
-            {/* Add Subtitle here */}
-          </p>
-        </header>
+        {/* Main content area - split into top and bottom */}
+        <div className="home-content">
+          {/* Top section - split into left (title) and right (image) */}
+          <div className="home-top-section">
+            <div className="home-title-section">
+              <div className="home-logo-placeholder" />
+              <h1 className="home-title">Shape 헌터</h1>
+              <p className="home-subtitle">
+                {/* Add Subtitle here */}
+              </p>
+            </div>
+            <div className="home-image-section">
+              <img src="/assets/img/home_drawing.png" alt="decoration" />
+            </div>
+          </div>
 
-        <main className="home-main">
-          <nav className="home-menu">
-            <h2 className="home-menu-title">Modes</h2>
-            <button className="home-menu-btn" onClick={() => navigate("/app")}>
-              기본 모드
-            </button>
+          {/* Bottom section - split into left (modes) and right (panels) */}
+          <div className="home-bottom-section">
+            <nav className="home-menu">
+              <h2 className="home-menu-title">Modes</h2>
+              <button className="home-menu-btn" onClick={() => navigate("/app")}>
+                기본 모드
+              </button>
 
-            <button
-              className="home-menu-btn"
-              onClick={() => navigate("/app/compete")}
-            >
-              경쟁 모드
-            </button>
+              <button
+                className="home-menu-btn"
+                onClick={() => navigate("/app/compete")}
+              >
+                경쟁 모드
+              </button>
 
-            <button
-              className="home-menu-btn"
-              onClick={() => navigate("/app/daily")}
-            >
-              데일리 모드
-            </button>
+              <button
+                className="home-menu-btn"
+                onClick={() => navigate("/app/daily")}
+              >
+                데일리 모드
+              </button>
 
-            <button
-              className="home-menu-btn"
-              onClick={() => navigate("/app/option")}
-            >
-              옵션
-            </button>
-          </nav>
+              <button
+                className="home-menu-btn"
+                onClick={() => navigate("/app/option")}
+              >
+                옵션
+              </button>
+            </nav>
 
-          <section className="home-panels">
+            <section className="home-panels">
             {/*Top left:Instructions*/}
             <article className="home-panel-card" onClick={() => setShowInstructions(true)} style={{cursor: 'pointer'}}>
               <div className="home-panel-image placeholder">
@@ -174,7 +184,8 @@ export default function Home() {
               </div>
             </article>
           </section>
-        </main>
+          </div>
+        </div>
 
         <footer className="home-footer">
           <span>© {new Date().getFullYear()} Shape Hunter</span>
