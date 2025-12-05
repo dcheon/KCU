@@ -83,9 +83,6 @@
   --btn-bg-hover: rgba(255, 0, 255, 0.4);
   --picker-bg: rgba(10, 14, 39, 0.95);
   --picker-overlay: rgba(0, 0, 0, 0.8);
-
-  background: url('/assets/img/retro-bg.png') center/cover fixed !important;
-  min-height: 100vh;
 }
 
 body:has(.content-grid.theme-retro) {
@@ -107,29 +104,6 @@ body:has(.content-grid.theme-retro) .main {
   --picker-bg: rgba(10, 14, 39, 0.95);
   --picker-overlay: rgba(0, 0, 0, 0.8);
 
-  background: 
-    repeating-linear-gradient(
-      90deg,
-      transparent 0px,
-      transparent 50px,
-      rgba(0, 255, 255, 0.03) 50px,
-      rgba(0, 255, 255, 0.03) 51px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      transparent 0px,
-      transparent 50px,
-      rgba(0, 255, 255, 0.03) 50px,
-      rgba(0, 255, 255, 0.03) 51px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      transparent 0px,
-      transparent 40px,
-      rgba(0, 255, 255, 0.1) 40px,
-      rgba(0, 255, 255, 0.1) 41px
-    ),
-    linear-gradient(180deg, #0a0e27 0%, #1a1464 50%, #2d1b69 100%) !important;
   font-family: 'Orbitron', 'Press Start 2P', 'Courier New', monospace;
 }
 
@@ -152,9 +126,7 @@ body:has(.content-grid.theme-retro) .main {
   --picker-bg: rgba(74, 56, 128, 0.98);
   --picker-overlay: rgba(0, 0, 0, 0.5);
 
-  background: url('/assets/img/christmas-bg.png') center/cover fixed !important;
   font-family: "Segoe UI", "Georgia", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  min-height: 100vh;
 }
 
 body:has(.content-grid.theme-christmas) {

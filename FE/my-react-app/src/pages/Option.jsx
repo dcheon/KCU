@@ -7,6 +7,8 @@ export default function Option() {
     return localStorage.getItem("shapehunter-theme") || "light";
   });
 
+  const [isSliding, setIsSliding] = useState(false);
+
   const [soundEnabled, setSoundEnabled] = useState(() => {
     return localStorage.getItem("shapehunter-sound") !== "false";
   });
@@ -37,12 +39,17 @@ export default function Option() {
 
 
   const toggleTheme = () => {
-    setTheme((prev) => {
-      if (prev === "light") return "dark";
-      if (prev === "dark") return "retro";
-      if (prev === "retro") return "christmas";
-      return "light";
-    });
+    setIsSliding(true);
+    
+    setTimeout(() => {
+      setTheme((prev) => {
+        if (prev === "light") return "dark";
+        if (prev === "dark") return "retro";
+        if (prev === "retro") return "christmas";
+        return "light";
+      });
+      setIsSliding(false);
+    }, 300);
   };
 
   const toggleSound = () => {
@@ -54,7 +61,7 @@ export default function Option() {
   };
 
   return (
-    <div className={`content-grid ${theme === "dark" ? "theme-dark" : theme === "retro" ? "theme-retro" : theme === "christmas" ? "theme-christmas" : "theme-light"}`}>
+    <div className={`content-grid ${isSliding ? "theme-sliding" : ""} ${theme === "dark" ? "theme-dark" : theme === "retro" ? "theme-retro" : theme === "christmas" ? "theme-christmas" : "theme-light"}`}>
         <div className="content-left"></div>
         <div className="content-center">
             <h2>설정</h2>

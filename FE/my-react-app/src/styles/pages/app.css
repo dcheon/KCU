@@ -11,6 +11,37 @@ body {
   width: 100%;
 }
 
+/* 테마 슬라이드 애니메이션 */
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.content-grid.theme-sliding {
+  animation: slideOutLeft 0.3s ease-in-out;
+}
+
+.content-grid:not(.theme-sliding) {
+  animation: slideInRight 0.3s ease-in-out;
+}
+
 /* ===== 상단 헤더 ===== */
 .main-header {
   position: fixed;
