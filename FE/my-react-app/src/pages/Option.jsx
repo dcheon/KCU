@@ -37,7 +37,11 @@ export default function Option() {
 
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+    setTheme((prev) => {
+      if (prev === "light") return "dark";
+      if (prev === "dark") return "retro";
+      return "light";
+    });
   };
 
   const toggleSound = () => {
@@ -49,7 +53,7 @@ export default function Option() {
   };
 
   return (
-    <div className={`content-grid ${theme === "dark" ? "theme-dark" : "theme-light"}`}>
+    <div className={`content-grid ${theme === "dark" ? "theme-dark" : theme === "retro" ? "theme-retro" : "theme-light"}`}>
         <div className="content-left"></div>
         <div className="content-center">
             <h2>설정</h2>
@@ -60,7 +64,7 @@ export default function Option() {
                 onClick={toggleTheme}
                 style={{maxWidth: 200}}
               >
-                {theme === "dark" ? "🌙 다크 모드" : "☀️ 라이트 모드"}
+                {theme === "dark" ? "🌙 다크 모드" : theme === "retro" ? "🎮 레트로 모드" : "☀️ 라이트 모드"}
               </button>
             </div>
             <div style={{marginTop: 16}}>

@@ -168,7 +168,7 @@ export default function DailyMode() {
   };
 
   return (
-    <div className={`content-grid ${theme === "dark" ? "theme-dark" : "theme-light"}`}>
+    <div className={`content-grid ${theme === "retro" ? "theme-retro" : theme === "dark" ? "theme-dark" : "theme-light"}`}>
       {/* 왼쪽 오늘의 도형 */}
       <div className="content-left">
         <div className="daily-shape-box">

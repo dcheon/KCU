@@ -133,7 +133,7 @@ function Layout() {
         </div>
       </header>
 
-      <div className={`page bg-${mode} ${theme === "dark" ? "theme-dark" : "theme-light"}`}>
+      <div className={`page bg-${mode} ${theme === "retro" ? "theme-retro" : theme === "dark" ? "theme-dark" : "theme-light"}`}>
         {/* Sidebar Overlay */}
         {isSidebarOpen && (
           <div 

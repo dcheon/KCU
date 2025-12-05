@@ -48,7 +48,7 @@ export default function Profile() {
   };
 
   return (
-    <div className={`page center-login-page ${theme === "dark" ? "theme-dark" : "theme-light"}`}>
+    <div className={`page center-login-page ${theme === "retro" ? "theme-retro" : theme === "dark" ? "theme-dark" : "theme-light"}`}>
       <main className="main">
         <div className="login-card">
           <h2>프로필</h2>

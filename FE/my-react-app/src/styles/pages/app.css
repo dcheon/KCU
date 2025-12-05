@@ -44,6 +44,33 @@ body:has(.page.theme-light) .main-header {
   color: #222;
 }
 
+/* 레트로 테마 헤더 */
+.page.theme-retro ~ .main-header,
+body:has(.page.theme-retro) .main-header {
+  background: rgba(10, 14, 39, 0.95);
+  border-bottom: 2px solid #00ffff;
+  color: #00ffff;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), 0 0 40px rgba(255, 0, 255, 0.3);
+}
+
+.page.theme-retro ~ .main-header .logo-text,
+body:has(.page.theme-retro) .main-header .logo-text {
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.page.theme-retro ~ .main-header button,
+body:has(.page.theme-retro) .main-header button {
+  border: 2px solid #00ffff !important;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(0, 255, 255, 0.2));
+  color: #00ffff;
+}
+
+.page.theme-retro ~ .main-header button:hover,
+body:has(.page.theme-retro) .main-header button:hover {
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.8), 0 0 40px rgba(255, 0, 255, 0.5);
+}
+
 /* 왼쪽 섹션: 토글 버튼 + 로고 */
 .left-section {
   flex: 1;
@@ -82,6 +109,13 @@ body:has(.page.theme-light) .main-header {
 .page.theme-dark ~ .main-header .toggle-btn,
 body:has(.page.theme-dark) .main-header .toggle-btn {
   color: #f5f5f5;
+}
+
+/* 레트로 테마 토글 버튼 */
+.page.theme-retro ~ .main-header .toggle-btn,
+body:has(.page.theme-retro) .main-header .toggle-btn {
+  color: #00ffff;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
 }
 
 /* Header-specific button: smaller text and subtle 3D look */
@@ -133,6 +167,12 @@ body:has(.page.theme-dark) .main-header .header-btn {
 .page.theme-dark ~ .main-header .logo-img,
 body:has(.page.theme-dark) .main-header .logo-img {
   filter: invert(1);
+}
+
+/* 레트로 테마 로고 */
+.page.theme-retro ~ .main-header .logo-img,
+body:has(.page.theme-retro) .main-header .logo-img {
+  filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.8)) drop-shadow(0 0 20px rgba(255, 0, 255, 0.5));
 }
 
 /* 중앙 문구 */
@@ -242,6 +282,20 @@ body:has(.page.theme-dark) .sidebar::before {
   background: rgba(255, 255, 255, 0.1);
 }
 
+/* 레트로 테마 사이드바 */
+.page.theme-retro ~ .sidebar,
+body:has(.page.theme-retro) .sidebar {
+  background: rgba(10, 14, 39, 0.95);
+  color: #00ffff;
+  border-right: 2px solid #00ffff;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+.page.theme-retro ~ .sidebar::before,
+body:has(.page.theme-retro) .sidebar::before {
+  background: rgba(0, 255, 255, 0.3);
+}
+
 .sidebar.active {
   transform: translateX(0);
 }
@@ -273,6 +327,23 @@ body:has(.page.theme-dark) .sidebar .sidebar-section {
 .page.theme-dark ~ .sidebar .sidebar-section:hover,
 body:has(.page.theme-dark) .sidebar .sidebar-section:hover {
   background: rgba(60, 60, 60, 0.95);
+}
+
+/* 레트로 테마 사이드바 버튼 */
+.page.theme-retro ~ .sidebar .sidebar-section,
+body:has(.page.theme-retro) .sidebar .sidebar-section {
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(0, 255, 255, 0.2));
+  border: 2px solid #00ffff;
+  color: #00ffff;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5), 0 0 30px rgba(255, 0, 255, 0.3);
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+.page.theme-retro ~ .sidebar .sidebar-section:hover,
+body:has(.page.theme-retro) .sidebar .sidebar-section:hover {
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.4), rgba(0, 255, 255, 0.4));
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.8), 0 0 50px rgba(255, 0, 255, 0.5);
+  transform: translateY(-2px);
 }
 
 /* ===== 메인 ===== */

@@ -66,7 +66,7 @@ export default function Home() {
   return (
     <div
       className={`home-root ${
-        theme === "dark" ? "theme-dark" : "theme-light"
+        theme === "retro" ? "theme-retro" : theme === "dark" ? "theme-dark" : "theme-light"
       }`}
     >
       <div className="home-bg-overlay">
@@ -95,13 +95,10 @@ export default function Home() {
           <div className="home-top-section">
             <div className="home-title-section">
               <div className="home-logo-placeholder" />
-              <h1 className="home-title">Shape 헌터</h1>
+              <h1 className="home-title">동성애자</h1>
               <p className="home-subtitle">
                 {/* Add Subtitle here */}
               </p>
-            </div>
-            <div className="home-image-section">
-              <img src="/assets/img/home_drawing.png" alt="decoration" />
             </div>
           </div>
 

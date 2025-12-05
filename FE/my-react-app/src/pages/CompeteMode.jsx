@@ -242,7 +242,7 @@ export default function CompeteMode() {
   return (
     <div
       className={`content-grid compete-grid ${
-        theme === "dark" ? "theme-dark" : "theme-light"
+        theme === "retro" ? "theme-retro" : theme === "dark" ? "theme-dark" : "theme-light"
       }`}
     >
 

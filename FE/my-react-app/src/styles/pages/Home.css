@@ -68,6 +68,80 @@
   --gallery-item-border: rgba(255, 255, 255, 0.06);
 }
 
+/* 레트로 테마 변수 세트 */
+.home-root.theme-retro {
+  --bg-color: #0a0e27;
+  --text-color: #00ffff;
+  --overlay-bg: linear-gradient(180deg, #0a0e27 0%, #1a1464 50%, #2d1b69 100%);
+
+  --menu-btn-bg: rgba(255, 0, 255, 0.2);
+  --menu-btn-bg-hover: rgba(255, 0, 255, 0.4);
+
+  --card-bg: rgba(10, 14, 39, 0.85);
+  --card-border: rgba(0, 255, 255, 0.5);
+
+  --placeholder-bg: rgba(0, 255, 255, 0.1);
+  --placeholder-border: rgba(0, 255, 255, 0.4);
+
+  --gallery-bg: rgba(10, 14, 39, 0.8);
+  --gallery-border: rgba(0, 255, 255, 0.5);
+  --gallery-item-bg: rgba(26, 20, 100, 0.6);
+  --gallery-item-border: rgba(0, 255, 255, 0.3);
+
+  font-family: 'Orbitron', 'Press Start 2P', 'Courier New', monospace;
+  background: 
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 50px,
+      rgba(0, 255, 255, 0.03) 50px,
+      rgba(0, 255, 255, 0.03) 51px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 50px,
+      rgba(0, 255, 255, 0.03) 50px,
+      rgba(0, 255, 255, 0.03) 51px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 40px,
+      rgba(0, 255, 255, 0.1) 40px,
+      rgba(0, 255, 255, 0.1) 41px
+    ),
+    linear-gradient(180deg, #0a0e27 0%, #1a1464 50%, #2d1b69 100%);
+}
+
+.home-root.theme-retro h1,
+.home-root.theme-retro h2,
+.home-root.theme-retro h3,
+.home-root.theme-retro p,
+.home-root.theme-retro span,
+.home-root.theme-retro a {
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.home-root.theme-retro button {
+  border: 2px solid #00ffff !important;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), 0 0 40px rgba(255, 0, 255, 0.3);
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(0, 255, 255, 0.2));
+  color: #00ffff !important;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+.home-root.theme-retro button:hover {
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.8), 0 0 60px rgba(255, 0, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.home-root.theme-retro .home-menu {
+  background: rgba(10, 14, 39, 0.9);
+  border: 2px solid #00ffff !important;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), 0 0 60px rgba(255, 0, 255, 0.3);
+}
+
 .home-root.theme-dark .home-menu {
   background: rgba(35, 32, 28, 0.92);  
   border: 1px solid rgba(240, 224, 190, 0.18); 
@@ -104,35 +178,19 @@
 
 /* Top section - split into left (title) and right (image) */
 .home-top-section {
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 2rem;
-  min-height: 20vh;
+  display: flex;
+  justify-content: center;
   align-items: center;
+  min-height: 30vh;
+  padding: 2rem 0;
 }
 
 .home-title-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-.home-image-section {
-  display: flex;
   align-items: center;
-  justify-content: center;
-}
-
-.home-image-section img {
-  width: 28%;
-  height: auto;
-  object-fit: fill;
-  transition: filter 0.25s ease;
-  display: block;
-}
-
-.home-root.theme-dark .home-image-section img {
-  filter: invert(1);
+  text-align: center;
 }
 
 /* Bottom section - split into left (modes) and right (panels) */
@@ -147,13 +205,13 @@
 
 .home-title {
   margin: 0;
-  font-size: 2rem;
+  font-size: 4rem;
   letter-spacing: 0.05em;
 }
 
 .home-subtitle {
-  margin: 0.4rem 0 0;
-  font-size: 0.95rem;
+  margin: 1rem 0 0;
+  font-size: 1.2rem;
   opacity: 0.9;
 }
 

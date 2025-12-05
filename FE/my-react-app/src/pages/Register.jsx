@@ -67,7 +67,7 @@ export default function Register() {
   };
 
   return (
-    <div className={`login-page ${theme === "dark" ? "theme-dark" : "theme-light"}`}>
+    <div className={`login-page ${theme === "retro" ? "theme-retro" : theme === "dark" ? "theme-dark" : "theme-light"}`}>
       <div className="login-card" role="form" aria-label="회원가입 폼">
         <h2>회원가입</h2>
 
