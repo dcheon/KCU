@@ -155,7 +155,34 @@ export default function DefaultMode() {
 
   return (
     <div className={`content-grid ${theme === "retro" ? "theme-retro" : theme === "christmas" ? "theme-christmas" : theme === "dark" ? "theme-dark" : "theme-light"}`}>
-      <div className="content-left"></div>
+     <div className="content-left">
+      <div className="mode-panel">
+        <div className="mode-panel-top">
+          <div className="mode-title">Geome Battle</div>
+          <span className="mode-pill">Default Mode</span>
+        </div>
+
+        <div className="mode-subtitle">
+          사진 업로드 → 도형 선택 → AI 판별 결과 확인
+        </div>
+
+        <div className="mode-steps">
+          <div className="mode-step">
+            <span className="step-num">1</span>
+            <span className="step-text">사진 업로드</span>
+          </div>
+          <div className="mode-step">
+            <span className="step-num">2</span>
+            <span className="step-text">도형 선택</span>
+          </div>
+          <div className="mode-step">
+            <span className="step-num">3</span>
+            <span className="step-text">결과 확인</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
       <div className="content-center">
         <div className="center-box">
