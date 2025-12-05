@@ -79,8 +79,8 @@
   --text-color: #00ffff;
   --card-bg: rgba(10, 14, 39, 0.85);
   --card-border: rgba(0, 255, 255, 0.5);
-  --btn-bg: rgba(255, 0, 255, 0.2);
-  --btn-bg-hover: rgba(255, 0, 255, 0.4);
+  --btn-bg: rgba(10, 14, 39, 0.9);
+  --btn-bg-hover: rgba(10, 14, 39, 0.95);
   --picker-bg: rgba(10, 14, 39, 0.95);
   --picker-overlay: rgba(0, 0, 0, 0.8);
 }
@@ -121,8 +121,8 @@ body:has(.content-grid.theme-retro) .main {
   --text-color: #ffffff;
   --card-bg: rgba(255, 200, 150, 0.2);
   --card-border: rgba(255, 200, 150, 0.5);
-  --btn-bg: rgba(255, 200, 150, 0.25);
-  --btn-bg-hover: rgba(255, 200, 150, 0.4);
+  --btn-bg: rgba(74, 56, 128, 0.85);
+  --btn-bg-hover: rgba(74, 56, 128, 0.9);
   --picker-bg: rgba(74, 56, 128, 0.98);
   --picker-overlay: rgba(0, 0, 0, 0.5);
 
