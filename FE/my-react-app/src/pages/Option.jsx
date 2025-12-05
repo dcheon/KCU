@@ -64,7 +64,7 @@ export default function Option() {
     <div className={`content-grid ${isSliding ? "theme-sliding" : ""} ${theme === "dark" ? "theme-dark" : theme === "retro" ? "theme-retro" : theme === "christmas" ? "theme-christmas" : "theme-light"}`}>
         <div className="content-left"></div>
         <div className="content-center">
-            <h2>설정</h2>
+            <h2>옵션</h2>
             <div style={{marginTop: 16}}>
               <p>배경화면 변경</p>
               <button 

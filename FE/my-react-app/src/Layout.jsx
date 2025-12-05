@@ -95,7 +95,7 @@ function Layout() {
     const path = location.pathname;
     if (path.includes('/app/compete')) return '대결모드';
     if (path.includes('/app/daily')) return '데일리샷';
-    if (path.includes('/app/option')) return '우리가 친해질 수 있을까요';
+    if (path.includes('/app/option')) return '설정';
     if (path.includes('/app')) return '기본모드';
     return '우리가 친해질 수 있을까요';
   };
