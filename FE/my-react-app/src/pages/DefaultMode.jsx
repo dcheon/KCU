@@ -163,7 +163,7 @@ export default function DefaultMode() {
         </div>
 
         <div className="mode-subtitle">
-          사진 업로드 → 도형 선택 → AI 판별 결과 확인
+          사진 업로드 → 도형 선택 → 판별 결과 확인
         </div>
 
         <div className="mode-steps">
