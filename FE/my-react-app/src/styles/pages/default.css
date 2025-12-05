@@ -361,3 +361,297 @@ input[type="range"]::-moz-range-thumb {
 .content-grid .output-area a {
 	color: var(--text-color) !important;
 }
+
+/* =========================
+   Button polish (drop-in)
+   Paste at END of file
+   (does NOT override theme-christmas)
+   ========================= */
+
+.content-grid:not(.theme-christmas) {
+  --btn-radius: 12px;
+  --btn-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+  --btn-shadow-hover: 0 12px 30px rgba(0, 0, 0, 0.22);
+}
+
+/* slightly softer shadows in light mode */
+.content-grid.theme-light:not(.theme-christmas) {
+  --btn-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+  --btn-shadow-hover: 0 14px 30px rgba(0, 0, 0, 0.11);
+}
+
+.content-grid:not(.theme-christmas) #insertImg,
+.content-grid:not(.theme-christmas) .shape-selection-section {
+  appearance: none;
+  font: inherit;
+
+  border-radius: var(--btn-radius);
+  border: 1px solid var(--card-border) !important;
+
+  background: var(--btn-bg) !important;
+  color: var(--text-color) !important;
+
+  padding: 10px 14px;
+  font-weight: 650;
+  letter-spacing: 0.15px;
+
+  box-shadow: var(--btn-shadow);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease,
+    background 140ms ease,
+    border-color 140ms ease,
+    opacity 140ms ease;
+}
+
+@supports (background: color-mix(in srgb, black 50%, white)) {
+  .content-grid:not(.theme-christmas) #insertImg,
+  .content-grid:not(.theme-christmas) .shape-selection-section {
+    border-color: color-mix(in srgb, var(--text-color) 14%, transparent) !important;
+
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--btn-bg) 88%, transparent),
+      color-mix(in srgb, var(--btn-bg) 70%, transparent)
+    ) !important;
+  }
+}
+
+.content-grid:not(.theme-christmas) #insertImg:hover,
+.content-grid:not(.theme-christmas) .shape-selection-section:hover {
+  background: var(--btn-bg-hover) !important;
+  transform: translateY(-1px);
+  box-shadow: var(--btn-shadow-hover);
+}
+
+@supports (background: color-mix(in srgb, black 50%, white)) {
+  .content-grid:not(.theme-christmas) #insertImg:hover,
+  .content-grid:not(.theme-christmas) .shape-selection-section:hover {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--btn-bg-hover) 88%, transparent),
+      color-mix(in srgb, var(--btn-bg) 65%, transparent)
+    ) !important;
+
+    border-color: color-mix(in srgb, var(--text-color) 22%, transparent) !important;
+  }
+}
+
+.content-grid:not(.theme-christmas) #insertImg:active,
+.content-grid:not(.theme-christmas) .shape-selection-section:active {
+  transform: translateY(0px) scale(0.99);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+.content-grid:not(.theme-christmas) #insertImg:focus-visible,
+.content-grid:not(.theme-christmas) .shape-selection-section:focus-visible {
+  outline: none;
+  box-shadow: var(--btn-shadow-hover), 0 0 0 3px rgba(100, 150, 255, 0.25);
+}
+
+.content-grid:not(.theme-christmas) #insertImg[disabled],
+.content-grid:not(.theme-christmas) .shape-selection-section[disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.content-grid .img-space {
+  position: relative;
+  overflow: hidden;
+
+  border-radius: 18px;
+  border: 1px solid var(--card-border) !important;
+
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease;
+}
+
+@supports (background: color-mix(in srgb, black 50%, white)) {
+  .content-grid .img-space {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--card-bg) 92%, transparent),
+      color-mix(in srgb, var(--card-bg) 72%, transparent)
+    ) !important;
+  }
+}
+
+.content-grid .img-space::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  pointer-events: none;
+  z-index: 0;
+
+  background: radial-gradient(
+    circle at 20% 15%,
+    rgba(255, 255, 255, 0.16),
+    rgba(255, 255, 255, 0.00) 55%
+  );
+  transform: rotate(-8deg);
+}
+
+.content-grid .img-space::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.25;
+
+  background:
+    linear-gradient(transparent 0, transparent 11px, rgba(255,255,255,0.04) 12px),
+    linear-gradient(90deg, transparent 0, transparent 11px, rgba(255,255,255,0.04) 12px);
+  background-size: 12px 12px;
+  mix-blend-mode: overlay;
+}
+
+.content-grid .img-space > * {
+  position: relative;
+  z-index: 1;
+}
+
+.content-grid .img-space.img-space-dragging {
+  transform: translateY(-2px);
+  box-shadow:
+    0 22px 55px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10);
+}
+
+@supports (background: color-mix(in srgb, black 50%, white)) {
+  .content-grid .img-space.img-space-dragging {
+    border-color: color-mix(in srgb, var(--text-color) 22%, transparent) !important;
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--btn-bg-hover) 70%, transparent),
+      color-mix(in srgb, var(--card-bg) 70%, transparent)
+    ) !important;
+  }
+}
+
+.content-grid .uploaded-img {
+  border-radius: 14px;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.22);
+  border: 1px solid var(--card-border);
+}
+
+
+.content-grid .content-left {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 16px 10px;
+}
+
+.content-grid .mode-panel {
+  width: min(260px, 100%);
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text-color);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  position: sticky; 
+  top: 18px;
+}
+
+.content-grid .mode-panel-top {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.content-grid .mode-title {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  line-height: 1.05;
+}
+
+.content-grid .mode-pill {
+  width: fit-content;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--card-border);
+  background: var(--btn-bg);
+  font-weight: 700;
+  font-size: 13px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.10);
+}
+
+.content-grid .mode-subtitle {
+  margin-top: 12px;
+  font-size: 13px;
+  line-height: 1.35;
+  opacity: 0.75;
+}
+
+.content-grid .mode-steps {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.content-grid .mode-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--card-border);
+  background: var(--btn-bg);
+
+  transition: transform 140ms ease, background 140ms ease;
+}
+
+.content-grid .mode-step:hover {
+  background: var(--btn-bg-hover);
+  transform: translateY(-1px);
+}
+
+.content-grid .step-num {
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--btn-bg-hover);
+  border: 1px solid var(--card-border);
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.content-grid .step-text {
+  font-weight: 650;
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .content-grid .mode-panel {
+    display: none;
+  }
+}

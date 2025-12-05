@@ -480,3 +480,52 @@ body:has(.content-grid.theme-christmas) {
 	color: var(--text-color);
 	font-size: 16px;
 }
+
+.content-grid .ranking {
+  position: relative;
+  overflow: hidden;
+
+  backdrop-filter: blur(12px) saturate(1.15);
+  -webkit-backdrop-filter: blur(12px) saturate(1.15);
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.content-grid .ranking::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  pointer-events: none;
+
+  background: radial-gradient(
+    circle at 25% 15%,
+    rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.00) 55%
+  );
+  transform: rotate(-10deg);
+}
+
+.content-grid .ranking > * {
+  position: relative;
+  z-index: 1;
+}
+
+.content-grid .ranking-item {
+  position: relative;
+}
+
+.content-grid .ranking-item {
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .content-grid .ranking {
+    background: rgba(0, 0, 0, 0.25);
+  }
+  .content-grid.theme-light .ranking {
+    background: rgba(255, 255, 255, 0.92);
+  }
+}
