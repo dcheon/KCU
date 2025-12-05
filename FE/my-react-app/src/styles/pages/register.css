@@ -40,6 +40,91 @@
   --link-color: #8f96ff;
 }
 
+.center-login-page.theme-retro, .page.theme-retro {
+  --bg-color: #0a0e27;
+  --text-color: #00ffff;
+  --card-bg: rgba(10, 14, 39, 0.85);
+  --card-border: rgba(0, 255, 255, 0.5);
+  --input-bg: rgba(10, 14, 39, 0.6);
+  --input-border: rgba(0, 255, 255, 0.4);
+  --btn-bg: rgba(255, 0, 255, 0.2);
+  --btn-bg-hover: rgba(255, 0, 255, 0.4);
+  --link-color: #00ffff;
+
+  background: linear-gradient(180deg, #0a0e27 0%, #1a1464 50%, #2d1b69 100%) !important;
+}
+
+.center-login-page.theme-retro h2,
+.center-login-page.theme-retro h3,
+.page.theme-retro h2,
+.page.theme-retro h3 {
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.center-login-page.theme-retro .login-input,
+.page.theme-retro .login-input {
+  border: 2px solid #00ffff !important;
+  box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+.center-login-page.theme-retro .login-btn,
+.page.theme-retro .login-btn {
+  border: 2px solid #00ffff !important;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(0, 255, 255, 0.2)) !important;
+  color: #00ffff !important;
+}
+
+.center-login-page.theme-retro .login-btn:hover,
+.page.theme-retro .login-btn:hover {
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.8), 0 0 40px rgba(255, 0, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.center-login-page.theme-christmas, .page.theme-christmas {
+  --bg-color: #4a3880;
+  --text-color: #ffffff;
+  --card-bg: rgba(74, 56, 128, 0.9);
+  --card-border: rgba(255, 200, 150, 0.6);
+  --input-bg: rgba(255, 255, 255, 0.08);
+  --input-border: rgba(255, 200, 150, 0.4);
+  --btn-bg: rgba(255, 180, 100, 0.3);
+  --btn-bg-hover: rgba(255, 180, 100, 0.5);
+  --link-color: rgba(255, 220, 180, 0.9);
+
+  background: url('/assets/img/christmas-bg.png') center/cover,
+    linear-gradient(180deg, rgba(74, 56, 128, 0.5) 0%, rgba(74, 56, 128, 0.6) 100%) !important;
+  background-blend-mode: overlay;
+}
+
+.center-login-page.theme-christmas h2,
+.center-login-page.theme-christmas h3,
+.page.theme-christmas h2,
+.page.theme-christmas h3 {
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.center-login-page.theme-christmas .login-input,
+.page.theme-christmas .login-input {
+  border: 2px solid #ffd700 !important;
+  box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.1);
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.center-login-page.theme-christmas .login-btn,
+.page.theme-christmas .login-btn {
+  border: 2px solid rgba(255, 220, 180, 0.8) !important;
+  box-shadow: 0 0 15px rgba(255, 200, 150, 0.3);
+  background: linear-gradient(135deg, rgba(255, 180, 100, 0.4), rgba(255, 200, 150, 0.3)) !important;
+  color: #ffffff !important;
+}
+
+.center-login-page.theme-christmas .login-btn:hover,
+.page.theme-christmas .login-btn:hover {
+  box-shadow: 0 0 25px rgba(255, 200, 150, 0.5), 0 0 40px rgba(255, 150, 100, 0.3);
+  transform: translateY(-2px);
+}
+
 .center-login-page { display:flex; align-items:center; justify-content:center; height:100vh; margin: 0; padding: 0; }
 .login-card { max-width:420px; width:90%; background:var(--card-bg); color:var(--text-color); padding:28px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.08); border: 1px solid var(--card-border); height: fit-content; margin: auto; }
 .login-card h2 { margin:0 0 16px 0; font-size:1.4rem; color:var(--text-color); }

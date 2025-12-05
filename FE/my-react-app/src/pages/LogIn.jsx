@@ -67,7 +67,7 @@ export default function LogIn() {
   };
 
   return (
-    <div className={`login-page ${theme === "retro" ? "theme-retro" : theme === "dark" ? "theme-dark" : "theme-light"}`}>
+    <div className={`login-page ${theme === "retro" ? "theme-retro" : theme === "christmas" ? "theme-christmas" : theme === "dark" ? "theme-dark" : "theme-light"}`}>
       <div className="login-card" role="form" aria-label="로그인 폼">
         <h2>로그인</h2>
 

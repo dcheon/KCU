@@ -89,29 +89,17 @@
   --gallery-item-border: rgba(0, 255, 255, 0.3);
 
   font-family: 'Orbitron', 'Press Start 2P', 'Courier New', monospace;
-  background: 
-    repeating-linear-gradient(
-      90deg,
-      transparent 0px,
-      transparent 50px,
-      rgba(0, 255, 255, 0.03) 50px,
-      rgba(0, 255, 255, 0.03) 51px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      transparent 0px,
-      transparent 50px,
-      rgba(0, 255, 255, 0.03) 50px,
-      rgba(0, 255, 255, 0.03) 51px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      transparent 0px,
-      transparent 40px,
-      rgba(0, 255, 255, 0.1) 40px,
-      rgba(0, 255, 255, 0.1) 41px
-    ),
-    linear-gradient(180deg, #0a0e27 0%, #1a1464 50%, #2d1b69 100%);
+  background: url('/assets/img/retro-bg.png') center/cover fixed !important;
+  min-height: 100vh;
+}
+
+body:has(.home-root.theme-retro) {
+  background: url('/assets/img/retro-bg.png') center/cover fixed !important;
+  min-height: 100vh;
+}
+
+body:has(.home-root.theme-retro) .main {
+  background: url('/assets/img/retro-bg.png') center/cover fixed !important;
 }
 
 .home-root.theme-retro h1,
@@ -146,6 +134,59 @@
   background: rgba(35, 32, 28, 0.92);  
   border: 1px solid rgba(240, 224, 190, 0.18); 
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* 크리스마스 테마 변수 세트 */
+.home-root.theme-christmas {
+  --bg-color: #4a3880;
+  --text-color: #ffffff;
+  --overlay-bg: linear-gradient(180deg, rgba(74, 56, 128, 0.5) 0%, rgba(74, 56, 128, 0.6) 100%);
+
+  --menu-btn-bg: rgba(255, 180, 100, 0.25);
+  --menu-btn-bg-hover: rgba(255, 180, 100, 0.4);
+
+  --card-bg: rgba(255, 200, 150, 0.15);
+  --card-border: rgba(255, 200, 150, 0.5);
+
+  --placeholder-bg: rgba(255, 255, 255, 0.08);
+  --placeholder-border: rgba(255, 200, 150, 0.3);
+
+  --gallery-bg: rgba(74, 56, 128, 0.6);
+  --gallery-border: rgba(255, 200, 150, 0.5);
+  --gallery-item-bg: rgba(255, 180, 100, 0.15);
+  --gallery-item-border: rgba(255, 200, 150, 0.3);
+
+  font-family: 'Georgia', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: url('/assets/img/christmas-bg.png') center/cover fixed,
+    linear-gradient(180deg, rgba(74, 56, 128, 0.3) 0%, rgba(74, 56, 128, 0.4) 100%);
+  background-blend-mode: overlay;
+}
+
+.home-root.theme-christmas h1,
+.home-root.theme-christmas h2,
+.home-root.theme-christmas h3,
+.home-root.theme-christmas p,
+.home-root.theme-christmas span,
+.home-root.theme-christmas a {
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.home-root.theme-christmas button {
+  border: 2px solid rgba(255, 220, 180, 0.8) !important;
+  box-shadow: 0 0 15px rgba(255, 200, 150, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.15);
+  background: linear-gradient(135deg, rgba(255, 180, 100, 0.4), rgba(255, 200, 150, 0.3));
+  color: #fff !important;
+}
+
+.home-root.theme-christmas button:hover {
+  box-shadow: 0 0 25px rgba(255, 200, 150, 0.6), 0 0 40px rgba(255, 150, 100, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.home-root.theme-christmas .home-menu {
+  background: rgba(74, 56, 128, 0.8);
+  border: 2px solid rgba(255, 220, 180, 0.7) !important;
+  box-shadow: 0 0 20px rgba(255, 200, 150, 0.3), 0 0 40px rgba(0, 0, 0, 0.3);
 }
 
 .home-bg-overlay {

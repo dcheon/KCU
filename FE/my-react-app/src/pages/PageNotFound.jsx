@@ -20,7 +20,7 @@ export default function PageNotFound() {
     };
   }, []);
   return (
-    <div className={`page ${theme === "retro" ? "theme-retro" : theme === "dark" ? "theme-dark" : "theme-light"}`}>
+    <div className={`page ${theme === "retro" ? "theme-retro" : theme === "christmas" ? "theme-christmas" : theme === "dark" ? "theme-dark" : "theme-light"}`}>
       <main className="main">
         <div className="access-denied" style={{width:'80%', maxWidth:900}}>
           <h2>404 — 페이지를 찾을 수 없습니다</h2>

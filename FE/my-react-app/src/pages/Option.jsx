@@ -40,6 +40,7 @@ export default function Option() {
     setTheme((prev) => {
       if (prev === "light") return "dark";
       if (prev === "dark") return "retro";
+      if (prev === "retro") return "christmas";
       return "light";
     });
   };
@@ -53,7 +54,7 @@ export default function Option() {
   };
 
   return (
-    <div className={`content-grid ${theme === "dark" ? "theme-dark" : theme === "retro" ? "theme-retro" : "theme-light"}`}>
+    <div className={`content-grid ${theme === "dark" ? "theme-dark" : theme === "retro" ? "theme-retro" : theme === "christmas" ? "theme-christmas" : "theme-light"}`}>
         <div className="content-left"></div>
         <div className="content-center">
             <h2>설정</h2>
@@ -64,7 +65,7 @@ export default function Option() {
                 onClick={toggleTheme}
                 style={{maxWidth: 200}}
               >
-                {theme === "dark" ? "🌙 다크 모드" : theme === "retro" ? "🎮 레트로 모드" : "☀️ 라이트 모드"}
+                {theme === "dark" ? "🌙 다크 모드" : theme === "retro" ? "🎮 레트로 모드" : theme === "christmas" ? "🎄 크리스마스 모드" : "☀️ 라이트 모드"}
               </button>
             </div>
             <div style={{marginTop: 16}}>

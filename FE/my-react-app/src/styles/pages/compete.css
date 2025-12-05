@@ -1,6 +1,6 @@
 /* Styles specific to Compete mode (ranking column) */
 
-.page .content-grid {
+.content-grid {
   --bg-color: #050509;
   --text-color: #f5f5f5;
   --card-bg: rgba(0, 0, 0, 0.35);
@@ -18,7 +18,7 @@
   transition: background 0.25s ease, color 0.25s ease;
 }
 
-.page.theme-light .content-grid {
+.content-grid.theme-light {
   --bg-color: #f5f5f5;
   --text-color: #111111;
   --card-bg: rgba(255, 255, 255, 0.95);
@@ -35,7 +35,7 @@
   color: var(--text-color, #111111);
 }
 
-.page.theme-dark .content-grid {
+.content-grid.theme-dark {
   --bg-color: #050509;
   --text-color: #f5f5f5;
   --card-bg: rgba(0, 0, 0, 0.35);
@@ -52,7 +52,7 @@
   color: var(--text-color, #f5f5f5);
 }
 
-.page.theme-retro .content-grid {
+.content-grid.theme-retro {
   --bg-color: #0a0e27;
   --text-color: #00ffff;
   --card-bg: rgba(10, 14, 39, 0.85);
@@ -62,6 +62,18 @@
   --ranking-divider: rgba(0, 255, 255, 0.4);
   --picker-bg: rgba(10, 14, 39, 0.95);
   --picker-overlay: rgba(0, 0, 0, 0.8);
+
+  background: url('/assets/img/retro-bg.png') center/cover fixed !important;
+  min-height: 100vh;
+}
+
+body:has(.content-grid.theme-retro) {
+  background: url('/assets/img/retro-bg.png') center/cover fixed !important;
+  min-height: 100vh;
+}
+
+body:has(.content-grid.theme-retro) .main {
+  background: url('/assets/img/retro-bg.png') center/cover fixed !important;
 }
 
 .page.theme-retro {
@@ -110,6 +122,48 @@
 
 .page.theme-retro button:hover {
   box-shadow: 0 0 30px rgba(0, 255, 255, 0.8), 0 0 60px rgba(255, 0, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.content-grid.theme-christmas {
+  --bg-color: #4a3880;
+  --text-color: #ffffff;
+  --card-bg: rgba(255, 200, 150, 0.2);
+  --card-border: rgba(255, 200, 150, 0.5);
+  --ranking-bg: rgba(255, 200, 150, 0.15);
+  --ranking-item-bg: rgba(255, 180, 100, 0.15);
+  --ranking-divider: rgba(255, 200, 150, 0.3);
+  --picker-bg: rgba(74, 56, 128, 0.98);
+  --picker-overlay: rgba(0, 0, 0, 0.5);
+
+  background: url('/assets/img/christmas-bg.png') center/cover fixed !important;
+  color: var(--text-color, #ffffff);
+  min-height: 100vh;
+}
+
+body:has(.content-grid.theme-christmas) {
+  background: url('/assets/img/christmas-bg.png') center/cover fixed !important;
+  min-height: 100vh;
+}
+
+.content-grid.theme-christmas h1,
+.content-grid.theme-christmas h2,
+.content-grid.theme-christmas h3,
+.content-grid.theme-christmas p,
+.content-grid.theme-christmas span,
+.content-grid.theme-christmas .ranking-title,
+.content-grid.theme-christmas .label {
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.content-grid.theme-christmas button {
+  border: 2px solid rgba(255, 220, 180, 0.8) !important;
+  box-shadow: 0 0 15px rgba(255, 200, 150, 0.3), 0 0 30px rgba(255, 150, 100, 0.15);
+  background: linear-gradient(135deg, rgba(255, 180, 100, 0.4), rgba(255, 200, 150, 0.3));
+}
+
+.content-grid.theme-christmas button:hover {
+  box-shadow: 0 0 25px rgba(255, 200, 150, 0.5), 0 0 50px rgba(255, 150, 100, 0.3);
   transform: translateY(-2px);
 }
 
@@ -191,18 +245,18 @@
 }
 
 /* Apply theme variables to existing elements */
-.page .content-grid .center-box {
+.content-grid .center-box {
 	background: var(--card-bg) !important;
 	border-color: var(--card-border) !important;
 }
 
-.page .content-grid .img-space {
+.content-grid .img-space {
 	background: var(--card-bg) !important;
 	border-color: var(--card-border) !important;
 	color: var(--text-color) !important;
 }
 
-.page .content-grid .output-area {
+.content-grid .output-area {
 	background: var(--ranking-bg) !important;
 	color: var(--text-color) !important;
 	border-color: var(--card-border) !important;
@@ -212,31 +266,31 @@
 	text-align: center;
 }
 
-.page .content-grid .shape-selection-section {
+.content-grid .shape-selection-section {
 	background: var(--ranking-bg) !important;
 	color: var(--text-color) !important;
 	border-color: var(--card-border) !important;
 }
 
-.page .content-grid .shape-selection-section:hover {
+.content-grid .shape-selection-section:hover {
 	background: var(--ranking-item-bg) !important;
 }
 
-.page .content-grid #insertImg {
+.content-grid #insertImg {
 	background: var(--ranking-bg) !important;
 	color: var(--text-color) !important;
 	border: 1px solid var(--card-border) !important;
 }
 
-.page .content-grid .content-center {
+.content-grid .content-center {
 	color: var(--text-color);
 }
 
-.page .content-grid .content-right {
+.content-grid .content-right {
 	color: var(--text-color);
 }
 
-.page .content-grid .center-box-description {
+.content-grid .center-box-description {
 	color: var(--text-color) !important;
 }
 

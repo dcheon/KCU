@@ -154,7 +154,7 @@ export default function DefaultMode() {
   };
 
   return (
-    <div className={`content-grid ${theme === "retro" ? "theme-retro" : theme === "dark" ? "theme-dark" : "theme-light"}`}>
+    <div className={`content-grid ${theme === "retro" ? "theme-retro" : theme === "christmas" ? "theme-christmas" : theme === "dark" ? "theme-dark" : "theme-light"}`}>
       <div className="content-left"></div>
 
       <div className="content-center">

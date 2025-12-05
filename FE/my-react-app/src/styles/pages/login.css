@@ -115,6 +115,60 @@
   box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.2);
 }
 
+.login-page.theme-christmas {
+  --bg-color: #4a3880;
+  --text-color: #ffffff;
+  --card-bg: rgba(74, 56, 128, 0.9);
+  --card-border: rgba(255, 200, 150, 0.6);
+  --input-bg: rgba(255, 255, 255, 0.08);
+  --input-border: rgba(255, 200, 150, 0.4);
+  --btn-bg: rgba(255, 180, 100, 0.3);
+  --btn-bg-hover: rgba(255, 180, 100, 0.5);
+  --link-color: rgba(255, 220, 180, 0.9);
+
+  background: url('/assets/img/christmas-bg.png') center/cover,
+    linear-gradient(180deg, rgba(74, 56, 128, 0.5) 0%, rgba(74, 56, 128, 0.6) 100%) !important;
+  background-blend-mode: overlay;
+}
+
+.login-page.theme-christmas h1,
+.login-page.theme-christmas h2,
+.login-page.theme-christmas h3,
+.login-page.theme-christmas p,
+.login-page.theme-christmas label,
+.login-page.theme-christmas a {
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.login-page.theme-christmas .login-card {
+  background: rgba(74, 56, 128, 0.9);
+  border: 2px solid rgba(255, 220, 180, 0.8);
+  box-shadow: 0 0 20px rgba(255, 200, 150, 0.3), 0 0 40px rgba(0, 0, 0, 0.3);
+}
+
+.login-page.theme-christmas button {
+  border: 2px solid rgba(255, 220, 180, 0.8) !important;
+  box-shadow: 0 0 15px rgba(255, 200, 150, 0.3);
+  background: linear-gradient(135deg, rgba(255, 180, 100, 0.4), rgba(255, 200, 150, 0.3));
+  color: #ffffff !important;
+}
+
+.login-page.theme-christmas button:hover {
+  box-shadow: 0 0 25px rgba(255, 200, 150, 0.5), 0 0 40px rgba(255, 150, 100, 0.3);
+  transform: translateY(-2px);
+}
+
+.login-page.theme-christmas input {
+  border: 2px solid rgba(255, 200, 150, 0.5) !important;
+  box-shadow: inset 0 0 10px rgba(255, 200, 150, 0.1);
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #ffffff !important;
+}
+
+.login-page.theme-christmas input::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
 .login-card {
   width: 360px;
   background: var(--card-bg);
